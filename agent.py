@@ -18,10 +18,22 @@ class CityPlanner(mesa.Agent):
 
 
     def decide(self):
+        """
+        How the agent decide what step to take next
+        """
         raise NotImplementedError("This is an abstract class, subclass and implement it")
 
 
     def update(self, **kwargs):
+        """
+        How the agent update any internal state
+        """
+        raise NotImplementedError("This is an abstract class, subclass and implement it")
+    
+    def start_new_trial(self, **kwargs):
+        """
+        Reset internal variables, save them as needed
+        """
         raise NotImplementedError("This is an abstract class, subclass and implement it")
     
     #the two actions

@@ -18,24 +18,29 @@ def instantiate_model(agent_classname, model_classname, seed):
     model = model_class(agent_class, seed=None)
     return model
 
-def run(model, steps):
+def run(model, trials, steps):
+    agent = model.agents[0]
+    for trial in range(trials):
+        #arguably can parrallelise this
+        for step in range(steps):
+            
+            #agent decide
+            model.step()
 
-    for i in range(steps):
-        agent = model.agents[0]
-        #let the agent decide 
-        model.step()
+            #calculate population gain (pop_g) and pollution gain (poll_g)
+            model.update_pop_and_poll()
 
-        #calculate population gain (pop_g) and pollution gain (poll_g)
-        agent.update_pop_and_poll()
-        
-        #update any internal states, like utiity, etc
-        agent.update()
+            #update any internal states, like utiity, etc
+            agent.update()
 
-def main(agent_classname, steps, seed=None):
+        model.reset()
+        agent.start_new_trial()
+
+def main(agent_classname, trials, steps, seed=None):
     
     model = instantiate_model(agent_classname, seed)
     
-    run(model, steps)
+    run(model, trials, steps)
 
 
 if __name__=="__main__":
