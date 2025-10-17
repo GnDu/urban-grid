@@ -1,12 +1,6 @@
 import mesa
 import random
-
-BARREN=0
-RESIDENCE=1
-GREENERY=2
-INDUSTRY=3
-SERVICE=4
-ROAD=5
+import utils
 
 class CityPlanner(mesa.Agent):
     """
@@ -32,14 +26,16 @@ class CityPlanner(mesa.Agent):
     
     def start_new_trial(self, **kwargs):
         """
-        Reset internal variables, save them as needed
+        Reset internal variables, but not any policy. Carry them forward
         """
         raise NotImplementedError("This is an abstract class, subclass and implement it")
     
     #the two actions
 
     def place(self, x, y, tile):
-        #check if x, y is even applicable 
+        #check if tile is even applicable. Throw an error if that is the case
+        #should check for any illegal action before hand
+        self.model.grid.tile
         pass
 
     def destroy(self, x, y):
