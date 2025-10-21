@@ -1,6 +1,5 @@
 import mesa
 import numpy as np
-import networkx
 from mesa.discrete_space import OrthogonalMooreGrid
 from mesa.discrete_space.property_layer import PropertyLayer
 
