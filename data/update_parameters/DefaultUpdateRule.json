@@ -1,0 +1,17 @@
+{
+  "residence_population_increase": 10,
+  "residence_poll_g": 1.5,
+  "residence_pop_g": 1,
+  "greenery_poll_minus": 2,
+  "greenery_pop_g": 2,
+  "greenery_coverage": 2,
+  "industry_poll_g": 7,
+  "industry_pop_g": 8,
+  "industry_coverage": 2,
+  "service_poll_g": 5,
+  "service_pop_g": 4,
+  "service_pop_modifier": 0.2,
+  "service_coverage": 2,
+  "road_poll_g": 1,
+  "road_pop_g": 0.5
+}
