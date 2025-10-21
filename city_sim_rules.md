@@ -26,7 +26,7 @@ def step(self):
     self.time_step+=1
 ```
 
-Steps:
+**Steps:**
 
 1) `self.agents.do("decide")`: Invoke 'decide' method in agent. In this case, the agent will decide to either place a tile, destroy a tile or any other actions it is defined.
 2) `self.book_keep()`: Book keep basically create binary array for each tile. 
@@ -34,6 +34,10 @@ Steps:
 4) `self.agents[0].update()`: update agent states, score or utility
 5) `self.data_collectors.collect(self)`: collect the metrics and data for the timestep if it's within collect rate.
 6) `self.time_step+=1`: Advance to next time step, nuff said. Do note, this is the last step.
+
+**Duration:**
+
+The duration of the game is arbritrarily but I am suggesting width * height + number of destroy actions. This allows the agent to fully utilise the grid while having some chances to revert any mistakes. 
 
 ## Core Mechanics
 

@@ -10,7 +10,7 @@ Rationality: population of a city can be co-related with the prosperity / attrac
 
 ## Goal
 
-With a duration $D$, the goal of the game is to maximise total population while minimising total pollution gained accrued throughout $D$.
+The goal of the game is maximise total population while minimising total pollution accrued within a specified duration.
 
 ## Project Structure
 
