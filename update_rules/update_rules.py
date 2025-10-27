@@ -1,5 +1,7 @@
 import numpy as np
 from dataclasses import dataclass
+from collections import defaultdict
+from typing import List
 from mesa.discrete_space.property_layer import PropertyLayer
 from scipy.ndimage import distance_transform_cdt, grey_dilation, \
                             generate_binary_structure, iterate_structure
@@ -20,11 +22,19 @@ class DefaultUpdateRulesParameters:
     industry_poll_g: float
     industry_pop_g: float
     industry_coverage: int
+    industry_connectivity_initial_modifier: float
+    industry_connectivity_cap: int
+    industry_connectivity_pop_post_modifier: float
+    industry_connectivity_poll_post_modifier: float
     
     service_poll_g: float
     service_pop_g: float
     service_pop_modifier: float
     service_coverage: int
+    service_connectivity_initial_modifier: float
+    service_connectivity_cap: int
+    service_connectivity_pop_post_modifier: float
+    service_connectivity_poll_post_modifier: float
 
     road_poll_g: float
     road_pop_g: float
@@ -49,32 +59,58 @@ class DefaultUpdateRules:
         self.industry_poll_g = parameters.industry_poll_g
         self.industry_pop_g = parameters.industry_pop_g
         self.industry_coverage = parameters.industry_coverage
+        self.industry_connectivity_initial_modifier= parameters.industry_connectivity_initial_modifier
+        
+        # connectivity cap refers to how many residences to connect 
+        # before the tile acheives 100% population and pollution
+        # we will inverse this and calculate how much each residence tile 
+        # will contribute 
+        assert(parameters.industry_connectivity_cap>0)
+        self.industry_connectivity_cap = parameters.industry_connectivity_cap
+        self.industry_connectivity_modifier_to_cap = (1 - self.industry_connectivity_initial_modifier) / self.industry_connectivity_cap
+
+        self.industry_connectivity_pop_post_modifier = parameters.industry_connectivity_pop_post_modifier
+        self.industry_connectivity_poll_post_modifier = parameters.industry_connectivity_poll_post_modifier
         
         self.service_poll_g = parameters.service_poll_g
         self.service_pop_g = parameters.service_pop_g
         self.service_pop_modifier = parameters.service_pop_modifier
         self.service_coverage = parameters.service_coverage
+        self.service_connectivity_initial_modifier = parameters.service_connectivity_initial_modifier
+
+        # connectivity cap refers to how many residences to connect 
+        # before the tile acheives 100% population and pollution
+        # we will inverse this and calculate how much each residence tile 
+        # will contribute 
+        assert(parameters.service_connectivity_cap > 0)
+        self.service_connectivity_cap = parameters.service_connectivity_cap
+        self.service_connectivity_modifier_to_cap = (1 - self.service_connectivity_initial_modifier) / self.service_connectivity_cap
+
+        self.service_connectivity_pop_post_modifier = parameters.service_connectivity_pop_post_modifier
+        self.service_connectivity_poll_post_modifier = parameters.service_connectivity_poll_post_modifier
 
         self.road_poll_g  = parameters.road_poll_g
         self.road_pop_g  = parameters.road_pop_g
 
     @staticmethod
-    def is_x_within_y_coverage(x:np.array, y:np.array, distance:int):
+    def is_x_within_y_coverage(x:np.array, y:np.array, distance:int, metric='chessboard'):
         """
         Returns a binary 2D array where x's elements 
-        are within y's element by a distance. Using chevbev's distance
-        which includes diagonal.
+        are within y's element by a distance. 
 
         Args:
             x: a 2D binary array
             y: a 2D binary array
             distance: grid distance
+            metric: the distance to consider. Uses the same metric 
+                    as `distance_transform_cdt` in scipy. Default uses 
+                    chevbey distance (chessboard)
 
         Returns:
             A 2D binary array where 1 indicate x's element within y's coverage
         """
 
-        dist = distance_transform_cdt(~y.astype(bool), metric='chessboard')
+        dist = distance_transform_cdt(~y.astype(bool), metric)
         affected = x * dist
         return ((affected<=distance) & (affected > 0)).astype(int)
 
@@ -96,6 +132,46 @@ class DefaultUpdateRules:
             coverage[coverage>0]=base_value
         return coverage
 
+    def find_linked_residences(self, model, road_tile_adjacent_list):
+        road_ids = model.road_adj_to_residence.keys()
+        tile_of_interest_road_ids = road_tile_adjacent_list.keys()
+        connected_ids = road_ids & tile_of_interest_road_ids
+
+        tile_connected_to_residence = defaultdict(set)
+
+        for road_id in connected_ids:
+            tiles_conncected = road_tile_adjacent_list[road_id]
+            for tile_coordinate in tiles_conncected:
+                tile_connected_to_residence[tile_coordinate]|=model.road_adj_to_residence[road_id]
+
+        updated_row = []
+        updated_col = []
+        residences_count = []
+        for tile_coordinate, residence_coordinates in tile_connected_to_residence:
+            residence_count = len(residence_coordinates)
+            updated_row.append(tile_coordinate[0])
+            updated_col.append(tile_coordinate[1])
+            residences_count.append(residence_count)
+
+        return updated_row, updated_col, residences_count
+        
+    def calculate_connectivity_modifier(self, linked_residence_count, connectivity_cap, 
+                                                connectivity_to_cap_modifier, 
+                                                pop_post_modifier, poll_post_modifier):
+        linked_tile_poll_modifier = []
+        linked_tile_pop_modifier = []
+        for count in linked_residence_count:
+            if count>=connectivity_cap:
+                #if it exceeds, it should be 100% + post modifier
+                industry_poll_modifier = 1.0 + (count - connectivity_cap) * poll_post_modifier
+                industry_pop_modifier = 1.0 + (count - connectivity_cap) * pop_post_modifier
+            else:
+                industry_poll_modifier = count*connectivity_to_cap_modifier
+                industry_pop_modifier = count*connectivity_to_cap_modifier
+            linked_tile_poll_modifier.append(industry_poll_modifier)
+            linked_tile_pop_modifier.append(industry_pop_modifier)
+        return linked_tile_pop_modifier, linked_tile_poll_modifier
+
     def apply_rules(self, model):
         
         residence_tiles = model.residence_tiles
@@ -107,14 +183,48 @@ class DefaultUpdateRules:
         #calculate population cap
         # residence_tiles * how much each increase
         population_cap = self.residence_population_increase * np.count_nonzero(residence_tiles)
-
+        print(np.count_nonzero(residence_tiles))
         #road connectivity for industry / service activation
         # skip for now
-        filtered_industry_tiles = industry_tiles
-        filtered_service_tiles = service_tiles
+
+        #algorithm sketch
+        # Find which industry / service tiles are mapped to connected to which residence tiles
+        #   - union model.road_adj_to_industries keys with model.road_adj_to_residence keys
+        #   - with each road network id, find get one industry tile and map it with residence tiles. 
+        #   - make sure add to set to remove duplicates (same residence tiles connected via different network)
+        # Count and apply rules. If it's connected 1: x%, >1 x+y%, >n, 100%
+        linked_industries_row, linked_industries_col, linked_industries_count = self.find_linked_residences(model, self.road_adj_to_industries)
+        linked_industries_pop_modifier, linked_industries_poll_modifier = self.calculate_connectivity_modifier(linked_industries_count, 
+                                                                                                                self.industry_connectivity_cap, 
+                                                                                                                self.industry_connectivity_modifier_to_cap, 
+                                                                                                                 self.industry_connectivity_pop_post_modifier, 
+                                                                                                                 self.industry_connectivity_poll_post_modifier)
+
+        linked_services_row, linked_services_col, linked_services_count = self.find_linked_residences(model, self.road_adj_to_services)
+        linked_services_pop_modifier, linked_services_poll_modifier = self.calculate_connectivity_modifier(linked_services_count, 
+                                                                                                                self.service_connectivity_cap, 
+                                                                                                                self.service_connectivity_modifier_to_cap, 
+                                                                                                                 self.service_connectivity_pop_post_modifier, 
+                                                                                                                 self.service_connectivity_poll_post_modifier)
+        
+        #calculate the scoring
+        #assume that industry is not linked
+        industry_tiles_pop_modifier = industry_tiles * self.industry_connectivity_initial_modifier
+        #now replace with those that are connected
+        industry_tiles_pop_modifier[linked_industries_row, linked_industries_col] = linked_industries_pop_modifier
+
+        industry_tiles_poll_modifier = industry_tiles * self.industry_connectivity_initial_modifier
+        industry_tiles_poll_modifier[linked_industries_row, linked_industries_col] = linked_industries_poll_modifier
+        industry_poll_g = self.industry_poll_g*industry_tiles_pop_modifier
+
+        #do the same for services
+        service_tiles_pop_modifier = service_tiles * self.service_connectivity_initial_modifier
+        service_tiles_pop_modifier[linked_services_row, linked_services_col] = linked_services_pop_modifier
+
+        service_tiles_poll_modifier = service_tiles * self.service_connectivity_initial_modifier
+        service_tiles_poll_modifier[linked_services_row, linked_services_col] = linked_services_poll_modifier
 
         pop_g_grid:PropertyLayer = model.grid.pop_g
-        pop_g_modifiers = np.ones((pop_g_grid.dimensions))
 
         poll_g_grid:PropertyLayer = model.grid.poll_g
 
@@ -126,21 +236,23 @@ class DefaultUpdateRules:
 
         ################### calculate base_pop ################### 
         #for residence
-        pop_g_grid.modify_cells(np.add, self.residence_pop_g*residence_tiles)
+        #if within 2 cells of residence, times modifier
+        #get the service that are activated
+        service_coverage = self.is_x_within_y_coverage(residence_tiles, 
+                                                        service_tiles[linked_services_row, linked_services_col], 
+                                                        self.service_coverage)
+        service_coverage*=self.service_pop_modifier
+        pop_g_grid.modify_cells(np.add, self.residence_pop_g*residence_tiles*service_coverage)
 
         #for greenery
         pop_g_grid.modify_cells(np.add, self.greenery_pop_g*greenery_tiles)
 
         #for industry
-        pop_g_grid.modify_cells(np.add, self.industry_pop_g*filtered_industry_tiles)
+        pop_g_grid.modify_cells(np.add, self.industry_pop_g*industry_tiles_pop_modifier)
 
         #for service
-        pop_g_grid.modify_cells(np.add, self.service_pop_g*filtered_service_tiles)
-        #if within 2 cells of residence, times modifier
-        service_coverage = self.is_x_within_y_coverage(residence_tiles, filtered_service_tiles, self.service_coverage)
-        # print(service_coverage)
-        pop_g_modifiers+=service_coverage*self.service_pop_modifier
-        
+        pop_g_grid.modify_cells(np.add, self.service_pop_g*service_tiles_pop_modifier)
+
         #for_road
         pop_g_grid.modify_cells(np.add, self.road_pop_g*road_tiles)
 
@@ -150,11 +262,12 @@ class DefaultUpdateRules:
 
         #for industry
         #get the industry pollution coverage
-        industry_poll_g = self.flat_dilation(filtered_industry_tiles, self.industry_coverage, self.industry_poll_g)
+        industry_poll_g = self.flat_dilation(industry_poll_g, 
+                                             self.industry_coverage)
         poll_g_grid.modify_cells(np.add, industry_poll_g)
 
         #for service
-        poll_g_grid.modify_cells(np.add, self.service_poll_g*filtered_service_tiles)
+        poll_g_grid.modify_cells(np.add, self.service_poll_g*service_tiles_poll_modifier)
 
         #for road
         poll_g_grid.modify_cells(np.add, self.road_poll_g*road_tiles)
@@ -176,7 +289,6 @@ class DefaultUpdateRules:
                 diff = 0
             population_modifier = diff / population_cap
         
-        pop_g_grid.modify_cells(np.multiply, pop_g_modifiers)
         self.population_cap = population_cap
         self.curr_pop_g = pop_g_grid.aggregate(np.sum) * population_modifier
 
