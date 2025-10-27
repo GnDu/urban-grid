@@ -15,8 +15,8 @@
   "industry_connectivity_pop_post_modifier": 0.02,
   "industry_connectivity_poll_post_modifier": 0.015,
 
-  "service_poll_g": 5,
-  "service_pop_g": 4,
+  "service_poll_g": 5.0,
+  "service_pop_g": 4.0,
   "service_pop_modifier": 1.2,
   "service_coverage": 2,
   "service_connectivity_initial_modifier":0.2,

@@ -193,35 +193,37 @@ class DefaultUpdateRules:
         #   - with each road network id, find get one industry tile and map it with residence tiles. 
         #   - make sure add to set to remove duplicates (same residence tiles connected via different network)
         # Count and apply rules. If it's connected 1: x%, >1 x+y%, >n, 100%
-        linked_industries_row, linked_industries_col, linked_industries_count = self.find_linked_residences(model, self.road_adj_to_industries)
+        linked_industries_row, linked_industries_col, linked_industries_count = self.find_linked_residences(model, model.road_adj_to_industries)
         linked_industries_pop_modifier, linked_industries_poll_modifier = self.calculate_connectivity_modifier(linked_industries_count, 
                                                                                                                 self.industry_connectivity_cap, 
                                                                                                                 self.industry_connectivity_modifier_to_cap, 
                                                                                                                  self.industry_connectivity_pop_post_modifier, 
                                                                                                                  self.industry_connectivity_poll_post_modifier)
 
-        linked_services_row, linked_services_col, linked_services_count = self.find_linked_residences(model, self.road_adj_to_services)
+        linked_services_row, linked_services_col, linked_services_count = self.find_linked_residences(model, model.road_adj_to_services)
         linked_services_pop_modifier, linked_services_poll_modifier = self.calculate_connectivity_modifier(linked_services_count, 
                                                                                                                 self.service_connectivity_cap, 
                                                                                                                 self.service_connectivity_modifier_to_cap, 
                                                                                                                  self.service_connectivity_pop_post_modifier, 
                                                                                                                  self.service_connectivity_poll_post_modifier)
+        linked_service_tiles = np.zeros(service_tiles.shape)
+        linked_service_tiles[linked_services_row, linked_services_col] = 1
         
         #calculate the scoring
         #assume that industry is not linked
-        industry_tiles_pop_modifier = industry_tiles * self.industry_connectivity_initial_modifier
+        industry_tiles_pop_modifier = (industry_tiles * self.industry_connectivity_initial_modifier).astype(np.float64)
         #now replace with those that are connected
         industry_tiles_pop_modifier[linked_industries_row, linked_industries_col] = linked_industries_pop_modifier
 
-        industry_tiles_poll_modifier = industry_tiles * self.industry_connectivity_initial_modifier
+        industry_tiles_poll_modifier = (industry_tiles * self.industry_connectivity_initial_modifier).astype(np.float64)
         industry_tiles_poll_modifier[linked_industries_row, linked_industries_col] = linked_industries_poll_modifier
         industry_poll_g = self.industry_poll_g*industry_tiles_pop_modifier
 
         #do the same for services
-        service_tiles_pop_modifier = service_tiles * self.service_connectivity_initial_modifier
+        service_tiles_pop_modifier = (service_tiles * self.service_connectivity_initial_modifier).astype(np.float64)
         service_tiles_pop_modifier[linked_services_row, linked_services_col] = linked_services_pop_modifier
 
-        service_tiles_poll_modifier = service_tiles * self.service_connectivity_initial_modifier
+        service_tiles_poll_modifier = (service_tiles * self.service_connectivity_initial_modifier).astype(np.float64)
         service_tiles_poll_modifier[linked_services_row, linked_services_col] = linked_services_poll_modifier
 
         pop_g_grid:PropertyLayer = model.grid.pop_g
@@ -239,9 +241,9 @@ class DefaultUpdateRules:
         #if within 2 cells of residence, times modifier
         #get the service that are activated
         service_coverage = self.is_x_within_y_coverage(residence_tiles, 
-                                                        service_tiles[linked_services_row, linked_services_col], 
+                                                        linked_service_tiles, 
                                                         self.service_coverage)
-        service_coverage*=self.service_pop_modifier
+        service_coverage = np.ones(service_coverage.shape) + service_coverage.astype(np.float64) * self.service_pop_modifier
         pop_g_grid.modify_cells(np.add, self.residence_pop_g*residence_tiles*service_coverage)
 
         #for greenery
@@ -251,7 +253,9 @@ class DefaultUpdateRules:
         pop_g_grid.modify_cells(np.add, self.industry_pop_g*industry_tiles_pop_modifier)
 
         #for service
+        print("Service")
         pop_g_grid.modify_cells(np.add, self.service_pop_g*service_tiles_pop_modifier)
+        print("Service end")
 
         #for_road
         pop_g_grid.modify_cells(np.add, self.road_pop_g*road_tiles)
