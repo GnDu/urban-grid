@@ -37,6 +37,8 @@ class CityPlanner(mesa.Agent):
     def place(self, row_x, col_y, tile):
         #check if tile is even applicable. Throw an error if that is the case
         #should check for any illegal action before hand
+        #note, tile should not be BARREN. That's destroy tile
+        assert(tile!=TileTypes.BARREN.value)
         x_y_tile = self.model.get_tile(row_x, col_y)
         if x_y_tile!=TileTypes.BARREN.value:
             raise RuntimeError(f"({row_x}, {col_y}): {x_y_tile} is not BARREN")
@@ -45,7 +47,7 @@ class CityPlanner(mesa.Agent):
     def destroy(self, row_x, col_y):
         #revert the tile to a barren
         #if x,y is not barren, add a fix poll_g to total_pollution
-        self.model.set_tile(row_x, col_y, TileTypes.BARREN)
+        self.model.set_tile(row_x, col_y, TileTypes.BARREN.value)
         #increment total polution
         self.total_pollution+=self.destroy_tile_penalty
     

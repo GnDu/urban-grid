@@ -1,8 +1,11 @@
 import mesa
+import networkx as nx
 import numpy as np
 from collections import defaultdict
 from mesa.discrete_space import OrthogonalMooreGrid
 from mesa.discrete_space.property_layer import PropertyLayer
+from scipy.ndimage import  grey_dilation, \
+                            generate_binary_structure, iterate_structure
 
 from utils import TileTypes
 
@@ -59,6 +62,8 @@ class CityModel(mesa.Model):
         self.road_adj_to_residence = defaultdict(set)
         self.road_adj_to_industries = defaultdict(set)
         self.road_adj_to_services = defaultdict(set)
+        self.road_graph = nx.Graph()
+        self.road_connected_sets = []
 
         self.grid = OrthogonalMooreGrid(dimensions=(self.width, self.height), random=self.random)
 
@@ -160,6 +165,38 @@ class CityModel(mesa.Model):
             self.update_industry_adjacencies(row_x, col_y)
         elif tile==TileTypes.SERVICE.value:
             self.update_service_adjacencies(row_x, col_y)
+        elif tile==TileTypes.BARREN.value:
+            #deleting a tile
+            #determine which tile is it deleting
+            tile_query = self.get_tile(row_x, col_y)
+            tile_of_interests = [TileTypes.RESIDENCE.value, TileTypes.INDUSTRY.value, TileTypes.SERVICE.value]
+            adj_of_interests = [self.road_adj_to_residence, self.road_adj_to_industries, self.road_adj_to_services]
+
+            if tile_query in tile_of_interests:
+                #if road is adjacent to the tile, we need to remove it
+                interest_index = tile_of_interests.index(tile_query)
+                adj_list = adj_of_interests[interest_index]
+                self.remove_tile_from_adjacencies(row_x, col_y, adj_list)
+            elif tile_query==TileTypes.ROAD.value:
+                #destory road tile
+                #update road network, carefully.
+                self.remove_road_tile(row_x, col_y)
+                pass
+
+    def remove_tile_from_adjacencies(self, row_x, col_y, adj_list):
+        neighbours, _ = self.get_neighbours(self.road_sets, row_x, col_y, is_4_neighbourhood=True)
+        
+        # print(neighbours)
+        neighbours = set(neighbours.flatten().tolist())
+        # print(neighbours)
+        #remove any invalid neighbours
+        try:
+            neighbours.remove(0)
+        except KeyError:
+            pass
+        #give you the road network ids
+        for neighbour in neighbours:
+            adj_list[neighbour].remove((row_x, col_y))
 
     def update_industry_adjacencies(self, row_x, col_y):
         self.update_adjacencies_to_road(row_x, col_y, TileTypes.INDUSTRY.value, self.road_adj_to_industries)
@@ -190,7 +227,7 @@ class CityModel(mesa.Model):
             pass
 
         for neighbour in neighbours:
-            self.road_adj_dict[neighbour].add((row_x, col_y))
+            road_adj_dict[neighbour].add((row_x, col_y))
 
     def update_road_adjacencies(self, row_x, col_y, tiletype_value, curr_road_id):
         tiles = self.grid.tile.select_cells(lambda data: data == tiletype_value, 
@@ -214,7 +251,8 @@ class CityModel(mesa.Model):
         #sanity check
         assert(int(self.grid.tile._mesa_data[(row_x, col_y)])==TileTypes.ROAD.value)
 
-        neighbours, _ = self.get_neighbours(self.road_sets, row_x, col_y, is_4_neighbourhood=True)
+        neighbours, center = self.get_neighbours(self.road_sets, row_x, col_y, is_4_neighbourhood=True)
+        road_local_coordinates = np.argwhere(neighbours>0)
         neighbours = set(neighbours.flatten().tolist())
         
         #raod_network_id must be >0
@@ -229,7 +267,8 @@ class CityModel(mesa.Model):
             #if there are no neighbours, create a new road network
             
             self.road_sets[row_x, col_y] = self.road_set_id
-            
+            self.road_graph.add_node((row_x, col_y))
+
             curr_road_id = self.road_set_id
             self.road_set_id+=1
         else:
@@ -247,6 +286,13 @@ class CityModel(mesa.Model):
 
             #set the new tile to the one with the biggest network
             self.road_sets[row_x, col_y] = max_neighbour
+
+            self.road_graph.add_node((row_x, col_y))
+            #add edge betweeo all existing road tiles
+            road_coordinates = np.array([row_x, col_y]) - (center - road_local_coordinates)
+            for road_coordinate in road_coordinates:
+                self.road_graph.add_edge((row_x, col_y), (int(road_coordinate[0]), int(road_coordinate[1])))
+
             curr_road_id = max_neighbour
             #now set the rest of the neighour network to that max_neighbour network
             for neighbour in neighbours:
@@ -262,7 +308,9 @@ class CityModel(mesa.Model):
             self.update_road_adjacencies(row_x, col_y, TileTypes.RESIDENCE.value, curr_road_id)
             self.update_road_adjacencies(row_x, col_y, TileTypes.INDUSTRY.value, curr_road_id)
             self.update_road_adjacencies(row_x, col_y, TileTypes.SERVICE.value, curr_road_id)
-       
+            
+            #cache connectivity
+            self.road_connected_sets = [node_set for node_set in nx.connected_components(self.road_graph)]
 
     @staticmethod
     def get_neighbours(tiles:np.array, center_row:int, center_col:int, is_4_neighbourhood:bool=False):
@@ -330,3 +378,102 @@ class CityModel(mesa.Model):
             neighbours[diagonal_adjacents[0], diagonal_adjacents[1]] = 0
         
         return neighbours, np.array(center)
+    
+    def remove_road_tile(self, row_x, col_y):
+        #get road id
+        old_road_id = int(self.road_sets[row_x, col_y])
+        
+        #remove road tile from graph
+        self.road_graph.remove_node((row_x, col_y))
+        #check connected components. If connected components +1
+        new_road_connected_sets = [node_set for node_set in nx.connected_components(self.road_graph)]
+        
+        relabel_coordinates = {}
+        original_set = None
+
+        for old_set in self.road_connected_sets:
+            #connected components are mutually exclusive
+            #so basically the only component must include the deleted road_tile
+            #and there can only be one.
+            if (row_x, col_y) in old_set:
+                original_set = old_set
+                break
+        
+        new_sets = []
+        # print("Check connected components", len(new_road_connected_sets), len(self.road_connected_sets))
+
+        # check to see which set is affected
+        # if deleted node  break a connected component into other smaller  
+        # components, each smaller component _must_ be a subset of the larger component
+        # even if it does not break, new set is definitely smaller
+        # regardless unrelated components should still remain the same
+        for new_set in new_road_connected_sets:
+            if new_set < original_set:
+                new_sets.append(new_set)
+
+        #the biggest set gets to keep the original road id        
+        new_sets.sort(key=lambda x: len(x), reverse=True)
+        # print("new sets to see", new_sets)
+        for i, new_set in enumerate(new_sets):
+            new_set_row = []; new_set_col = []
+            for x, y in new_set:
+                new_set_row.append(x)
+                new_set_col.append(y)
+
+            if i==0:
+                #biggest component gets to keep their old set
+                relabel_coordinates[old_road_id] = (new_set_row, new_set_col)
+            else:
+                #this set needs a new label
+                #in the case where there is no disconnected component, 
+                #it will never reach here
+                relabel_coordinates[self.road_set_id] = (new_set_row, new_set_col)
+                self.road_set_id+=1
+
+        #modify the road_set
+        for new_road_id, (rows, cols) in relabel_coordinates.items():
+            if new_road_id==old_road_id:
+                #these are already labeled
+                continue
+            self.road_sets[rows, cols] = new_road_id
+        
+        # check if industry, service, residence tiles are affected
+        # they are affected in 2 ways:
+        #   1) the deleted road tile is the only tile that is connecting them to a network
+        #   2) they now belong to fragmented networks
+        # (1) and (2) are not mutually exclusive. 
+        # screw this, we just relabel everything related, solve (1) and (2) at the same time!
+        
+        self.road_sets[row_x, col_y] = 0
+        self.road_connected_sets = new_road_connected_sets
+
+        #check various layers and make sure that they are not affected
+        self.relabel_adjacencies(old_road_id, relabel_coordinates, self.residence_tiles, self.road_adj_to_residence)
+        self.relabel_adjacencies(old_road_id, relabel_coordinates, self.industry_tiles, self.road_adj_to_industries)
+        self.relabel_adjacencies(old_road_id, relabel_coordinates, self.service_tiles, self.road_adj_to_services)
+
+    def relabel_adjacencies(self, old_road_id, relabel_coordinates, tiles_of_interest, adj_list):
+        #delete the entries related to the old road id
+        if old_road_id in adj_list:
+            del adj_list[old_road_id]
+        # print("Relabeling")
+        # for new_road_id, (rows, cols) in relabel_coordinates.items():
+        #     for r, c in zip(rows, cols):
+        #         print(f"{new_road_id}: ({r}, {c})")
+
+        for new_road_id, (rows, cols) in relabel_coordinates.items():
+            
+            #basically, get all direct neighbours from all road_cells related to the network
+            mask = np.zeros(self.road_sets.shape)
+            mask[rows, cols]=1
+            st = generate_binary_structure(2,1)
+            mask = grey_dilation(mask, footprint = iterate_structure(st,1), mode='constant')
+            tiles_affected = tiles_of_interest * mask
+
+            #get the coordinates and assoicate them to the new network
+            tiles_coordinates = np.argwhere(tiles_affected>0)
+            if len(tiles_coordinates)>0:
+                #sanity check
+                adj_list[new_road_id] = set([])
+            for coordinate in tiles_coordinates:
+                adj_list[new_road_id].add((int(coordinate[0]), int(coordinate[1])))
