@@ -44,7 +44,16 @@ class DefaultUpdateRules:
         self.curr_poll_g = 0
         self.population_cap = 0
 
+    def clone(self):
+        cloned_obj = DefaultUpdateRules()
+        cloned_obj.curr_pop_g = self.curr_pop_g
+        cloned_obj.curr_poll_g = self.curr_poll_g
+        cloned_obj.population_cap = self.population_cap
+        cloned_obj.set_parameters(self.parameter_saved)
+        return cloned_obj
+
     def set_parameters(self, parameters:DefaultUpdateRulesParameters):
+        self.parameter_saved = parameters
         self.residence_population_increase = parameters.residence_population_increase
         self.residence_poll_g = parameters.residence_poll_g
         self.residence_pop_g = parameters.residence_pop_g
@@ -182,7 +191,7 @@ class DefaultUpdateRules:
         linked_tile_poll_modifier = []
         linked_tile_pop_modifier = []
         for count in linked_residence_count:
-            print(initial_modifier, count, connectivity_to_cap_modifier)
+            # print(initial_modifier, count, connectivity_to_cap_modifier)
             poll_modifier = initial_modifier + count*connectivity_to_cap_modifier
             pop_modifier = initial_modifier + count*connectivity_to_cap_modifier
             linked_tile_poll_modifier.append(poll_modifier)
@@ -209,11 +218,11 @@ class DefaultUpdateRules:
         #       - for each industry / service tile, find residence within walkability coverage
         #       - add cooordinate to existing set.
         linked_industries_row, linked_industries_col, linked_industries_count = self.find_linked_residences(model, model.road_adj_to_industries, residence_tiles, industry_tiles)
-        print("Industry",self.industry_poll_g )
+        # print("Industry",self.industry_poll_g )
         linked_industries_pop_modifier, linked_industries_poll_modifier = self.calculate_connectivity_modifier(linked_industries_count, 
                                                                                                                self.industry_connectivity_initial_modifier,
                                                                                                                 self.industry_connectivity_modifier_to_cap)
-        print("Done")
+        # print("Done")
         linked_services_row, linked_services_col, linked_services_count = self.find_linked_residences(model, model.road_adj_to_services, residence_tiles, service_tiles)
         linked_services_pop_modifier, linked_services_poll_modifier = self.calculate_connectivity_modifier(linked_services_count, 
                                                                                                                 self.service_connectivity_initial_modifier,
@@ -254,15 +263,15 @@ class DefaultUpdateRules:
         #get the service that are activated
         service_pop_modifier = np.ones(service_tiles.shape, dtype=np.float64)
         service_coordinates = np.argwhere(service_tiles>0)
-        print("Calculating")
-        print(service_coordinates)
+        # print("Calculating")
+        # print(service_coordinates)
         for service_coordinate in service_coordinates:
             st = generate_binary_structure(2,1)
             coverage = np.zeros(service_tiles.shape, dtype=np.float64)
             coverage[service_coordinate[0],service_coordinate[1]]=1
             coverage = grey_dilation(coverage, footprint = iterate_structure(st,self.service_coverage), mode='constant')
             coverage[coverage>0]=self.service_pop_modifier
-            print(coverage)
+            # print(coverage)
             service_pop_modifier+=coverage
 
         # service_coverage = self.is_x_within_y_coverage(residence_tiles, 
@@ -270,8 +279,8 @@ class DefaultUpdateRules:
         #                                                 self.service_coverage)
         # service_coverage = service_coverage.astype(np.float64) * self.service_pop_modifier
         # service_coverage[service_coverage<=0] = 1
-        print("Result")
-        print(service_pop_modifier)
+        # print("Result")
+        # print(service_pop_modifier)
         pop_g_grid.modify_cells(np.add, self.residence_pop_g*residence_tiles*service_pop_modifier)
 
         #for greenery
@@ -323,7 +332,7 @@ class DefaultUpdateRules:
 
         #total_population basically sum of all pop_g
         if population_cap<=0:
-            population_modifier = 1.0
+            population_modifier = population_cap - model.get_city_planner().total_population
         else:
             diff = population_cap - model.get_city_planner().total_population
             #if diff is really small, just set it to 0
@@ -337,4 +346,4 @@ class DefaultUpdateRules:
         #total pollution is basically the sum of all poll_g
         self.curr_poll_g = poll_g_grid.aggregate(np.sum)
 
-        return self.population_cap, self.curr_pop_g, self.curr_poll_g
+        return float(self.population_cap), float(self.curr_pop_g), float(self.curr_poll_g)
