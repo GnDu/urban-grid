@@ -28,14 +28,16 @@ class DQNetwork(nn.Module):
         self.grid_size = grid_size
         self.num_tile_types = num_tile_types
 
-        # Convolutional layers for grid processing
-        # Input: 3 channels (tile_grid, pop_g_grid, poll_g_grid)
+        # Convolutional layers for grid processing with larger receptive field
+        # Input: 5 channels (tile_grid, pop_g_grid, poll_g_grid, block_id_grid, road_connectivity_grid)
         self.conv_layers = nn.Sequential(
-            nn.Conv2d(3, 32, kernel_size=3, padding=1),
+            nn.Conv2d(5, 64, kernel_size=5, padding=2),  # Larger kernel
             nn.ReLU(),
-            nn.Conv2d(32, 64, kernel_size=3, padding=1),
+            nn.Conv2d(64, 128, kernel_size=5, padding=2),  # Larger kernel
             nn.ReLU(),
-            nn.Conv2d(64, 64, kernel_size=3, padding=1),
+            nn.Conv2d(128, 128, kernel_size=5, padding=2),  # Larger kernel
+            nn.ReLU(),
+            nn.Conv2d(128, 64, kernel_size=3, padding=1),
             nn.ReLU()
         )
 
@@ -71,6 +73,8 @@ class DQNetwork(nn.Module):
                 - tile_grid: (batch, grid_size, grid_size)
                 - pop_g_grid: (batch, grid_size, grid_size)
                 - poll_g_grid: (batch, grid_size, grid_size)
+                - block_id_grid: (batch, grid_size, grid_size)
+                - road_connectivity_grid: (batch, grid_size, grid_size)
                 - features: (batch, 4)
 
         Returns:
@@ -80,8 +84,10 @@ class DQNetwork(nn.Module):
         grid_input = torch.stack([
             state['tile_grid'].float(),
             state['pop_g_grid'],
-            state['poll_g_grid']
-        ], dim=1)  # (batch, 3, grid_size, grid_size)
+            state['poll_g_grid'],
+            state['block_id_grid'].float(),
+            state['road_connectivity_grid'].float()
+        ], dim=1)  # (batch, 5, grid_size, grid_size)
 
         # Process grids through conv layers
         conv_features = self.conv_layers(grid_input)
@@ -119,6 +125,8 @@ class ReplayBuffer:
             'tile_grid': torch.stack([torch.tensor(e.state['tile_grid']) for e in experiences]),
             'pop_g_grid': torch.stack([torch.tensor(e.state['pop_g_grid']) for e in experiences]),
             'poll_g_grid': torch.stack([torch.tensor(e.state['poll_g_grid']) for e in experiences]),
+            'block_id_grid': torch.stack([torch.tensor(e.state['block_id_grid']) for e in experiences]),
+            'road_connectivity_grid': torch.stack([torch.tensor(e.state['road_connectivity_grid']) for e in experiences]),
             'features': torch.stack([torch.tensor(e.state['features']) for e in experiences])
         }
 
@@ -129,6 +137,8 @@ class ReplayBuffer:
             'tile_grid': torch.stack([torch.tensor(e.next_state['tile_grid']) for e in experiences]),
             'pop_g_grid': torch.stack([torch.tensor(e.next_state['pop_g_grid']) for e in experiences]),
             'poll_g_grid': torch.stack([torch.tensor(e.next_state['poll_g_grid']) for e in experiences]),
+            'block_id_grid': torch.stack([torch.tensor(e.next_state['block_id_grid']) for e in experiences]),
+            'road_connectivity_grid': torch.stack([torch.tensor(e.next_state['road_connectivity_grid']) for e in experiences]),
             'features': torch.stack([torch.tensor(e.next_state['features']) for e in experiences])
         }
 

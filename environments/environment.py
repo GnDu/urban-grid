@@ -58,12 +58,23 @@ class CityModel(mesa.Model):
 
         # for road network
         self.road_set_id = 1
-        self.road_sets = np.zeros((self.width, self.height)) 
+        self.road_sets = np.zeros((self.width, self.height))
         self.road_adj_to_residence = defaultdict(set)
         self.road_adj_to_industries = defaultdict(set)
         self.road_adj_to_services = defaultdict(set)
         self.road_graph = nx.Graph()
         self.road_connected_sets = []
+
+        # for block detection (adjacent tiles of same type)
+        self.block_ids = np.zeros((self.width, self.height), dtype=np.int32)
+        self.blocks_by_type = {
+            TileTypes.RESIDENCE.value: {},  # {block_id: set of (row, col) tuples}
+            TileTypes.INDUSTRY.value: {},
+            TileTypes.SERVICE.value: {},
+            TileTypes.GREENERY.value: {}
+        }
+        self.next_block_id = 1
+        self.road_connected_blocks = set()  # Set of block_ids that are adjacent to roads
 
         self.grid = OrthogonalMooreGrid(dimensions=(self.width, self.height), random=self.random)
 
@@ -134,16 +145,20 @@ class CityModel(mesa.Model):
 
     def book_keep(self):
         #just a bunch of methods so that agents/update-rules can use them
-        self.residence_tiles = self.grid.tile.select_cells(lambda data: data == TileTypes.RESIDENCE.value, 
+        self.residence_tiles = self.grid.tile.select_cells(lambda data: data == TileTypes.RESIDENCE.value,
                                                             return_list=False).astype(int)
-        self.greenery_tiles = self.grid.tile.select_cells(lambda data: data == TileTypes.GREENERY.value, 
+        self.greenery_tiles = self.grid.tile.select_cells(lambda data: data == TileTypes.GREENERY.value,
                                                             return_list=False).astype(int)
-        self.industry_tiles = self.grid.tile.select_cells(lambda data: data == TileTypes.INDUSTRY.value, 
+        self.industry_tiles = self.grid.tile.select_cells(lambda data: data == TileTypes.INDUSTRY.value,
                                                             return_list=False).astype(int)
-        self.service_tiles = self.grid.tile.select_cells(lambda data: data == TileTypes.SERVICE.value, 
+        self.service_tiles = self.grid.tile.select_cells(lambda data: data == TileTypes.SERVICE.value,
                                                             return_list=False).astype(int)
-        self.road_tiles = self.grid.tile.select_cells(lambda data: data == TileTypes.ROAD.value, 
+        self.road_tiles = self.grid.tile.select_cells(lambda data: data == TileTypes.ROAD.value,
                                                             return_list=False).astype(int)
+
+        # Update block detection and road connectivity
+        self.detect_blocks()
+        self.update_road_connected_blocks()
 
     def get_city_planner(self):
         return self.agents[0]
@@ -477,3 +492,145 @@ class CityModel(mesa.Model):
                 adj_list[new_road_id] = set([])
             for coordinate in tiles_coordinates:
                 adj_list[new_road_id].add((int(coordinate[0]), int(coordinate[1])))
+
+    def detect_blocks(self):
+        """
+        Detect connected blocks of the same tile type using flood fill.
+        A block is a group of adjacent tiles (4-connectivity) of the same type.
+        Updates block_ids grid and blocks_by_type dictionary.
+        """
+        # Reset block tracking
+        self.block_ids = np.zeros((self.width, self.height), dtype=np.int32)
+        self.blocks_by_type = {
+            TileTypes.RESIDENCE.value: {},
+            TileTypes.INDUSTRY.value: {},
+            TileTypes.SERVICE.value: {},
+            TileTypes.GREENERY.value: {}
+        }
+        self.next_block_id = 1
+
+        # Tile types that can form blocks
+        tile_types_to_check = [
+            TileTypes.RESIDENCE.value,
+            TileTypes.INDUSTRY.value,
+            TileTypes.SERVICE.value,
+            TileTypes.GREENERY.value
+        ]
+
+        for tile_type in tile_types_to_check:
+            # Get all tiles of this type
+            tiles = self.grid.tile.select_cells(
+                lambda data: data == tile_type,
+                return_list=False
+            ).astype(int)
+
+            # Find connected components using flood fill
+            visited = np.zeros((self.width, self.height), dtype=bool)
+
+            for row in range(self.width):
+                for col in range(self.height):
+                    if tiles[row, col] > 0 and not visited[row, col]:
+                        # Start a new block with flood fill
+                        block_cells = self._flood_fill(row, col, tiles, visited)
+
+                        # Assign block ID
+                        block_id = self.next_block_id
+                        self.next_block_id += 1
+
+                        # Store block info
+                        self.blocks_by_type[tile_type][block_id] = block_cells
+
+                        # Update block_ids grid
+                        for cell_row, cell_col in block_cells:
+                            self.block_ids[cell_row, cell_col] = block_id
+
+    def _flood_fill(self, start_row, start_col, tiles, visited):
+        """
+        Flood fill to find all connected tiles starting from (start_row, start_col).
+        Uses 4-connectivity (Von Neumann neighborhood).
+        """
+        stack = [(start_row, start_col)]
+        block_cells = set()
+
+        while stack:
+            row, col = stack.pop()
+
+            # Check bounds and if already visited
+            if row < 0 or row >= self.width or col < 0 or col >= self.height:
+                continue
+            if visited[row, col]:
+                continue
+            if tiles[row, col] == 0:
+                continue
+
+            # Mark as visited and add to block
+            visited[row, col] = True
+            block_cells.add((row, col))
+
+            # Add 4-connected neighbors
+            stack.append((row - 1, col))  # up
+            stack.append((row + 1, col))  # down
+            stack.append((row, col - 1))  # left
+            stack.append((row, col + 1))  # right
+
+        return block_cells
+
+    def update_road_connected_blocks(self):
+        """
+        Update which blocks are connected to the road network.
+        A block is road-connected if at least one of its tiles is adjacent to a road.
+        """
+        self.road_connected_blocks = set()
+
+        # For each block of each type
+        for tile_type, blocks_dict in self.blocks_by_type.items():
+            for block_id, block_cells in blocks_dict.items():
+                # Check if any cell in the block is adjacent to a road
+                is_connected = False
+                for cell_row, cell_col in block_cells:
+                    # Check 4-connected neighbors for roads
+                    neighbors = [
+                        (cell_row - 1, cell_col),
+                        (cell_row + 1, cell_col),
+                        (cell_row, cell_col - 1),
+                        (cell_row, cell_col + 1)
+                    ]
+
+                    for n_row, n_col in neighbors:
+                        if 0 <= n_row < self.width and 0 <= n_col < self.height:
+                            if self.grid.tile._mesa_data[n_row, n_col] == TileTypes.ROAD.value:
+                                is_connected = True
+                                break
+
+                    if is_connected:
+                        break
+
+                if is_connected:
+                    self.road_connected_blocks.add(block_id)
+
+    def get_road_connectivity_grid(self):
+        """
+        Returns a binary grid where 1 indicates the position is adjacent to a road.
+        This helps the agent know where it can place tiles to connect to roads.
+        """
+        connectivity_grid = np.zeros((self.width, self.height), dtype=np.float32)
+
+        # Mark all positions adjacent to roads
+        road_positions = np.argwhere(self.road_tiles > 0)
+        for road_row, road_col in road_positions:
+            # Mark 4-connected neighbors
+            neighbors = [
+                (road_row - 1, road_col),
+                (road_row + 1, road_col),
+                (road_row, road_col - 1),
+                (road_row, road_col + 1)
+            ]
+
+            for n_row, n_col in neighbors:
+                if 0 <= n_row < self.width and 0 <= n_col < self.height:
+                    connectivity_grid[n_row, n_col] = 1.0
+
+        # Also mark road positions themselves
+        connectivity_grid[self.road_tiles > 0] = 1.0
+
+        return connectivity_grid

@@ -186,7 +186,7 @@ class DefaultUpdateRules:
 
         return updated_row, updated_col, residences_count
         
-    def calculate_connectivity_modifier(self, linked_residence_count, initial_modifier, 
+    def calculate_connectivity_modifier(self, linked_residence_count, initial_modifier,
                                                 connectivity_to_cap_modifier):
         linked_tile_poll_modifier = []
         linked_tile_pop_modifier = []
@@ -198,12 +198,31 @@ class DefaultUpdateRules:
             linked_tile_pop_modifier.append(pop_modifier)
         return linked_tile_pop_modifier, linked_tile_poll_modifier
 
+    def _filter_road_connected_tiles(self, model, tiles):
+        """
+        Filter tiles to only include those in blocks connected to roads.
+        Returns a filtered copy of the tiles array.
+        """
+        filtered_tiles = np.zeros_like(tiles)
+
+        # Get coordinates of all tiles of this type
+        tile_coords = np.argwhere(tiles > 0)
+
+        for row, col in tile_coords:
+            block_id = model.block_ids[row, col]
+            # Only include if this block is road-connected
+            if block_id in model.road_connected_blocks:
+                filtered_tiles[row, col] = tiles[row, col]
+
+        return filtered_tiles
+
     def apply_rules(self, model):
-        
-        residence_tiles = model.residence_tiles
-        greenery_tiles = model.greenery_tiles
-        industry_tiles = model.industry_tiles
-        service_tiles = model.service_tiles
+
+        # Get only tiles that belong to road-connected blocks
+        residence_tiles = self._filter_road_connected_tiles(model, model.residence_tiles)
+        greenery_tiles = self._filter_road_connected_tiles(model, model.greenery_tiles)
+        industry_tiles = self._filter_road_connected_tiles(model, model.industry_tiles)
+        service_tiles = self._filter_road_connected_tiles(model, model.service_tiles)
         road_tiles = model.road_tiles
 
         #calculate population cap
