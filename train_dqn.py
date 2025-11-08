@@ -54,21 +54,24 @@ class DQNTrainer:
         print(f"Observation space: {self.env.observation_space}")
         print("-" * 80)
 
-        for episode in tqdm(range(self.num_episodes), desc="Training"):
+        # Create progress bar
+        pbar = tqdm(range(self.num_episodes), desc="Training")
+
+        for episode in pbar:
             episode_reward, episode_length = self._train_episode()
 
             self.episode_rewards.append(episode_reward)
             self.episode_lengths.append(episode_length)
 
-            # Log progress
+            # Update progress bar with metrics
             if (episode + 1) % 10 == 0:
                 avg_reward = np.mean(self.episode_rewards[-10:])
                 avg_length = np.mean(self.episode_lengths[-10:])
-                print(f"\nEpisode {episode + 1}/{self.num_episodes}")
-                print(f"  Avg Reward (last 10): {avg_reward:.2f}")
-                print(f"  Avg Length (last 10): {avg_length:.1f}")
-                print(f"  Epsilon: {self.agent.epsilon:.4f}")
-                print(f"  Buffer size: {len(self.agent.replay_buffer)}")
+                pbar.set_postfix({
+                    'Avg_R': f'{avg_reward:.2f}',
+                    'Eps': f'{self.agent.epsilon:.4f}',
+                    'Buffer': len(self.agent.replay_buffer)
+                })
 
             # Evaluate agent
             if (episode + 1) % self.eval_freq == 0:
@@ -77,19 +80,15 @@ class DQNTrainer:
                 self.eval_populations.append(eval_metrics['population'])
                 self.eval_pollutions.append(eval_metrics['pollution'])
 
-                print(f"\n{'='*80}")
-                print(f"EVALUATION at Episode {episode + 1}")
-                print(f"  Avg Reward: {eval_metrics['reward']:.2f}")
-                print(f"  Avg Population: {eval_metrics['population']:.2f}")
-                print(f"  Avg Pollution: {eval_metrics['pollution']:.2f}")
-                print(f"  Population/Pollution Ratio: {eval_metrics['population']/max(eval_metrics['pollution'], 1):.2f}")
-                print(f"{'='*80}\n")
+                tqdm.write(f"\nEvaluation @ Ep {episode + 1}: Reward={eval_metrics['reward']:.2f}, "
+                          f"Pop={eval_metrics['population']:.2f}, Poll={eval_metrics['pollution']:.2f}, "
+                          f"Ratio={eval_metrics['population']/max(eval_metrics['pollution'], 1):.2f}")
 
             # Save checkpoint
             if (episode + 1) % self.save_freq == 0:
                 checkpoint_path = os.path.join(self.checkpoint_dir, f'dqn_episode_{episode+1}.pt')
                 self.agent.save(checkpoint_path)
-                print(f"Checkpoint saved: {checkpoint_path}")
+                tqdm.write(f"Checkpoint saved: {checkpoint_path}")
 
         # Final save
         final_path = os.path.join(self.checkpoint_dir, 'dqn_final.pt')
