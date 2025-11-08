@@ -244,7 +244,7 @@ def main():
     trainer = DQNTrainer(
         env=env,
         agent=agent,
-        num_episodes=1000,
+        num_episodes=5000,
         save_freq=100,
         eval_freq=50,
         eval_episodes=5,

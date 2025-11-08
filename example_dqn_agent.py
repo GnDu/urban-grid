@@ -13,7 +13,7 @@ from environments.environment import CityModel
 from update_rules.update_rules import DefaultUpdateRules, DefaultUpdateRulesParameters
 from utils import TileTypes
 import torch
-
+from matplotlib.colors import ListedColormap
 
 class RandomCityPlanner(CityPlanner):
     """Random baseline agent for comparison."""
@@ -217,8 +217,15 @@ def visualize_city_grids(dqn_results: dict, random_results: dict, num_samples: i
     """Visualize example city grids from both agents."""
     fig, axes = plt.subplots(2, num_samples, figsize=(4*num_samples, 8))
 
-    # Colormap for tiles
-    cmap = plt.cm.get_cmap('tab10')
+    tile_colors = [
+        '#8B4513',  
+        '#FFD700', 
+        '#228B22',  
+        '#808080',  
+        '#4169E1',  
+        '#000000',  
+    ]
+    cmap = ListedColormap(tile_colors)
 
     for i in range(num_samples):
         # DQN grid

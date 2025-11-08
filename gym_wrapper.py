@@ -138,7 +138,7 @@ class UrbanGridEnv(gym.Env):
     def _initialize_edge_roads(self):
         """Place roads along a random edge of the map at the start."""
         # Choose random edge: 0=top, 1=right, 2=bottom, 3=left
-        edge = self.model.random.integers(0, 4)
+        edge = self.model.random.randint(0, 4)
 
         if edge == 0:  # Top edge
             for col in range(self.grid_size):
