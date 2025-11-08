@@ -45,7 +45,7 @@ This project is developed on python 3.12. The packages are defined in requiremen
 
 ## How it works
 
-Please refer to `example_run.ipynb` for a quick walkthrough.
+Please refer to `example_run.ipynb` for a quick walkthrough. You can also look at `environment_example.ipynb` to check how the environment works.
 
 If you're looking for a breakdown of the game mechanics, refer to the `city_sim_rules.md`.
 
@@ -57,12 +57,8 @@ Goals:
 
 Environment:
 
-- Industry and Service tiles should be connected to a Resident tile via Road tiles before they are 'activated'
+- ~~Industry and Service tiles should be connected to a Resident tile via Road tiles before they are 'activated'~~
 - Finding the 'proper' values for pollution, population gain/loss, pollution mitigations, and any modifiers.
-- Adding of water tiles
-- Modeling traffic so the agent is encouraged to diversify road networks.
-- Simulate walking. Service or industry within 'walking distance' should have their pollution decrease.
-  - Any roads that connect residences to a service/industry should have their pollution decrease if the residences are within walking distance.
 
 Visualisation:
 
