@@ -3,13 +3,14 @@ Example usage of the DQN agent for Urban-Grid city planning.
 Demonstrates how to load a trained agent and evaluate it against baselines.
 """
 
+import json
 import numpy as np
 import matplotlib.pyplot as plt
 from gym_wrapper import UrbanGridEnv
 from agents.dqn_agent import DQNAgent
 from agents.agent import CityPlanner
 from environments.environment import CityModel
-from update_rules.update_rules import DefaultUpdateRules, default_rule_parameters
+from update_rules.update_rules import DefaultUpdateRules, DefaultUpdateRulesParameters
 from utils import TileTypes
 import torch
 
@@ -102,7 +103,13 @@ def evaluate_random_agent(num_episodes: int = 10, grid_size: int = 16):
     for episode in range(num_episodes):
         # Create environment
         update_rules = DefaultUpdateRules()
-        update_rules.set_parameters(default_rule_parameters)
+
+        with open("data/update_parameters/DefaultUpdateRule.json") as f:
+                default_rule_parameters = json.load(f)
+
+        params = DefaultUpdateRulesParameters(**default_rule_parameters)
+
+        update_rules.set_parameters(params)
 
         model = CityModel(
             agent_class=RandomCityPlanner,
