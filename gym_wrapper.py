@@ -7,10 +7,10 @@ import gymnasium as gym
 import numpy as np
 from typing import Tuple, Dict, Any, Optional
 from environments.environment import CityModel
-from update_rules.update_rules import DefaultUpdateRules, default_rule_parameters
+from update_rules.update_rules import DefaultUpdateRules, DefaultUpdateRulesParameters
 from utils import TileTypes
 from agents.agent import CityPlanner
-
+import json
 
 class DummyAgent(CityPlanner):
     """Dummy agent that does nothing - controlled externally by Gym wrapper."""
@@ -61,7 +61,12 @@ class UrbanGridEnv(gym.Env):
         # Setup update rules
         if update_rules is None:
             self.update_rules = DefaultUpdateRules()
-            self.update_rules.set_parameters(default_rule_parameters)
+                    
+            with open("data/update_parameters/DefaultUpdateRule.json") as f:
+                default_rule_parameters = json.load(f)
+
+            params = DefaultUpdateRulesParameters(**default_rule_parameters)
+            self.update_rules.set_parameters(params)
         else:
             self.update_rules = update_rules
 
