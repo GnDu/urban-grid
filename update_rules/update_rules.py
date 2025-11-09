@@ -332,7 +332,7 @@ class DefaultUpdateRules:
 
         #total_population basically sum of all pop_g
         if population_cap<=0:
-            population_modifier = population_cap - model.get_city_planner().total_population
+            population_modifier = -1
         else:
             diff = population_cap - model.get_city_planner().total_population
             #if diff is really small, just set it to 0

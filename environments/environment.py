@@ -131,7 +131,7 @@ class CityModel(mesa.Model):
         if self.time_step%self.collect_rate==0:
             self.data_collectors.collect(self)
         self.time_step+=1
-
+        
     def book_keep(self):
         #just a bunch of methods so that agents/update-rules can use them
         self.residence_tiles = self.grid.tile.select_cells(lambda data: data == TileTypes.RESIDENCE.value, 
@@ -149,7 +149,7 @@ class CityModel(mesa.Model):
         return self.agents[0]
 
     def get_tile(self, row_x, col_y):
-        return self.grid.tile._mesa_data[(row_x,col_y)]
+        return self.grid.tile._mesa_data[row_x,col_y]
 
     def set_tile(self, row_x, col_y, tile):
         #because mesa has a really convulted way to set discrete_space property directly
@@ -229,7 +229,7 @@ class CityModel(mesa.Model):
         for neighbour in neighbours:
             road_adj_dict[neighbour].add((row_x, col_y))
 
-    def update_road_adjacencies(self, row_x, col_y, tiletype_value, curr_road_id):
+    def update_road_adjacencies(self, row_x, col_y, tiletype_value, curr_road_id, road_adj_list):
         tiles = self.grid.tile.select_cells(lambda data: data == tiletype_value, 
                                             return_list=False).astype(int)
         neighbours, center = self.get_neighbours(tiles, row_x, col_y, is_4_neighbourhood=True)
@@ -237,9 +237,10 @@ class CityModel(mesa.Model):
         if local_coordinates.size > 0:
             #using center, find the relative offset and use the x_row, y_col to find the actual
             #coordinates
+            #TODO major error here! Should be road_adj_to_{relative tile}
             residence_coordinates = np.array([row_x, col_y]) - (center - local_coordinates)
             for residence_coordinate in residence_coordinates:
-                self.road_adj_to_residence[curr_road_id].add((int(residence_coordinate[0]), 
+                road_adj_list[curr_road_id].add((int(residence_coordinate[0]), 
                                                                 int(residence_coordinate[1])))
 
     def update_road_network(self, row_x, col_y):
@@ -305,9 +306,9 @@ class CityModel(mesa.Model):
                 del self.road_adj_to_residence[neighbour]
             
             #now check and see if a road is adjacent to a residence
-            self.update_road_adjacencies(row_x, col_y, TileTypes.RESIDENCE.value, curr_road_id)
-            self.update_road_adjacencies(row_x, col_y, TileTypes.INDUSTRY.value, curr_road_id)
-            self.update_road_adjacencies(row_x, col_y, TileTypes.SERVICE.value, curr_road_id)
+            self.update_road_adjacencies(row_x, col_y, TileTypes.RESIDENCE.value, curr_road_id, self.road_adj_to_residence)
+            self.update_road_adjacencies(row_x, col_y, TileTypes.INDUSTRY.value, curr_road_id, self.road_adj_to_industries)
+            self.update_road_adjacencies(row_x, col_y, TileTypes.SERVICE.value, curr_road_id, self.road_adj_to_services)
             
             #cache connectivity
             self.road_connected_sets = [node_set for node_set in nx.connected_components(self.road_graph)]
