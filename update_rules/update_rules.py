@@ -238,7 +238,7 @@ class DefaultUpdateRules:
 
         industry_tiles_poll_modifier = (industry_tiles * self.industry_connectivity_initial_modifier).astype(np.float64)
         industry_tiles_poll_modifier[linked_industries_row, linked_industries_col] = linked_industries_poll_modifier
-        industry_poll_g = self.industry_poll_g*industry_tiles_pop_modifier
+        industry_poll_g = self.industry_poll_g*industry_tiles_poll_modifier
 
         #do the same for services
         service_tiles_pop_modifier = (service_tiles * self.service_connectivity_initial_modifier).astype(np.float64)
