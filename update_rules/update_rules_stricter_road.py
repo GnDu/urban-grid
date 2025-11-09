@@ -30,7 +30,9 @@ class UpdateRulesStricterRoad(DefaultUpdateRules):
         self.residence_population_increase = parameters.residence_population_increase
         self.residence_poll_g = parameters.residence_poll_g
         self.residence_pop_g = parameters.residence_pop_g
-        self.residence_walking_distance = parameters.residence_walking_distance
+        if parameters.residence_walking_distance!=0:
+            print("Warning: residence_walking_distance is ignored. Setting to 0")
+        self.residence_walking_distance = 0
 
         self.greenery_poll_minus  = parameters.greenery_poll_minus
         self.greenery_pop_g  = parameters.greenery_pop_g

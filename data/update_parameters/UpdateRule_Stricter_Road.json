@@ -1,0 +1,26 @@
+{
+  "residence_population_increase": 300,
+  "residence_poll_g": 1.5,
+  "residence_pop_g": 1,
+  "residence_walking_distance": 0,
+  
+  "greenery_poll_minus": 0.9,
+  "greenery_pop_g": 0.5,
+  "greenery_coverage": 2,
+  
+  "industry_poll_g": 1,
+  "industry_pop_g": 8,
+  "industry_coverage": 2,
+  "industry_connectivity_initial_modifier": 0, 
+  "industry_connectivity_cap": 10,
+
+  "service_poll_g": 5.0,
+  "service_pop_g": 4.0,
+  "service_pop_modifier": 0.3,
+  "service_coverage": 3,
+  "service_connectivity_initial_modifier":0,
+  "service_connectivity_cap": 10,
+  
+  "road_poll_g": 0.5,
+  "road_pop_g": 0.1
+}
