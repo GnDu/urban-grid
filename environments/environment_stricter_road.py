@@ -88,6 +88,9 @@ class CityModelStricterRoad(CityModel):
         st = generate_binary_structure(2,1)
         legal_tiles = grey_dilation(self.road_tiles, footprint = iterate_structure(st,1), mode='constant')
         legal_tiles-=self.road_tiles
+        #gotta make sure they don't overlap with the rest of the tiles
+        #basically, it's valid if they are on barren tiles
+        legal_tiles = legal_tiles * (self.grid.tile._mesa_data==TileTypes.BARREN.value)
         return np.argwhere(legal_tiles>0)
 
 
