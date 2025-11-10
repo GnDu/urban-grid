@@ -37,14 +37,13 @@ def get_state():
         "grid": current_grid,
         "tick": current_step,
         "population": 0,
-        "pollution": 0,
-        "history": []
+        "pollution": 0
     })
 
 @app.route("/step", methods=["POST"])
 def step():
     """Return the next step from JSON file."""
-    global current_step, current_grid, history
+    global current_step, current_grid
     logging.info(f"Received /step request | Current step index: {current_step}")
 
     if current_step >= len(steps_data):
@@ -64,18 +63,11 @@ def step():
     current_grid[row][col] = tile_type
     logging.info(f"Returning action: {action}")
 
-    history.append({
-        "tick": action["step"],
-        "population": action["total_population"],
-        "pollution": action["total_pollution"]
-    })
-
     response = {
         "grid": current_grid,
         "tick": action["step"],
         "population": action["total_population"],
         "pollution": action["total_pollution"],    
-        "history": history,
         "action": action
     }
 
@@ -85,11 +77,11 @@ def step():
 
 @app.route("/reset", methods=["POST"])
 def reset():
-    global current_step, current_grid, history
+    global current_step, current_grid
     current_step = 0
     current_grid = create_grid(size, types)
-    history = []
-    return jsonify({"message": "Simulation reset", "grid": current_grid, "tick": 0, "population": 0, "pollution": 0, "history": []})
+
+    return jsonify({"message": "Simulation reset", "grid": current_grid, "tick": 0, "population": 0, "pollution": 0})
 
 if __name__ == "__main__":
     app.run(debug=True)

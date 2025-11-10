@@ -50,7 +50,14 @@ export default function App() {
       setTick(data.tick);
       setPopulation(data.population);
       setPollution(data.pollution);
-      setHistory(data.history);
+      setHistory((prev) => [
+        ...prev,
+        {
+          tick: data.tick,
+          population: data.population,
+          pollution: data.pollution
+        },
+      ]);
     } else {
       // fallback local sim
       setGrid(createGrid(size, types));
