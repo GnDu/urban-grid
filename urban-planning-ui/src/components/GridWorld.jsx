@@ -2,12 +2,12 @@ import React from "react";
 
 // Define colors for each type of land cell
 const COLORS = {
-  barren: "#8B4513",    // brown
-  residence: "#4A90E2", // blue
-  greenery: "#4CAF50",  // green
-  industry: "#FFA500",  // orange
-  service: "#FFD700",   // yellow
-  road: "#333333",      // dark gray
+  BARREN: "#8B4513",    // brown
+  RESIDENCE: "#4A90E2", // blue
+  GREENERY: "#4CAF50",  // green
+  INDUSTRY: "#FFA500",  // orange
+  SERVICE: "#FFD700",   // yellow
+  ROAD: "#333333",      // dark gray
 };
 
 export default function GridWorld({ grid }) {
