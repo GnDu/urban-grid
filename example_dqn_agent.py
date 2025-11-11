@@ -199,7 +199,7 @@ def compare_agents(dqn_results: dict, random_results: dict):
 
 def visualize_comparison(dqn_results: dict, random_results: dict, save_path: str = 'comparison.png'):
     """Create visualization comparing DQN and random agents."""
-    fig, axes = plt.subplots(2, 3, figsize=(16, 10))
+    fig, axes = plt.subplots(2, 3, figsize=(10, 10))
 
     metrics = [
         ('rewards', 'Total Reward'),
@@ -296,7 +296,7 @@ def main():
     print("DQN Agent Evaluation for Urban-Grid City Planning")
     print("="*80)
 
-    grid_size = 16
+    grid_size = 10
     num_episodes = 10
 
     # Option 1: Load a trained agent
