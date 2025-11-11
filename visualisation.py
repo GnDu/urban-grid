@@ -2,21 +2,33 @@ import numpy as np
 from matplotlib.colors import ListedColormap
 import matplotlib.pyplot as plt
 import ipywidgets as widgets
-
+import json
+from PIL import Image
+import imageio
 from utils import TileTypes
 
+
 color_mapping_labels = [
-    (TileTypes.BARREN, TileTypes.BARREN.name, "#E7771B"),
-    (TileTypes.RESIDENCE, TileTypes.RESIDENCE.name, "#5EBDE9"),
-    (TileTypes.GREENERY, TileTypes.GREENERY.name, "#00EC4F"),
-    (TileTypes.INDUSTRY, TileTypes.INDUSTRY.name, "#A32845"),
-    (TileTypes.SERVICE, TileTypes.SERVICE.name, "#3B12F3"),
-    (TileTypes.ROAD, TileTypes.ROAD.name, "#000000")
+    (TileTypes.BARREN, TileTypes.BARREN.name, "#eea5a5"),
+    (TileTypes.RESIDENCE, TileTypes.RESIDENCE.name, "#ffeb3b"),
+    (TileTypes.GREENERY, TileTypes.GREENERY.name, "#4caf50"),
+    (TileTypes.INDUSTRY, TileTypes.INDUSTRY.name, "#9e9e9e"),
+    (TileTypes.SERVICE, TileTypes.SERVICE.name, "#2196f3"),
+    (TileTypes.ROAD, TileTypes.ROAD.name, "#424242")
 ]
 
 color_mapping_labels.sort(key=lambda x: x[0].value)
 
 cmap = ListedColormap([color for _,_,color in color_mapping_labels])
+
+tile_colours_map = {
+    TileTypes.BARREN: "#eea5a5",
+    TileTypes.RESIDENCE: "#ffeb3b",
+    TileTypes.GREENERY: "#4caf50",
+    TileTypes.INDUSTRY: "#9e9e9e",
+    TileTypes.SERVICE: "#2196f3",
+    TileTypes.ROAD: "#424242",
+}
 
 class GridAnimator:
     """
@@ -154,3 +166,438 @@ def plot_selected_columns(df, selected_columns):
     # Hide unused subplots
     for idx in range(len(numeric_cols), len(axes)):
         axes[idx].set_visible(False)
+
+def render_grid_html(
+    grid_data: np.ndarray,
+    output_path: str = "grid_animation.html",
+    cell_size: int = 20,
+    fps: int = 10,
+    title: str = "Grid Evolution",
+    show_grid_lines: bool = True
+) -> str:
+    """
+    Render a 3D numpy array as an interactive HTML animation.
+    
+    Parameters:
+    -----------
+    grid_data : np.ndarray
+        3D array of shape (t, x, y) where t is time steps.
+    output_path : str
+        Path where the output HTML will be saved.
+    cell_size : int
+        Size of each cell in pixels.
+    fps : int
+        Frames per second for the animation.
+    title : str
+        Title to display.
+    show_grid_lines : bool
+        Whether to show grid lines between cells.
+    
+    Returns:
+    --------
+    str
+        Path to the saved HTML file.
+    """
+    if grid_data.ndim != 3:
+        raise ValueError(f"Expected 3D array, got {grid_data.ndim}D array")
+    
+    t_steps, height, width = grid_data.shape
+    
+    # Convert grid data to JSON-serializable format
+    grid_json = grid_data.tolist()
+    
+    # Create color map as simple dict
+    color_map = {tile_type.value: tile_colours_map[tile_type] 
+                 for tile_type in TileTypes}
+    
+    tile_names = {tile_type.value: tile_type.name 
+                  for tile_type in TileTypes}
+    
+    html_content = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+    <style>
+        body {{
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            background-color: #f5f5f5;
+            margin: 0;
+        }}
+        
+        h1 {{
+            color: #333;
+            margin-bottom: 10px;
+        }}
+        
+        #canvas-container {{
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }}
+        
+        canvas {{
+            border: 2px solid #ddd;
+            display: block;
+        }}
+        
+        #controls {{
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            min-width: 500px;
+        }}
+        
+        .control-row {{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }}
+        
+        .control-row label {{
+            min-width: 100px;
+            font-weight: 500;
+            color: #555;
+        }}
+        
+        button {{
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            background-color: #2196f3;
+            color: white;
+            transition: background-color 0.3s;
+        }}
+        
+        button:hover {{
+            background-color: #1976d2;
+        }}
+        
+        button:disabled {{
+            background-color: #ccc;
+            cursor: not-allowed;
+        }}
+        
+        input[type="range"] {{
+            flex: 1;
+            cursor: pointer;
+        }}
+        
+        input[type="number"] {{
+            width: 80px;
+            padding: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }}
+        
+        #frame-info {{
+            font-size: 18px;
+            color: #333;
+            font-weight: 500;
+        }}
+        
+        #legend {{
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }}
+        
+        #legend h3 {{
+            margin-top: 0;
+            color: #333;
+        }}
+        
+        .legend-item {{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+        }}
+        
+        .legend-color {{
+            width: 30px;
+            height: 30px;
+            border: 1px solid #333;
+            border-radius: 4px;
+        }}
+        
+        .legend-label {{
+            font-size: 14px;
+            color: #555;
+        }}
+    </style>
+</head>
+<body>
+    <h1>{title}</h1>
+    
+    <div id="canvas-container">
+        <canvas id="gridCanvas"></canvas>
+    </div>
+    
+    <div id="controls">
+        <div class="control-row">
+            <button id="playPauseBtn">Play</button>
+            <button id="resetBtn">Reset</button>
+            <span id="frame-info">Frame: 0 / {t_steps - 1}</span>
+        </div>
+        
+        <div class="control-row">
+            <label for="frameSlider">Frame:</label>
+            <input type="range" id="frameSlider" min="0" max="{t_steps - 1}" value="0">
+        </div>
+        
+        <div class="control-row">
+            <label for="fpsInput">FPS:</label>
+            <input type="number" id="fpsInput" min="1" max="60" value="{fps}">
+        </div>
+        
+        <div class="control-row">
+            <label for="gridLinesCheckbox">Grid Lines:</label>
+            <input type="checkbox" id="gridLinesCheckbox" {"checked" if show_grid_lines else ""}>
+        </div>
+    </div>
+    
+    <div id="legend">
+        <h3>Legend</h3>
+        <div id="legend-items"></div>
+    </div>
+
+    <script>
+        // Grid data
+        const gridData = {json.dumps(grid_json)};
+        const colorMap = {json.dumps(color_map)};
+        const tileNames = {json.dumps(tile_names)};
+        const cellSize = {cell_size};
+        
+        // Canvas setup
+        const canvas = document.getElementById('gridCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        const tSteps = gridData.length;
+        const height = gridData[0].length;
+        const width = gridData[0][0].length;
+        
+        canvas.width = width * cellSize;
+        canvas.height = height * cellSize;
+        
+        // Animation state
+        let currentFrame = 0;
+        let isPlaying = false;
+        let animationInterval = null;
+        let showGridLines = {str(show_grid_lines).lower()};
+        
+        // Controls
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const frameSlider = document.getElementById('frameSlider');
+        const frameInfo = document.getElementById('frame-info');
+        const fpsInput = document.getElementById('fpsInput');
+        const gridLinesCheckbox = document.getElementById('gridLinesCheckbox');
+        
+        // Draw a single frame
+        function drawFrame(frameIndex) {{
+            const grid = gridData[frameIndex];
+            
+            // Clear canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw cells
+            for (let y = 0; y < height; y++) {{
+                for (let x = 0; x < width; x++) {{
+                    const tileValue = grid[y][x];
+                    const color = colorMap[tileValue] || '#808080';
+                    
+                    ctx.fillStyle = color;
+                    ctx.fillRect(x * cellSize, y * cellSize, cellSize, cellSize);
+                    
+                    // Draw grid lines
+                    if (showGridLines) {{
+                        ctx.strokeStyle = '#c8c8c8';
+                        ctx.lineWidth = 1;
+                        ctx.strokeRect(x * cellSize, y * cellSize, cellSize, cellSize);
+                    }}
+                }}
+            }}
+        }}
+        
+        // Update frame info
+        function updateFrameInfo() {{
+            frameInfo.textContent = `Frame: ${{currentFrame}} / ${{tSteps - 1}}`;
+            frameSlider.value = currentFrame;
+        }}
+        
+        // Play animation
+        function play() {{
+            if (animationInterval) return;
+            
+            isPlaying = true;
+            playPauseBtn.textContent = 'Pause';
+            
+            const fps = parseInt(fpsInput.value) || 10;
+            const interval = 1000 / fps;
+            
+            animationInterval = setInterval(() => {{
+                currentFrame++;
+                if (currentFrame >= tSteps) {{
+                    currentFrame = 0;
+                }}
+                drawFrame(currentFrame);
+                updateFrameInfo();
+            }}, interval);
+        }}
+        
+        // Pause animation
+        function pause() {{
+            if (animationInterval) {{
+                clearInterval(animationInterval);
+                animationInterval = null;
+            }}
+            isPlaying = false;
+            playPauseBtn.textContent = 'Play';
+        }}
+        
+        // Reset animation
+        function reset() {{
+            pause();
+            currentFrame = 0;
+            drawFrame(currentFrame);
+            updateFrameInfo();
+        }}
+        
+        // Event listeners
+        playPauseBtn.addEventListener('click', () => {{
+            if (isPlaying) {{
+                pause();
+            }} else {{
+                play();
+            }}
+        }});
+        
+        resetBtn.addEventListener('click', reset);
+        
+        frameSlider.addEventListener('input', (e) => {{
+            pause();
+            currentFrame = parseInt(e.target.value);
+            drawFrame(currentFrame);
+            updateFrameInfo();
+        }});
+        
+        fpsInput.addEventListener('change', () => {{
+            if (isPlaying) {{
+                pause();
+                play();
+            }}
+        }});
+        
+        gridLinesCheckbox.addEventListener('change', (e) => {{
+            showGridLines = e.target.checked;
+            drawFrame(currentFrame);
+        }});
+        
+        // Create legend
+        const legendItems = document.getElementById('legend-items');
+        Object.keys(colorMap).sort((a, b) => a - b).forEach(key => {{
+            const item = document.createElement('div');
+            item.className = 'legend-item';
+            
+            const colorBox = document.createElement('div');
+            colorBox.className = 'legend-color';
+            colorBox.style.backgroundColor = colorMap[key];
+            
+            const label = document.createElement('span');
+            label.className = 'legend-label';
+            label.textContent = tileNames[key];
+            
+            item.appendChild(colorBox);
+            item.appendChild(label);
+            legendItems.appendChild(item);
+        }});
+        
+        // Initial draw
+        drawFrame(currentFrame);
+        updateFrameInfo();
+    </script>
+</body>
+</html>"""
+    
+    print(f"Saving HTML to {output_path}...")
+    with open(output_path, 'w') as f:
+        f.write(html_content)
+    
+    print(f"HTML saved successfully to {output_path}")
+    print(f"Open the file in a web browser to view the interactive animation.")
+    
+    return output_path
+
+def _hex_to_rgb(hex_color):
+    """Convert hex color to RGB tuple."""
+    hex_color = hex_color.lstrip('#')
+    return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
+
+def render_3d_array_to_gif(array, output_path, pixel_size=10, duration=200):
+    """
+    Render a 3D array as an animated GIF.
+    
+    Parameters:
+    -----------
+    array : np.ndarray
+        3D array of shape (t, x, y) where values correspond to TileTypes
+    output_path : str
+        Path to save the GIF file
+    pixel_size : int
+        Size of each tile in pixels (default: 10)
+    duration : int
+        Duration of each frame in milliseconds (default: 200)
+    """
+    
+    # Extract dimensions
+    num_frames, height, width = array.shape
+    
+    # Convert hex colors to RGB
+    color_map = {
+        tile_type.value: _hex_to_rgb(hex_color)
+        for tile_type, hex_color in tile_colours_map.items()
+    }
+    
+    # Generate frames
+    frames = []
+    for t in range(num_frames):
+        # Create image for this frame
+        frame_array = array[t]
+        
+        # Create PIL Image with pixel_size scaling
+        img_array = np.zeros((height * pixel_size, width * pixel_size, 3), dtype=np.uint8)
+        
+        for x in range(height):
+            for y in range(width):
+                tile_value = int(frame_array[x, y])
+                color = color_map.get(tile_value, (200, 200, 200))  # Default color if not found
+                
+                # Fill the pixel block with the color
+                img_array[
+                    x*pixel_size:(x+1)*pixel_size,
+                    y*pixel_size:(y+1)*pixel_size
+                ] = color
+        
+        # Convert to PIL Image
+        img = Image.fromarray(img_array, 'RGB')
+        frames.append(np.array(img))
+    
+    # Save as GIF
+    imageio.mimsave(output_path, frames, duration=duration)
+    print(f"GIF saved to {output_path}")
