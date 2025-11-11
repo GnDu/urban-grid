@@ -12,7 +12,15 @@ logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(message)s"
 )
 
-# Load the steps data from the JSON file once
+# TO CHANGE
+MODEL = {
+    1: "steps_with_totals.json",
+    2: "steps_with_totals_2.json",
+    3: "steps_with_totals_3.json"
+}
+
+DEFAULT_MODEL_ID = 1
+
 with open("steps_with_totals.json") as f:
     steps_data = json.load(f)
 
@@ -77,9 +85,18 @@ def step():
 
 @app.route("/reset", methods=["POST"])
 def reset():
-    global current_step, current_grid
+    global current_step, current_grid, steps_data
     current_step = 0
     current_grid = create_grid(size, types)
+
+    req = request.get_json() or {}
+    model_id = req.get("model_id", DEFAULT_MODEL_ID)
+
+    file_name = MODEL.get(model_id, MODEL[DEFAULT_MODEL_ID])
+    logging.info(f"Resetting simulation for model {model_id}, loading {file_name}")
+    with open(file_name) as f:
+        steps_data = json.load(f)
+
 
     return jsonify({"message": "Simulation reset", "grid": current_grid, "tick": 0, "population": 0, "pollution": 0})
 
