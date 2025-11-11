@@ -34,14 +34,47 @@ class RandomCityPlanner(CityPlanner):
         if len(barren_cells[0]) == 0:
             return
 
-        # Random position
-        idx = self.model.rng.integers(0, len(barren_cells[0]))
-        x_row, y_col = barren_cells[0][idx], barren_cells[1][idx]
+        # Build list of valid actions respecting road placement rules
+        valid_actions = []
+        for i in range(len(barren_cells[0])):
+            x_row, y_col = barren_cells[0][i], barren_cells[1][i]
 
-        # Random tile
-        rand_tile = self.model.rng.choice(self.RAND_TILES)
+            # Check if adjacent to road
+            is_adjacent_to_road = self._is_adjacent_to_road(x_row, y_col)
+
+            for tile_type in self.RAND_TILES:
+                # Roads can only be placed adjacent to existing roads
+                if tile_type == TileTypes.ROAD.value:
+                    if is_adjacent_to_road:
+                        valid_actions.append((x_row, y_col, tile_type))
+                else:
+                    # Non-road tiles can go anywhere
+                    valid_actions.append((x_row, y_col, tile_type))
+
+        if len(valid_actions) == 0:
+            return
+
+        # Choose random valid action
+        idx = self.model.rng.integers(0, len(valid_actions))
+        x_row, y_col, rand_tile = valid_actions[idx]
 
         self.place(x_row, y_col, rand_tile)
+
+    def _is_adjacent_to_road(self, row: int, col: int) -> bool:
+        """Check if a cell is adjacent (4-connected) to a road."""
+        neighbors = [
+            (row - 1, col),  # up
+            (row + 1, col),  # down
+            (row, col - 1),  # left
+            (row, col + 1)   # right
+        ]
+
+        for n_row, n_col in neighbors:
+            if 0 <= n_row < self.model.width and 0 <= n_col < self.model.height:
+                if self.model.grid.tile._mesa_data[n_row, n_col] == TileTypes.ROAD.value:
+                    return True
+
+        return False
 
     def update(self, **kwargs):
         self.total_population += self.model.update_rules.curr_pop_g

@@ -136,24 +136,27 @@ class UrbanGridEnv(gym.Env):
         return observation, info
 
     def _initialize_edge_roads(self):
-        """Place roads along a random edge of the map at the start."""
+        """Place a single road tile randomly at the border of the map."""
         # Choose random edge: 0=top, 1=right, 2=bottom, 3=left
         edge = self.model.random.randint(0, 4)
 
         if edge == 0:  # Top edge
-            for col in range(self.grid_size):
-                self.agent.place(0, col, TileTypes.ROAD.value)
+            col = self.model.random.randint(0, self.grid_size)
+            row = 0
         elif edge == 1:  # Right edge
-            for row in range(self.grid_size):
-                self.agent.place(row, self.grid_size - 1, TileTypes.ROAD.value)
+            row = self.model.random.randint(0, self.grid_size)
+            col = self.grid_size - 1
         elif edge == 2:  # Bottom edge
-            for col in range(self.grid_size):
-                self.agent.place(self.grid_size - 1, col, TileTypes.ROAD.value)
+            col = self.model.random.randint(0, self.grid_size)
+            row = self.grid_size - 1
         else:  # Left edge (edge == 3)
-            for row in range(self.grid_size):
-                self.agent.place(row, 0, TileTypes.ROAD.value)
+            row = self.model.random.randint(0, self.grid_size)
+            col = 0
 
-        # Update the model state after placing roads
+        # Place single road tile
+        self.agent.place(row, col, TileTypes.ROAD.value)
+
+        # Update the model state after placing road
         self.model.step()
 
     def step(self, action: np.ndarray) -> Tuple[Dict[str, np.ndarray], float, bool, bool, Dict[str, Any]]:
@@ -204,10 +207,37 @@ class UrbanGridEnv(gym.Env):
 
         self.model.time_step += 1
 
-        # Calculate reward (change in population - pollution)
+        # Calculate reward with improved shaping
         pop_delta = self.agent.total_population - prev_pop
         poll_delta = self.agent.total_pollution - prev_poll
+
+        # Base reward: population gain - pollution gain
         reward = pop_delta - self.pollution_coefficient * poll_delta
+
+        # Bonus for building connected blocks (incentivize dense development)
+        num_road_connected_blocks = len(self.model.road_connected_blocks)
+        block_bonus = num_road_connected_blocks * 0.1  # Small bonus per connected block
+
+        # Calculate average block size (reward larger, more efficient blocks)
+        total_tiles_in_blocks = 0
+        for tile_type, blocks_dict in self.model.blocks_by_type.items():
+            for block_id, block_cells in blocks_dict.items():
+                if block_id in self.model.road_connected_blocks:
+                    total_tiles_in_blocks += len(block_cells)
+
+        avg_block_size = total_tiles_in_blocks / max(num_road_connected_blocks, 1)
+        size_bonus = (avg_block_size - 1) * 0.05  # Bonus for blocks larger than 1 tile
+
+        # Penalize excessive road usage (incentivize efficient road networks)
+        num_roads = np.count_nonzero(self.model.road_tiles)
+        num_non_barren = self.grid_size * self.grid_size - len(np.where(self.model.grid.tile._mesa_data == TileTypes.BARREN.value)[0])
+        if num_non_barren > 0:
+            road_ratio = num_roads / num_non_barren
+            road_penalty = -road_ratio * 2.0 if road_ratio > 0.3 else 0  # Penalize if >30% roads
+        else:
+            road_penalty = 0
+
+        reward = reward + block_bonus + size_bonus + road_penalty
 
         # Check termination conditions
         terminated = self._is_terminated()
