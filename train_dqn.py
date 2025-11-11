@@ -217,7 +217,7 @@ def main():
 
     # Create environment
     env = UrbanGridEnv(
-        grid_size=16,
+        grid_size=10,
         pollution_coefficient=1.0,
         seed=seed
     )
@@ -225,7 +225,7 @@ def main():
     # Create DQN agent
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     agent = DQNAgent(
-        grid_size=16,
+        grid_size=10,
         num_tile_types=5,
         learning_rate=1e-4,
         gamma=0.99,
@@ -244,9 +244,9 @@ def main():
     trainer = DQNTrainer(
         env=env,
         agent=agent,
-        num_episodes=5000,
-        save_freq=100,
-        eval_freq=50,
+        num_episodes=100000,
+        save_freq=2000,
+        eval_freq=250,
         eval_episodes=5,
         checkpoint_dir='checkpoints'
     )

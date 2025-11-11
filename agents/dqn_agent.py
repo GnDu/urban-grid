@@ -31,32 +31,49 @@ class DQNetwork(nn.Module):
         # Convolutional layers for grid processing with larger receptive field
         # Input: 5 channels (tile_grid, pop_g_grid, poll_g_grid, block_id_grid, road_connectivity_grid)
         self.conv_layers = nn.Sequential(
-            nn.Conv2d(5, 64, kernel_size=5, padding=2),  # Larger kernel
+            nn.Conv2d(5, 128, kernel_size=5, padding=2),
+            nn.BatchNorm2d(128),
             nn.ReLU(),
-            nn.Conv2d(64, 128, kernel_size=5, padding=2),  # Larger kernel
+            nn.Conv2d(128, 128, kernel_size=5, padding=2),
+            nn.BatchNorm2d(128),
             nn.ReLU(),
-            nn.Conv2d(128, 128, kernel_size=5, padding=2),  # Larger kernel
+            
+            nn.Conv2d(128, 256, kernel_size=5, padding=2),
+            nn.BatchNorm2d(256),
             nn.ReLU(),
-            nn.Conv2d(128, 64, kernel_size=3, padding=1),
+            nn.Conv2d(256, 256, kernel_size=3, padding=1),
+            nn.BatchNorm2d(256),
+            nn.ReLU(),
+            
+            nn.Conv2d(256, 256, kernel_size=3, padding=1),
+            nn.BatchNorm2d(256),
+            nn.ReLU(),
+            nn.Conv2d(256, 128, kernel_size=3, padding=1),
+            nn.BatchNorm2d(128),
             nn.ReLU()
         )
 
-        # Calculate flattened size after convolutions
-        conv_output_size = 64 * grid_size * grid_size
+        conv_output_size = 128 * grid_size * grid_size
 
-        # Features MLP (for scalar features)
         self.feature_mlp = nn.Sequential(
-            nn.Linear(4, 64),
+            nn.Linear(4, 128),
             nn.ReLU(),
-            nn.Linear(64, 128),
+            nn.Dropout(0.1),
+            nn.Linear(128, 256),
+            nn.ReLU(),
+            nn.Dropout(0.1),
+            nn.Linear(256, 256),
             nn.ReLU()
         )
 
-        # Combined MLP
         self.combined_mlp = nn.Sequential(
-            nn.Linear(conv_output_size + 128, hidden_dim),
+            nn.Linear(conv_output_size + 256, hidden_dim * 2),
             nn.ReLU(),
-            nn.Linear(hidden_dim, hidden_dim),
+            nn.Dropout(0.2),
+            nn.Linear(hidden_dim * 2, hidden_dim * 2),
+            nn.ReLU(),
+            nn.Dropout(0.2),
+            nn.Linear(hidden_dim * 2, hidden_dim),
             nn.ReLU()
         )
 
