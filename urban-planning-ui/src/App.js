@@ -7,7 +7,7 @@ import { getState, stepSim, resetSim } from "./api";
 
 export default function App() {
   const size = 20;
-  const types = ["barren", "residence", "greenery", "industry", "service", "road"];
+  const types = ["BARREN", "RESIDENCE", "GREENERY", "INDUSTRY", "SERVICE", "ROAD"];
 
   const [grid, setGrid] = useState(createGrid(size, types));
   const [tick, setTick] = useState(0);
@@ -40,11 +40,24 @@ export default function App() {
   async function step() {
     const data = await stepSim();
     if (data) {
+
+      if (data.message === "Simulation complete") {
+        console.log("🛑 Simulation complete — stopping interval.");
+        handleStop();
+        return;
+      }
       setGrid(data.grid);
       setTick(data.tick);
       setPopulation(data.population);
       setPollution(data.pollution);
-      setHistory(data.history);
+      setHistory((prev) => [
+        ...prev,
+        {
+          tick: data.tick,
+          population: data.population,
+          pollution: data.pollution
+        },
+      ]);
     } else {
       // fallback local sim
       setGrid(createGrid(size, types));

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_BASE = "http://localhost:8000"; // Change if backend is hosted elsewhere
+const API_BASE = "http://127.0.0.1:5000"; // Change if backend is hosted elsewhere
 
 export const getState = async () => {
   try {
