@@ -17,6 +17,8 @@ export default function App() {
   const [running, setRunning] = useState(false);
   const [speed, setSpeed] = useState(500);
   const intervalRef = useRef(null);
+  const chartUpdateRef = useRef(null);
+  const historyRef = useRef([]);
 
   function createGrid(size, types) {
     return Array.from({ length: size }, () =>
@@ -31,7 +33,7 @@ export default function App() {
       setTick(data.tick);
       setPopulation(data.population);
       setPollution(data.pollution);
-      setHistory(data.history || []);
+      historyRef.current = [];
       return true;
     }
     return false;
@@ -40,60 +42,62 @@ export default function App() {
   async function step() {
     const data = await stepSim();
     if (data) {
-
       if (data.message === "Simulation complete") {
-        console.log("🛑 Simulation complete — stopping interval.");
         handleStop();
         return;
       }
+
       setGrid(data.grid);
       setTick(data.tick);
       setPopulation(data.population);
       setPollution(data.pollution);
-      setHistory((prev) => [
-        ...prev,
-        {
-          tick: data.tick,
-          population: data.population,
-          pollution: data.pollution
-        },
-      ]);
+
+      // accumulate history in ref
+      historyRef.current.push({
+        tick: data.tick,
+        population: data.population,
+        pollution: data.pollution,
+      });
     } else {
-      // fallback local sim
+      // fallback simulation
       setGrid(createGrid(size, types));
       setTick((t) => t + 1);
       setPopulation((p) => p + 20);
       setPollution((p) => p + 10);
-      setHistory((h) => [...h, { tick: tick + 1, population, pollution }]);
+
+      historyRef.current.push({
+        tick: tick + 1,
+        population: population + 20,
+        pollution: pollution + 10,
+      });
     }
   }
 
   const handleStart = () => {
     setRunning(true);
     intervalRef.current = setInterval(step, speed);
+
+    // Update chart every 10 seconds
+    chartUpdateRef.current = setInterval(() => {
+      setHistory([...historyRef.current]);
+    }, 10000);
   };
 
   const handleStop = () => {
     setRunning(false);
     clearInterval(intervalRef.current);
+    clearInterval(chartUpdateRef.current);
   };
 
   const handleReset = async () => {
     handleStop();
     const data = await resetSim();
-    if (data) {
-      setGrid(data.grid);
-      setTick(0);
-      setPopulation(0);
-      setPollution(0);
-      setHistory([]);
-    } else {
-      setGrid(createGrid(size, types));
-      setTick(0);
-      setPopulation(0);
-      setPollution(0);
-      setHistory([]);
-    }
+    setGrid(data?.grid || createGrid(size, types));
+    setTick(0);
+    setPopulation(0);
+    setPollution(0);
+    historyRef.current = [];
+    setHistory([]);
   };
 
   useEffect(() => {
