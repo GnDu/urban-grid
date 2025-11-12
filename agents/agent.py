@@ -39,9 +39,7 @@ class CityPlanner(mesa.Agent):
         #should check for any illegal action before hand
         #note, tile should not be BARREN. That's destroy tile
         assert(tile!=TileTypes.BARREN.value)
-        x_y_tile = self.model.get_tile(row_x, col_y)
-        if x_y_tile!=TileTypes.BARREN.value:
-            raise RuntimeError(f"({row_x}, {col_y}): {x_y_tile} is not BARREN")
+        # Allow placing tiles on any cell (including rewrites)
         self.model.set_tile(row_x, col_y, tile)
         
     def destroy(self, row_x, col_y):

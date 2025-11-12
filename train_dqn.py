@@ -219,7 +219,7 @@ def main():
     env = UrbanGridEnv(
         grid_size=10,
         pollution_coefficient=1.0,
-        seed=seed
+        max_steps=300
     )
 
     # Create DQN agent
@@ -230,8 +230,8 @@ def main():
         learning_rate=1e-4,
         gamma=0.99,
         epsilon_start=1.0,
-        epsilon_end=0.05,
-        epsilon_decay=0.995,
+        epsilon_end=0.1,  # Higher min exploration to keep discovering roads
+        epsilon_decay=0.9995,  # Much slower decay: ~1400 episodes to reach 0.5
         buffer_size=100000,
         batch_size=64,
         target_update_freq=100,
@@ -244,7 +244,7 @@ def main():
     trainer = DQNTrainer(
         env=env,
         agent=agent,
-        num_episodes=100000,
+        num_episodes=5000,
         save_freq=2000,
         eval_freq=250,
         eval_episodes=5,

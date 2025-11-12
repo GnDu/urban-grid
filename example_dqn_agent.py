@@ -29,27 +29,22 @@ class RandomCityPlanner(CityPlanner):
         ]
 
     def decide(self):
-        # Find barren cells
-        barren_cells = np.where(self.model.grid.tile._mesa_data == TileTypes.BARREN.value)
-        if len(barren_cells[0]) == 0:
-            return
-
-        # Build list of valid actions respecting road placement rules
+        # Build list of valid actions on ALL cells (allows rewrites)
         valid_actions = []
-        for i in range(len(barren_cells[0])):
-            x_row, y_col = barren_cells[0][i], barren_cells[1][i]
 
-            # Check if adjacent to road
-            is_adjacent_to_road = self._is_adjacent_to_road(x_row, y_col)
+        for x_row in range(self.model.width):
+            for y_col in range(self.model.height):
+                # Check if adjacent to road
+                is_adjacent_to_road = self._is_adjacent_to_road(x_row, y_col)
 
-            for tile_type in self.RAND_TILES:
-                # Roads can only be placed adjacent to existing roads
-                if tile_type == TileTypes.ROAD.value:
-                    if is_adjacent_to_road:
+                for tile_type in self.RAND_TILES:
+                    # Roads can only be placed adjacent to existing roads
+                    if tile_type == TileTypes.ROAD.value:
+                        if is_adjacent_to_road:
+                            valid_actions.append((x_row, y_col, tile_type))
+                    else:
+                        # Non-road tiles can go anywhere (including rewrites)
                         valid_actions.append((x_row, y_col, tile_type))
-                else:
-                    # Non-road tiles can go anywhere
-                    valid_actions.append((x_row, y_col, tile_type))
 
         if len(valid_actions) == 0:
             return
@@ -79,6 +74,7 @@ class RandomCityPlanner(CityPlanner):
     def update(self, **kwargs):
         self.total_population += self.model.update_rules.curr_pop_g
         self.total_pollution += self.model.update_rules.curr_poll_g
+        self.population_cap = self.model.update_rules.population_cap
 
 
 def evaluate_dqn_agent(agent: DQNAgent, num_episodes: int = 10, grid_size: int = 16):

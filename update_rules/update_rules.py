@@ -350,15 +350,18 @@ class DefaultUpdateRules:
         poll_g_grid.modify_cells(lambda x: 0, condition=lambda grid: grid<=0)
 
         #total_population basically sum of all pop_g
-        if population_cap<=0:
-            population_modifier = population_cap - model.get_city_planner().total_population
+        if population_cap <= 0:
+            # No population capacity means no population growth
+            population_modifier = 0.0
         else:
             diff = population_cap - model.get_city_planner().total_population
-            #if diff is really small, just set it to 0
-            if diff<=ZERO_EPS:
-                diff = 0
-            population_modifier = diff / population_cap
-        
+            # If diff is really small or negative, set to 0 (at or over capacity)
+            if diff <= ZERO_EPS:
+                population_modifier = 0.0
+            else:
+                # Scale population growth based on remaining capacity
+                population_modifier = diff / population_cap
+
         self.population_cap = population_cap
         self.curr_pop_g = pop_g_grid.aggregate(np.sum) * population_modifier
 

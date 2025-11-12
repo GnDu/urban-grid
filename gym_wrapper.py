@@ -22,6 +22,7 @@ class DummyAgent(CityPlanner):
     def update(self, **kwargs):
         self.total_population += self.model.update_rules.curr_pop_g
         self.total_pollution += self.model.update_rules.curr_poll_g
+        self.population_cap = self.model.update_rules.population_cap
 
 
 class UrbanGridEnv(gym.Env):
@@ -195,18 +196,18 @@ class UrbanGridEnv(gym.Env):
         prev_pop = self.agent.total_population
         prev_poll = self.agent.total_pollution
 
-        # Execute action
+        # Execute action - allow rewriting existing tiles
         try:
             cell_value = self.model.grid.tile._mesa_data[row, col]
-            if cell_value == TileTypes.BARREN.value:
-                self.agent.place(row, col, tile_type)
-            else:
-                # Invalid action (cell not barren) - penalize
-                reward = -10.0
-                observation = self._get_observation()
-                info = self._get_info()
-                info['invalid_action'] = True
-                return observation, reward, False, False, info
+
+            # Small penalty for rewriting existing tiles (to encourage efficient placement)
+            rewrite_penalty = 0.0
+            if cell_value != TileTypes.BARREN.value:
+                rewrite_penalty = -1.0  # Small cost for changing existing tiles
+
+            # Place the tile (will overwrite if not barren)
+            self.agent.place(row, col, tile_type)
+
         except Exception as e:
             # Action execution failed - penalize
             reward = -10.0
@@ -226,47 +227,128 @@ class UrbanGridEnv(gym.Env):
 
         self.model.time_step += 1
 
-        # Calculate reward with improved shaping
+        # Calculate reward with improved shaping for balanced city building
         pop_delta = self.agent.total_population - prev_pop
         poll_delta = self.agent.total_pollution - prev_poll
 
         # Base reward: population gain - pollution gain
-        reward = pop_delta - self.pollution_coefficient * poll_delta
+        base_reward = pop_delta - self.pollution_coefficient * poll_delta
 
-        # Strong bonus for connecting blocks to roads (this is critical!)
+        # CRITICAL: Direct immediate bonus for placing roads (positive reinforcement)
+        road_placement_bonus = 0.0
+        if tile_type == TileTypes.ROAD.value:
+            road_placement_bonus = 3.0  # Strong immediate reward for building roads
+
+        # Strong bonus for connecting blocks to roads
         num_road_connected_blocks = len(self.model.road_connected_blocks)
-        # Track previous number of connected blocks to reward new connections
         prev_connected = getattr(self, '_prev_connected_blocks', 0)
         newly_connected = num_road_connected_blocks - prev_connected
         self._prev_connected_blocks = num_road_connected_blocks
 
-        # Large immediate reward for connecting new blocks (makes the causal link clear)
-        connection_bonus = newly_connected * 5.0  # Big reward for each newly connected block
+        # Massive reward for connecting new blocks (this is the key incentive!)
+        connection_bonus = newly_connected * 10.0  # Increased from 5.0 to 10.0
 
         # Ongoing bonus for maintaining connected blocks
-        block_bonus = num_road_connected_blocks * 0.5  # Increased from 0.1 to 0.5
+        block_bonus = num_road_connected_blocks * 0.5
 
         # Calculate average block size (reward larger, more efficient blocks)
         total_tiles_in_blocks = 0
-        for tile_type, blocks_dict in self.model.blocks_by_type.items():
+        for tile_type_enum, blocks_dict in self.model.blocks_by_type.items():
             for block_id, block_cells in blocks_dict.items():
                 if block_id in self.model.road_connected_blocks:
                     total_tiles_in_blocks += len(block_cells)
 
         avg_block_size = total_tiles_in_blocks / max(num_road_connected_blocks, 1)
-        size_bonus = (avg_block_size - 1) * 0.1  # Increased from 0.05 to 0.1
+        size_bonus = (avg_block_size - 1) * 0.1
 
-        # Gentler penalty for excessive road usage (only penalize when really excessive)
+        # Bonus for non-road tiles placed adjacent to roads (strategic placement)
+        adjacency_bonus = 0.0
+        if tile_type != TileTypes.ROAD.value and self._is_adjacent_to_road(row, col):
+            adjacency_bonus = 1.0  # Reward for building near road infrastructure
+
+        # Road network size bonus (encourages building connected road networks)
         num_roads = np.count_nonzero(self.model.road_tiles)
+        road_network_bonus = np.sqrt(num_roads) * 0.3  # Sublinear scaling
+
+        # Count total non-road, non-barren buildings
+        total_buildings = 0
+        for tile_type_val in [TileTypes.RESIDENCE.value, TileTypes.GREENERY.value,
+                               TileTypes.INDUSTRY.value, TileTypes.SERVICE.value]:
+            total_buildings += np.count_nonzero(self.model.grid.tile._mesa_data == tile_type_val)
+
+        # Connectivity efficiency bonus: reward high ratio of connected buildings
+        if total_buildings > 0:
+            connectivity_efficiency = total_tiles_in_blocks / total_buildings
+            efficiency_bonus = connectivity_efficiency * 2.0  # Bonus for high connectivity
+        else:
+            efficiency_bonus = 0.0
+
+        # Gentler road penalty (only penalize excessive roads)
         num_non_barren = self.grid_size * self.grid_size - len(np.where(self.model.grid.tile._mesa_data == TileTypes.BARREN.value)[0])
-        if num_non_barren > 0:
+        if num_non_barren > 0 and num_roads > 0:
             road_ratio = num_roads / num_non_barren
-            # Reduced penalty and higher threshold to encourage road exploration
-            road_penalty = -road_ratio * 0.5 if road_ratio > 0.5 else 0  # Only penalize if >50% roads
+            # Only penalize if roads exceed 40% of tiles (down from 50%)
+            road_penalty = -road_ratio * 2.0 if road_ratio > 0.4 else 0
         else:
             road_penalty = 0
 
-        reward = reward + connection_bonus + block_bonus + size_bonus + road_penalty
+        # Population cap utilization bonus (encourage building residences)
+        current_pop = self.agent.total_population
+        pop_cap = self.agent.population_cap
+        if pop_cap > 0:
+            utilization = current_pop / pop_cap
+            # Bonus for approaching capacity (but not exceeding)
+            cap_bonus = min(utilization, 1.0) * 2.0  # Up to +2.0 for full utilization
+        else:
+            cap_bonus = 0.0
+
+        # Count each building type for ratio-based balancing
+        num_residences = np.count_nonzero(self.model.grid.tile._mesa_data == TileTypes.RESIDENCE.value)
+        num_greenery = np.count_nonzero(self.model.grid.tile._mesa_data == TileTypes.GREENERY.value)
+        num_industry = np.count_nonzero(self.model.grid.tile._mesa_data == TileTypes.INDUSTRY.value)
+        num_service = np.count_nonzero(self.model.grid.tile._mesa_data == TileTypes.SERVICE.value)
+
+        # Ratio-based balance incentives
+        balance_penalty = 0.0
+        if num_residences > 0:
+            # Ideal ratios: 1 greenery per 2-3 residences, 1 industry per 3-4 residences, 1 service per 4-5 residences
+            greenery_ratio = num_greenery / num_residences
+            industry_ratio = num_industry / num_residences
+            service_ratio = num_service / num_residences
+
+            # Penalize too many greenery (optimal: 0.3-0.5, i.e., 1 per 2-3 residences)
+            if greenery_ratio > 0.6:
+                balance_penalty += (greenery_ratio - 0.6) * -3.0  # Penalty for greenery spam
+
+            # Penalize too few greenery (need some for pollution control)
+            if greenery_ratio < 0.2 and num_residences >= 5:
+                balance_penalty += (0.2 - greenery_ratio) * -2.0
+
+            # Penalize too many industry relative to residences
+            if industry_ratio > 0.4:  # Max ~1 industry per 2.5 residences
+                balance_penalty += (industry_ratio - 0.4) * -2.0
+
+            # Penalize too many services relative to residences
+            if service_ratio > 0.3:  # Max ~1 service per 3.3 residences
+                balance_penalty += (service_ratio - 0.3) * -2.0
+
+            # Bonus for balanced city (has all building types in reasonable proportions)
+            has_all_types = (num_greenery > 0 and num_industry > 0 and
+                           num_service > 0 and num_residences >= 3)
+            if has_all_types:
+                # Check if ratios are within good ranges
+                good_greenery = 0.2 <= greenery_ratio <= 0.5
+                good_industry = 0.1 <= industry_ratio <= 0.35
+                good_service = 0.1 <= service_ratio <= 0.25
+
+                if good_greenery and good_industry and good_service:
+                    balance_penalty += 3.0  # Bonus for well-balanced city
+
+        # Combine all reward components
+        reward = (base_reward + road_placement_bonus + connection_bonus +
+                 block_bonus + size_bonus + adjacency_bonus +
+                 road_network_bonus + efficiency_bonus + road_penalty +
+                 rewrite_penalty + cap_bonus + balance_penalty)
 
         # Check termination conditions
         terminated = self._is_terminated()
@@ -318,9 +400,9 @@ class UrbanGridEnv(gym.Env):
         }
 
     def _is_terminated(self) -> bool:
-        """Check if episode should terminate (no more barren cells)."""
-        barren_cells = np.where(self.model.grid.tile._mesa_data == TileTypes.BARREN.value)
-        return len(barren_cells[0]) == 0
+        """Check if episode should terminate. With rewrites enabled, rely on max_steps."""
+        # Since we allow rewrites, episodes continue until max_steps
+        return False
 
     def render(self) -> Optional[np.ndarray]:
         """Render the environment (optional)."""
@@ -334,27 +416,26 @@ class UrbanGridEnv(gym.Env):
         """
         Get list of valid actions with road adjacency constraint.
         Roads can only be placed adjacent to existing roads.
-        Other tiles can be placed on any barren cell.
+        Other tiles can be placed or rewritten on any cell.
         """
-        barren_cells = np.where(self.model.grid.tile._mesa_data == TileTypes.BARREN.value)
-
         valid_actions = []
-        for i in range(len(barren_cells[0])):
-            row, col = barren_cells[0][i], barren_cells[1][i]
 
-            # Check if this cell is adjacent to a road
-            is_adjacent_to_road = self._is_adjacent_to_road(row, col)
+        # Allow actions on ALL cells (enables rewriting)
+        for row in range(self.grid_size):
+            for col in range(self.grid_size):
+                # Check if this cell is adjacent to a road
+                is_adjacent_to_road = self._is_adjacent_to_road(row, col)
 
-            for tile_type in range(5):  # 0-4 maps to tile types 1-5
-                actual_tile_type = tile_type + 1  # Convert to 1-5
+                for tile_type in range(5):  # 0-4 maps to tile types 1-5
+                    actual_tile_type = tile_type + 1  # Convert to 1-5
 
-                # If placing a road (type 5), must be adjacent to existing road
-                if actual_tile_type == TileTypes.ROAD.value:
-                    if is_adjacent_to_road:
+                    # If placing a road (type 5), must be adjacent to existing road
+                    if actual_tile_type == TileTypes.ROAD.value:
+                        if is_adjacent_to_road:
+                            valid_actions.append([row, col, tile_type])
+                    else:
+                        # Non-road tiles can be placed anywhere (including rewrites)
                         valid_actions.append([row, col, tile_type])
-                else:
-                    # Non-road tiles can be placed anywhere
-                    valid_actions.append([row, col, tile_type])
 
         return np.array(valid_actions) if valid_actions else np.array([]).reshape(0, 3)
 
