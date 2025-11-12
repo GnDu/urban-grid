@@ -149,7 +149,8 @@ class CityModelStricterRoad(CityModel):
                 self.cluster_co_ordinates[max_neighbour]|=self.cluster_co_ordinates[neighbour]
                 #remove old neighbour
                 del self.cluster_co_ordinates[neighbour]
-            
+        
+        self.cluster_co_ordinates[curr_cluster_id].add((row_x, col_y))
         #now check and see if a road is adjacent to a cluster
         #check road neighbour
          #if there are raod, this cluster is connected to it
