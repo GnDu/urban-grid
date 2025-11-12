@@ -117,6 +117,40 @@ def evaluate_dqn_agent(agent: DQNAgent, num_episodes: int = 10, grid_size: int =
     return results
 
 
+def _initialize_random_edge_road(model, agent, grid_size: int):
+    """
+    Initialize the grid with a random road at the border.
+    Matches the initialization in gym_wrapper.py
+    """
+    border_positions = []
+
+    # Top edge (row 0)
+    for col in range(grid_size):
+        border_positions.append((0, col))
+
+    # Bottom edge (row = grid_size - 1)
+    for col in range(grid_size):
+        border_positions.append((grid_size - 1, col))
+
+    # Left edge (col 0), excluding corners already added
+    for row in range(1, grid_size - 1):
+        border_positions.append((row, 0))
+
+    # Right edge (col = grid_size - 1), excluding corners already added
+    for row in range(1, grid_size - 1):
+        border_positions.append((row, grid_size - 1))
+
+    # Randomly select one border position using Mesa's random generator
+    idx = int(model.random.random() * len(border_positions))
+    row, col = border_positions[idx]
+
+    # Place single road tile
+    agent.place(row, col, TileTypes.ROAD.value)
+
+    # Apply book-keeping to register the road in the model
+    model.book_keep()
+
+
 def evaluate_random_agent(num_episodes: int = 10, grid_size: int = 16):
     """Evaluate random baseline agent."""
     results = {
@@ -150,6 +184,9 @@ def evaluate_random_agent(num_episodes: int = 10, grid_size: int = 16):
         )
 
         agent = model.get_city_planner()
+
+        # Initialize with random edge road (same as gym_wrapper)
+        _initialize_random_edge_road(model, agent, grid_size)
 
         # Run episode
         for _ in range(grid_size * grid_size):

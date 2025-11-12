@@ -176,8 +176,7 @@ class UrbanGridEnv(gym.Env):
         # Place single road tile
         self.agent.place(row, col, TileTypes.ROAD.value)
 
-        # Update the model state after placing road
-        self.model.step()
+        self.model.book_keep()
 
     def step(self, action: np.ndarray) -> Tuple[Dict[str, np.ndarray], float, bool, bool, Dict[str, Any]]:
         """
