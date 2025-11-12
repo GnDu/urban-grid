@@ -48,15 +48,13 @@ class UrbanGridEnv(gym.Env):
         grid_size: int = 16,
         pollution_coefficient: float = 1.0,
         max_steps: Optional[int] = None,
-        update_rules: Optional[DefaultUpdateRules] = None,
-        seed: Optional[int] = None
+        update_rules: Optional[DefaultUpdateRules] = None
     ):
         super().__init__()
 
         self.grid_size = grid_size
         self.pollution_coefficient = pollution_coefficient
         self.max_steps = max_steps or (grid_size * grid_size)  # One tile per cell
-        self.seed_value = seed
 
         # Setup update rules
         if update_rules is None:
@@ -107,25 +105,36 @@ class UrbanGridEnv(gym.Env):
         seed: Optional[int] = None,
         options: Optional[Dict[str, Any]] = None
     ) -> Tuple[Dict[str, np.ndarray], Dict[str, Any]]:
-        """Reset the environment to initial state."""
+        """
+        Reset the environment to initial state.
+
+        Args:
+            seed: If provided, uses this specific seed (for evaluation/reproducibility).
+                  If None, generates a new random seed each episode (for training variety).
+        """
         super().reset(seed=seed)
 
+        # Use provided seed for evaluation, or generate new random seed for training
         if seed is not None:
-            self.seed_value = seed
+            episode_seed = seed
+        else:
+            # Generate a new random seed for this episode (ensures variety during training)
+            episode_seed = np.random.randint(0, 2**31 - 1)
 
-        # Create new city model
+        # Create new city model with the episode seed
         self.model = CityModel(
             agent_class=DummyAgent,
             width=self.grid_size,
             height=self.grid_size,
             update_rules=self.update_rules,
             collect_rate=1.0,
-            seed=self.seed_value
+            seed=episode_seed
         )
 
         self.agent = self.model.get_city_planner()
         self.prev_population = 0
         self.prev_pollution = 0
+        self._prev_connected_blocks = 0  # Track connected blocks for reward shaping
 
         # Initialize random edge with roads
         self._initialize_edge_roads()
@@ -136,22 +145,32 @@ class UrbanGridEnv(gym.Env):
         return observation, info
 
     def _initialize_edge_roads(self):
-        """Place a single road tile randomly at the border of the map."""
-        # Choose random edge: 0=top, 1=right, 2=bottom, 3=left
-        edge = self.model.random.randint(0, 4)
+        """
+        Place a single road tile randomly at the border of the map.
+        Uses Mesa's random generator (self.model.random) for reproducibility with seeds.
+        """
+        # Collect all border positions
+        border_positions = []
 
-        if edge == 0:  # Top edge
-            col = self.model.random.randint(0, self.grid_size)
-            row = 0
-        elif edge == 1:  # Right edge
-            row = self.model.random.randint(0, self.grid_size)
-            col = self.grid_size - 1
-        elif edge == 2:  # Bottom edge
-            col = self.model.random.randint(0, self.grid_size)
-            row = self.grid_size - 1
-        else:  # Left edge (edge == 3)
-            row = self.model.random.randint(0, self.grid_size)
-            col = 0
+        # Top edge (row 0)
+        for col in range(self.grid_size):
+            border_positions.append((0, col))
+
+        # Bottom edge (row = grid_size - 1)
+        for col in range(self.grid_size):
+            border_positions.append((self.grid_size - 1, col))
+
+        # Left edge (col 0), excluding corners already added
+        for row in range(1, self.grid_size - 1):
+            border_positions.append((row, 0))
+
+        # Right edge (col = grid_size - 1), excluding corners already added
+        for row in range(1, self.grid_size - 1):
+            border_positions.append((row, self.grid_size - 1))
+
+        # Randomly select one border position using Mesa's random generator
+        idx = int(self.model.random.random() * len(border_positions))
+        row, col = border_positions[idx]
 
         # Place single road tile
         self.agent.place(row, col, TileTypes.ROAD.value)
@@ -214,9 +233,18 @@ class UrbanGridEnv(gym.Env):
         # Base reward: population gain - pollution gain
         reward = pop_delta - self.pollution_coefficient * poll_delta
 
-        # Bonus for building connected blocks (incentivize dense development)
+        # Strong bonus for connecting blocks to roads (this is critical!)
         num_road_connected_blocks = len(self.model.road_connected_blocks)
-        block_bonus = num_road_connected_blocks * 0.1  # Small bonus per connected block
+        # Track previous number of connected blocks to reward new connections
+        prev_connected = getattr(self, '_prev_connected_blocks', 0)
+        newly_connected = num_road_connected_blocks - prev_connected
+        self._prev_connected_blocks = num_road_connected_blocks
+
+        # Large immediate reward for connecting new blocks (makes the causal link clear)
+        connection_bonus = newly_connected * 5.0  # Big reward for each newly connected block
+
+        # Ongoing bonus for maintaining connected blocks
+        block_bonus = num_road_connected_blocks * 0.5  # Increased from 0.1 to 0.5
 
         # Calculate average block size (reward larger, more efficient blocks)
         total_tiles_in_blocks = 0
@@ -226,18 +254,19 @@ class UrbanGridEnv(gym.Env):
                     total_tiles_in_blocks += len(block_cells)
 
         avg_block_size = total_tiles_in_blocks / max(num_road_connected_blocks, 1)
-        size_bonus = (avg_block_size - 1) * 0.05  # Bonus for blocks larger than 1 tile
+        size_bonus = (avg_block_size - 1) * 0.1  # Increased from 0.05 to 0.1
 
-        # Penalize excessive road usage (incentivize efficient road networks)
+        # Gentler penalty for excessive road usage (only penalize when really excessive)
         num_roads = np.count_nonzero(self.model.road_tiles)
         num_non_barren = self.grid_size * self.grid_size - len(np.where(self.model.grid.tile._mesa_data == TileTypes.BARREN.value)[0])
         if num_non_barren > 0:
             road_ratio = num_roads / num_non_barren
-            road_penalty = -road_ratio * 2.0 if road_ratio > 0.3 else 0  # Penalize if >30% roads
+            # Reduced penalty and higher threshold to encourage road exploration
+            road_penalty = -road_ratio * 0.5 if road_ratio > 0.5 else 0  # Only penalize if >50% roads
         else:
             road_penalty = 0
 
-        reward = reward + block_bonus + size_bonus + road_penalty
+        reward = reward + connection_bonus + block_bonus + size_bonus + road_penalty
 
         # Check termination conditions
         terminated = self._is_terminated()
