@@ -8,6 +8,11 @@ import { getState, stepSim, resetSim } from "./api";
 export default function App() {
   const size = 20;
   const types = ["BARREN", "RESIDENCE", "GREENERY", "INDUSTRY", "SERVICE", "ROAD"];
+  const models = [
+  { id: 1, name: "Model 1" },
+  { id: 2, name: "Model 2" },
+  { id: 3, name: "Model 3" },
+  ];
 
   const [grid, setGrid] = useState(createGrid(size, types));
   const [tick, setTick] = useState(0);
@@ -17,6 +22,9 @@ export default function App() {
   const [running, setRunning] = useState(false);
   const [speed, setSpeed] = useState(500);
   const intervalRef = useRef(null);
+  const chartUpdateRef = useRef(null);
+  const historyRef = useRef([]);
+  const [selectedModel, setSelectedModel] = useState(models[0].id);
 
   function createGrid(size, types) {
     return Array.from({ length: size }, () =>
@@ -31,7 +39,7 @@ export default function App() {
       setTick(data.tick);
       setPopulation(data.population);
       setPollution(data.pollution);
-      setHistory(data.history || []);
+      historyRef.current = [];
       return true;
     }
     return false;
@@ -40,60 +48,62 @@ export default function App() {
   async function step() {
     const data = await stepSim();
     if (data) {
-
       if (data.message === "Simulation complete") {
-        console.log("🛑 Simulation complete — stopping interval.");
         handleStop();
         return;
       }
+
       setGrid(data.grid);
       setTick(data.tick);
       setPopulation(data.population);
       setPollution(data.pollution);
-      setHistory((prev) => [
-        ...prev,
-        {
-          tick: data.tick,
-          population: data.population,
-          pollution: data.pollution
-        },
-      ]);
+
+      // accumulate history in ref
+      historyRef.current.push({
+        tick: data.tick,
+        population: data.population,
+        pollution: data.pollution,
+      });
     } else {
-      // fallback local sim
+      // fallback simulation
       setGrid(createGrid(size, types));
       setTick((t) => t + 1);
       setPopulation((p) => p + 20);
       setPollution((p) => p + 10);
-      setHistory((h) => [...h, { tick: tick + 1, population, pollution }]);
+
+      historyRef.current.push({
+        tick: tick + 1,
+        population: population + 20,
+        pollution: pollution + 10,
+      });
     }
   }
 
   const handleStart = () => {
     setRunning(true);
     intervalRef.current = setInterval(step, speed);
+
+    // Update chart every 10 seconds
+    chartUpdateRef.current = setInterval(() => {
+      setHistory([...historyRef.current]);
+    }, 10000);
   };
 
   const handleStop = () => {
     setRunning(false);
     clearInterval(intervalRef.current);
+    clearInterval(chartUpdateRef.current);
   };
 
   const handleReset = async () => {
     handleStop();
-    const data = await resetSim();
-    if (data) {
-      setGrid(data.grid);
-      setTick(0);
-      setPopulation(0);
-      setPollution(0);
-      setHistory([]);
-    } else {
-      setGrid(createGrid(size, types));
-      setTick(0);
-      setPopulation(0);
-      setPollution(0);
-      setHistory([]);
-    }
+    const data = await resetSim(selectedModel);
+    setGrid(data?.grid || createGrid(size, types));
+    setTick(0);
+    setPopulation(0);
+    setPollution(0);
+    historyRef.current = [];
+    setHistory([]);
   };
 
   useEffect(() => {
@@ -110,6 +120,23 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col items-center gap-6 p-6">
       <h1 className="text-4xl font-bold">🌆 Urban Planning Simulation</h1>
+
+      <div className="flex items-center gap-4 bg-gray-900 p-4 rounded-xl shadow-m">
+        <span className="text-lg">Model:</span>
+        <select
+          id="model-select"
+          value={selectedModel}
+          onChange={(e) => setSelectedModel(Number(e.target.value))}
+          disabled={running}
+          className="border rounded-md px-3 py-1.5 text-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-gray-900">
+          {models.map((m) => (
+            <option key={m.id} value={m.id}>
+              {m.name}
+            </option>
+          ))}
+        </select>
+      </div>
+
       <ControlPanel running={running} onStart={handleStart} onStop={handleStop} onReset={handleReset} speed={speed} setSpeed={setSpeed} />
       <Legend />
       <GridWorld grid={grid} />
