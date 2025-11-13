@@ -1,0 +1,1002 @@
+[
+  {
+    "step": 1,
+    "action_index": 402,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 0,
+    "col": 2,
+    "total_population": 0.0,
+    "total_pollution": 1.0
+  },
+  {
+    "step": 2,
+    "action_index": 109,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 0,
+    "col": 9,
+    "total_population": 0.0,
+    "total_pollution": 2.0
+  },
+  {
+    "step": 3,
+    "action_index": 119,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 1,
+    "col": 9,
+    "total_population": 0.0,
+    "total_pollution": 3.0
+  },
+  {
+    "step": 4,
+    "action_index": 117,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 1,
+    "col": 7,
+    "total_population": 0.0,
+    "total_pollution": 4.0
+  },
+  {
+    "step": 5,
+    "action_index": 105,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 0,
+    "col": 5,
+    "total_population": 0.0,
+    "total_pollution": 5.0
+  },
+  {
+    "step": 6,
+    "action_index": 36,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 3,
+    "col": 6,
+    "total_population": 9.5,
+    "total_pollution": 7.5
+  },
+  {
+    "step": 7,
+    "action_index": 116,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 1,
+    "col": 6,
+    "total_population": 21.0,
+    "total_pollution": 9.928571428571429
+  },
+  {
+    "step": 8,
+    "action_index": 55,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 5,
+    "col": 5,
+    "total_population": 33.5,
+    "total_pollution": 13.857142857142858
+  },
+  {
+    "step": 9,
+    "action_index": 70,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 7,
+    "col": 0,
+    "total_population": 47.0,
+    "total_pollution": 19.285714285714285
+  },
+  {
+    "step": 10,
+    "action_index": 210,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 1,
+    "col": 0,
+    "total_population": 60.66,
+    "total_pollution": 24.874285714285712
+  },
+  {
+    "step": 11,
+    "action_index": 140,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 4,
+    "col": 0,
+    "total_population": 76.32,
+    "total_pollution": 30.460952380952378
+  },
+  {
+    "step": 12,
+    "action_index": 138,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 3,
+    "col": 8,
+    "total_population": 90.0,
+    "total_pollution": 35.98268398268398
+  },
+  {
+    "step": 13,
+    "action_index": 264,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 6,
+    "col": 4,
+    "total_population": 90.0,
+    "total_pollution": 41.76441558441558
+  },
+  {
+    "step": 14,
+    "action_index": 213,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 1,
+    "col": 3,
+    "total_population": 90.0,
+    "total_pollution": 47.739815546772064
+  },
+  {
+    "step": 15,
+    "action_index": 118,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 1,
+    "col": 8,
+    "total_population": 90.0,
+    "total_pollution": 53.71521550912855
+  },
+  {
+    "step": 16,
+    "action_index": 189,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 8,
+    "col": 9,
+    "total_population": 90.0,
+    "total_pollution": 59.69061547148503
+  },
+  {
+    "step": 17,
+    "action_index": 24,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 2,
+    "col": 4,
+    "total_population": 112.98,
+    "total_pollution": 67.16601543384152
+  },
+  {
+    "step": 18,
+    "action_index": 28,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 2,
+    "col": 8,
+    "total_population": 136.96,
+    "total_pollution": 75.891415396198
+  },
+  {
+    "step": 19,
+    "action_index": 66,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 6,
+    "col": 6,
+    "total_population": 161.94,
+    "total_pollution": 86.11681535855448
+  },
+  {
+    "step": 20,
+    "action_index": 8,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 0,
+    "col": 8,
+    "total_population": 187.92,
+    "total_pollution": 97.59221532091095
+  },
+  {
+    "step": 21,
+    "action_index": 50,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 5,
+    "col": 0,
+    "total_population": 214.89999999999998,
+    "total_pollution": 110.49618671183886
+  },
+  {
+    "step": 22,
+    "action_index": 100,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 0,
+    "col": 0,
+    "total_population": 240.0,
+    "total_pollution": 123.34691134952001
+  },
+  {
+    "step": 23,
+    "action_index": 146,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 4,
+    "col": 6,
+    "total_population": 240.0,
+    "total_pollution": 135.99263316393748
+  },
+  {
+    "step": 24,
+    "action_index": 15,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 1,
+    "col": 5,
+    "total_population": 270.0,
+    "total_pollution": 149.9427028044419
+  },
+  {
+    "step": 25,
+    "action_index": 161,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 6,
+    "col": 1,
+    "total_population": 270.0,
+    "total_pollution": 163.7545040466779
+  },
+  {
+    "step": 26,
+    "action_index": 1,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 0,
+    "col": 1,
+    "total_population": 300.0,
+    "total_pollution": 178.99487671748537
+  },
+  {
+    "step": 27,
+    "action_index": 88,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 8,
+    "col": 8,
+    "total_population": 330.0,
+    "total_pollution": 195.66382081686424
+  },
+  {
+    "step": 28,
+    "action_index": 339,
+    "tile_value": 4,
+    "tile_type": "SERVICE",
+    "row": 3,
+    "col": 9,
+    "total_population": 330.0,
+    "total_pollution": 212.56003764351584
+  },
+  {
+    "step": 29,
+    "action_index": 12,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 1,
+    "col": 2,
+    "total_population": 360.0,
+    "total_pollution": 232.09189610389603
+  },
+  {
+    "step": 30,
+    "action_index": 83,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 8,
+    "col": 3,
+    "total_population": 390.0,
+    "total_pollution": 253.12375456427623
+  },
+  {
+    "step": 31,
+    "action_index": 381,
+    "tile_value": 4,
+    "tile_type": "SERVICE",
+    "row": 8,
+    "col": 1,
+    "total_population": 390.0,
+    "total_pollution": 274.39370826275166
+  },
+  {
+    "step": 32,
+    "action_index": 243,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 4,
+    "col": 3,
+    "total_population": 390.0,
+    "total_pollution": 295.7989866365518
+  },
+  {
+    "step": 33,
+    "action_index": 290,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 9,
+    "col": 0,
+    "total_population": 390.0,
+    "total_pollution": 317.3223602484471
+  },
+  {
+    "step": 34,
+    "action_index": 29,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 2,
+    "col": 9,
+    "total_population": 420.0,
+    "total_pollution": 340.95937022397885
+  },
+  {
+    "step": 35,
+    "action_index": 378,
+    "tile_value": 4,
+    "tile_type": "SERVICE",
+    "row": 7,
+    "col": 8,
+    "total_population": 420.0,
+    "total_pollution": 365.7392373423677
+  },
+  {
+    "step": 36,
+    "action_index": 98,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 9,
+    "col": 8,
+    "total_population": 450.0,
+    "total_pollution": 391.94767588932797
+  },
+  {
+    "step": 37,
+    "action_index": 71,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 7,
+    "col": 1,
+    "total_population": 480.0,
+    "total_pollution": 420.48944776962156
+  },
+  {
+    "step": 38,
+    "action_index": 27,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 2,
+    "col": 7,
+    "total_population": 510.0,
+    "total_pollution": 450.28121964991516
+  },
+  {
+    "step": 39,
+    "action_index": 123,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 2,
+    "col": 3,
+    "total_population": 510.0,
+    "total_pollution": 479.88283832109903
+  },
+  {
+    "step": 40,
+    "action_index": 199,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 9,
+    "col": 9,
+    "total_population": 510.0,
+    "total_pollution": 509.35458686241276
+  },
+  {
+    "step": 41,
+    "action_index": 35,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 3,
+    "col": 5,
+    "total_population": 540.0,
+    "total_pollution": 540.2549068322979
+  },
+  {
+    "step": 42,
+    "action_index": 77,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 7,
+    "col": 7,
+    "total_population": 570.0,
+    "total_pollution": 573.559988706945
+  },
+  {
+    "step": 43,
+    "action_index": 114,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 1,
+    "col": 4,
+    "total_population": 570.0,
+    "total_pollution": 606.6412309429699
+  },
+  {
+    "step": 44,
+    "action_index": 232,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 3,
+    "col": 2,
+    "total_population": 570.0,
+    "total_pollution": 639.7415207980423
+  },
+  {
+    "step": 45,
+    "action_index": 386,
+    "tile_value": 4,
+    "tile_type": "SERVICE",
+    "row": 8,
+    "col": 6,
+    "total_population": 570.0,
+    "total_pollution": 673.0918106531147
+  },
+  {
+    "step": 46,
+    "action_index": 333,
+    "tile_value": 4,
+    "tile_type": "SERVICE",
+    "row": 3,
+    "col": 3,
+    "total_population": 570.0,
+    "total_pollution": 706.6801957462825
+  },
+  {
+    "step": 47,
+    "action_index": 148,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 4,
+    "col": 8,
+    "total_population": 570.0,
+    "total_pollution": 740.1711500094107
+  },
+  {
+    "step": 48,
+    "action_index": 62,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 6,
+    "col": 2,
+    "total_population": 600.0,
+    "total_pollution": 775.0906757011103
+  },
+  {
+    "step": 49,
+    "action_index": 145,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 4,
+    "col": 5,
+    "total_population": 600.0,
+    "total_pollution": 809.8198249576509
+  },
+  {
+    "step": 50,
+    "action_index": 397,
+    "tile_value": 4,
+    "tile_type": "SERVICE",
+    "row": 9,
+    "col": 7,
+    "total_population": 600.0,
+    "total_pollution": 845.6918313570486
+  },
+  {
+    "step": 51,
+    "action_index": 91,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 9,
+    "col": 1,
+    "total_population": 630.0,
+    "total_pollution": 884.5472663278749
+  },
+  {
+    "step": 52,
+    "action_index": 6,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 0,
+    "col": 6,
+    "total_population": 660.0,
+    "total_pollution": 924.7070491247881
+  },
+  {
+    "step": 53,
+    "action_index": 57,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 5,
+    "col": 7,
+    "total_population": 690.0,
+    "total_pollution": 966.2304682853377
+  },
+  {
+    "step": 54,
+    "action_index": 47,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 4,
+    "col": 7,
+    "total_population": 720.0,
+    "total_pollution": 1009.0038874458872
+  },
+  {
+    "step": 55,
+    "action_index": 96,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 9,
+    "col": 6,
+    "total_population": 750.0,
+    "total_pollution": 1055.1320685111987
+  },
+  {
+    "step": 56,
+    "action_index": 26,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 2,
+    "col": 6,
+    "total_population": 780.0,
+    "total_pollution": 1102.5645974025972
+  },
+  {
+    "step": 57,
+    "action_index": 44,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 4,
+    "col": 4,
+    "total_population": 810.0,
+    "total_pollution": 1152.3670103519667
+  },
+  {
+    "step": 58,
+    "action_index": 342,
+    "tile_value": 4,
+    "tile_type": "SERVICE",
+    "row": 4,
+    "col": 2,
+    "total_population": 810.0,
+    "total_pollution": 1202.4075185394313
+  },
+  {
+    "step": 59,
+    "action_index": 287,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 8,
+    "col": 7,
+    "total_population": 810.0,
+    "total_pollution": 1254.9502604931297
+  },
+  {
+    "step": 60,
+    "action_index": 374,
+    "tile_value": 4,
+    "tile_type": "SERVICE",
+    "row": 7,
+    "col": 4,
+    "total_population": 810.0,
+    "total_pollution": 1307.743002446828
+  },
+  {
+    "step": 61,
+    "action_index": 93,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 9,
+    "col": 3,
+    "total_population": 840.0,
+    "total_pollution": 1362.0357444005265
+  },
+  {
+    "step": 62,
+    "action_index": 249,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 4,
+    "col": 9,
+    "total_population": 840.0,
+    "total_pollution": 1416.4884524750607
+  },
+  {
+    "step": 63,
+    "action_index": 279,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 7,
+    "col": 9,
+    "total_population": 840.0,
+    "total_pollution": 1470.9965718050062
+  },
+  {
+    "step": 64,
+    "action_index": 65,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 6,
+    "col": 5,
+    "total_population": 870.0,
+    "total_pollution": 1527.792353472614
+  },
+  {
+    "step": 65,
+    "action_index": 360,
+    "tile_value": 4,
+    "tile_type": "SERVICE",
+    "row": 6,
+    "col": 0,
+    "total_population": 870.0,
+    "total_pollution": 1586.5426805947673
+  },
+  {
+    "step": 66,
+    "action_index": 134,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 3,
+    "col": 4,
+    "total_population": 870.0,
+    "total_pollution": 1645.0074660643702
+  },
+  {
+    "step": 67,
+    "action_index": 7,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 0,
+    "col": 7,
+    "total_population": 900.0,
+    "total_pollution": 1704.672251533973
+  },
+  {
+    "step": 68,
+    "action_index": 52,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 5,
+    "col": 2,
+    "total_population": 930.0,
+    "total_pollution": 1766.6703703369092
+  },
+  {
+    "step": 69,
+    "action_index": 58,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 5,
+    "col": 8,
+    "total_population": 960.0,
+    "total_pollution": 1830.0321255034817
+  },
+  {
+    "step": 70,
+    "action_index": 295,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 9,
+    "col": 5,
+    "total_population": 960.0,
+    "total_pollution": 1893.7478806700542
+  },
+  {
+    "step": 71,
+    "action_index": 203,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 0,
+    "col": 3,
+    "total_population": 960.0,
+    "total_pollution": 1958.094018708827
+  },
+  {
+    "step": 72,
+    "action_index": 353,
+    "tile_value": 4,
+    "tile_type": "SERVICE",
+    "row": 5,
+    "col": 3,
+    "total_population": 960.0,
+    "total_pollution": 2023.6401567475998
+  },
+  {
+    "step": 73,
+    "action_index": 120,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 2,
+    "col": 0,
+    "total_population": 960.0,
+    "total_pollution": 2089.179443666478
+  },
+  {
+    "step": 74,
+    "action_index": 59,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 5,
+    "col": 9,
+    "total_population": 990.0,
+    "total_pollution": 2156.931136006023
+  },
+  {
+    "step": 75,
+    "action_index": 73,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 7,
+    "col": 3,
+    "total_population": 1020.0,
+    "total_pollution": 2227.1328283455673
+  },
+  {
+    "step": 76,
+    "action_index": 221,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 2,
+    "col": 1,
+    "total_population": 1020.0,
+    "total_pollution": 2297.334520685112
+  },
+  {
+    "step": 77,
+    "action_index": 51,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 5,
+    "col": 1,
+    "total_population": 1050.0,
+    "total_pollution": 2368.8998493882928
+  },
+  {
+    "step": 78,
+    "action_index": 392,
+    "tile_value": 4,
+    "tile_type": "SERVICE",
+    "row": 9,
+    "col": 2,
+    "total_population": 1050.0,
+    "total_pollution": 2442.615178091474
+  },
+  {
+    "step": 79,
+    "action_index": 282,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 8,
+    "col": 2,
+    "total_population": 1050.0,
+    "total_pollution": 2516.7912686994164
+  },
+  {
+    "step": 80,
+    "action_index": 375,
+    "tile_value": 4,
+    "tile_type": "SERVICE",
+    "row": 7,
+    "col": 5,
+    "total_population": 1050.0,
+    "total_pollution": 2592.167359307359
+  },
+  {
+    "step": 81,
+    "action_index": 84,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 8,
+    "col": 4,
+    "total_population": 1080.0,
+    "total_pollution": 2669.993449915302
+  },
+  {
+    "step": 82,
+    "action_index": 372,
+    "tile_value": 4,
+    "tile_type": "SERVICE",
+    "row": 7,
+    "col": 2,
+    "total_population": 1080.0,
+    "total_pollution": 2750.7719214756257
+  },
+  {
+    "step": 83,
+    "action_index": 269,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 6,
+    "col": 9,
+    "total_population": 1080.0,
+    "total_pollution": 2831.7328172783737
+  },
+  {
+    "step": 84,
+    "action_index": 180,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 8,
+    "col": 0,
+    "total_population": 1080.0,
+    "total_pollution": 2912.2765596837944
+  },
+  {
+    "step": 85,
+    "action_index": 4,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 0,
+    "col": 4,
+    "total_population": 1110.0,
+    "total_pollution": 2994.1839384528516
+  },
+  {
+    "step": 86,
+    "action_index": 85,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 8,
+    "col": 5,
+    "total_population": 1140.0,
+    "total_pollution": 3079.9813172219087
+  },
+  {
+    "step": 87,
+    "action_index": 168,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 6,
+    "col": 8,
+    "total_population": 1140.0,
+    "total_pollution": 3165.2339621306232
+  },
+  {
+    "step": 88,
+    "action_index": 37,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 3,
+    "col": 7,
+    "total_population": 1170.0,
+    "total_pollution": 3251.7366070393377
+  },
+  {
+    "step": 89,
+    "action_index": 154,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 5,
+    "col": 4,
+    "total_population": 1170.0,
+    "total_pollution": 3337.777952343309
+  },
+  {
+    "step": 90,
+    "action_index": 25,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 2,
+    "col": 5,
+    "total_population": 1200.0,
+    "total_pollution": 3424.9731438011268
+  },
+  {
+    "step": 91,
+    "action_index": 163,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 6,
+    "col": 3,
+    "total_population": 1200.0,
+    "total_pollution": 3511.5037651855396
+  },
+  {
+    "step": 92,
+    "action_index": 222,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 2,
+    "col": 2,
+    "total_population": 1200.0,
+    "total_pollution": 3598.0343865699524
+  },
+  {
+    "step": 93,
+    "action_index": 211,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 1,
+    "col": 1,
+    "total_population": 1200.0,
+    "total_pollution": 3684.5650079543652
+  },
+  {
+    "step": 94,
+    "action_index": 176,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 7,
+    "col": 6,
+    "total_population": 1200.0,
+    "total_pollution": 3770.2978568938315
+  },
+  {
+    "step": 95,
+    "action_index": 156,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 5,
+    "col": 6,
+    "total_population": 1200.0,
+    "total_pollution": 3855.6207130637486
+  },
+  {
+    "step": 96,
+    "action_index": 141,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 4,
+    "col": 1,
+    "total_population": 1200.0,
+    "total_pollution": 3940.693982319131
+  },
+  {
+    "step": 97,
+    "action_index": 331,
+    "tile_value": 4,
+    "tile_type": "SERVICE",
+    "row": 3,
+    "col": 1,
+    "total_population": 1200.0,
+    "total_pollution": 4025.984642878861
+  },
+  {
+    "step": 98,
+    "action_index": 167,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 6,
+    "col": 7,
+    "total_population": 1200.0,
+    "total_pollution": 4110.830087567506
+  },
+  {
+    "step": 99,
+    "action_index": 94,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 9,
+    "col": 4,
+    "total_population": 1230.0,
+    "total_pollution": 4198.034198922817
+  },
+  {
+    "step": 100,
+    "action_index": 230,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 3,
+    "col": 0,
+    "total_population": 1230.0,
+    "total_pollution": 4285.273092886824
+  }
+]
