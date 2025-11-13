@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python test_balanced_agent.py:*)",
+      "Bash(myenvScriptsactivate)",
+      "Bash(\"./myenv/Scripts/python.exe\" test_balanced_agent.py)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
