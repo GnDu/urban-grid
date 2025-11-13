@@ -33,9 +33,8 @@ history = []
 size = 10
 
 def create_grid(size, types):
-    from random import choice
-    return [[choice(types) for _ in range(size)] for _ in range(size)]
-
+    return [["BARREN" for _ in range(size)] for _ in range(size)]
+    
 # Store the current grid and tick
 current_grid = create_grid(size, types)
 
