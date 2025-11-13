@@ -26,9 +26,9 @@ export default function App() {
   const historyRef = useRef([]);
   const [selectedModel, setSelectedModel] = useState(models[0].id);
 
-  function createGrid(size, types) {
+  function createGrid(size) {
     return Array.from({ length: size }, () =>
-      Array.from({ length: size }, () => types[Math.floor(Math.random() * types.length)])
+      Array.from({ length: size }, () => "BARREN")
     );
   }
 
