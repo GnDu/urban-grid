@@ -9,9 +9,9 @@ export default function App() {
   const size = 20;
   const types = ["BARREN", "RESIDENCE", "GREENERY", "INDUSTRY", "SERVICE", "ROAD"];
   const models = [
-  { id: 1, name: "Model 1" },
-  { id: 2, name: "Model 2" },
-  { id: 3, name: "Model 3" },
+  { id: 1, name: "DQN" },
+  { id: 2, name: "Claude Generated Agent" },
+  { id: 3, name: "DQN V2" }
   ];
 
   const [grid, setGrid] = useState(createGrid(size, types));

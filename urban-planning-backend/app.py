@@ -14,9 +14,9 @@ logging.basicConfig(
 
 # TO CHANGE
 MODEL = {
-    1: "steps_with_totals.json",
-    2: "steps_with_totals_2.json",
-    3: "steps_with_totals_3.json"
+    1: "dqn_selva.json",
+    2: "BK_SequencedBuildOrderAgent.json",
+    3: "dqn_charles.json"
 }
 
 DEFAULT_MODEL_ID = 1
@@ -30,7 +30,7 @@ types = ["BARREN", "RESIDENCE", "GREENERY", "INDUSTRY", "SERVICE", "ROAD"]
 history = []
 
 # TO CHANGE
-size = 20
+size = 10
 
 def create_grid(size, types):
     from random import choice
@@ -87,10 +87,16 @@ def step():
 def reset():
     global current_step, current_grid, steps_data
     current_step = 0
-    current_grid = create_grid(size, types)
 
     req = request.get_json() or {}
     model_id = req.get("model_id", DEFAULT_MODEL_ID)
+
+    if model_id == 3:
+        size = 20
+    else:
+        size = 10
+
+    current_grid = create_grid(size, types)
 
     file_name = MODEL.get(model_id, MODEL[DEFAULT_MODEL_ID])
     logging.info(f"Resetting simulation for model {model_id}, loading {file_name}")
