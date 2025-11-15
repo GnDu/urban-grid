@@ -20,9 +20,9 @@ export const stepSim = async () => {
   }
 };
 
-export const resetSim = async () => {
+export const resetSim = async (model_id) => {
   try {
-    const res = await axios.post(`${API_BASE}/reset`);
+    const res = await axios.post(`${API_BASE}/reset`, { model_id });
     return res.data;
   } catch {
     return null;

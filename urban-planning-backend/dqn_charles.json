@@ -1,0 +1,3812 @@
+[
+  {
+    "step": 1,
+    "action_index": 120,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 6,
+    "col": 0,
+    "total_population": 0.0,
+    "total_pollution": 0.0
+  },
+  {
+    "step": 2,
+    "action_index": 121,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 6,
+    "col": 1,
+    "total_population": 0.0,
+    "total_pollution": 0.0
+  },
+  {
+    "step": 3,
+    "action_index": 122,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 6,
+    "col": 2,
+    "total_population": -0.2,
+    "total_pollution": 1.0
+  },
+  {
+    "step": 4,
+    "action_index": 123,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 6,
+    "col": 3,
+    "total_population": -0.5,
+    "total_pollution": 1.5
+  },
+  {
+    "step": 5,
+    "action_index": 124,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 6,
+    "col": 4,
+    "total_population": -0.9,
+    "total_pollution": 2.0
+  },
+  {
+    "step": 6,
+    "action_index": 125,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 6,
+    "col": 5,
+    "total_population": -1.4,
+    "total_pollution": 2.5
+  },
+  {
+    "step": 7,
+    "action_index": 126,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 6,
+    "col": 6,
+    "total_population": -2.0,
+    "total_pollution": 3.0
+  },
+  {
+    "step": 8,
+    "action_index": 106,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 5,
+    "col": 6,
+    "total_population": -2.7,
+    "total_pollution": 3.5
+  },
+  {
+    "step": 9,
+    "action_index": 86,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 4,
+    "col": 6,
+    "total_population": -3.5,
+    "total_pollution": 4.0
+  },
+  {
+    "step": 10,
+    "action_index": 66,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 3,
+    "col": 6,
+    "total_population": -4.4,
+    "total_pollution": 4.5
+  },
+  {
+    "step": 11,
+    "action_index": 46,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 2,
+    "col": 6,
+    "total_population": -5.4,
+    "total_pollution": 5.0
+  },
+  {
+    "step": 12,
+    "action_index": 26,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 1,
+    "col": 6,
+    "total_population": -6.5,
+    "total_pollution": 5.5
+  },
+  {
+    "step": 13,
+    "action_index": 127,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 6,
+    "col": 7,
+    "total_population": -7.7,
+    "total_pollution": 6.0
+  },
+  {
+    "step": 14,
+    "action_index": 128,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 6,
+    "col": 8,
+    "total_population": -9.0,
+    "total_pollution": 6.5
+  },
+  {
+    "step": 15,
+    "action_index": 129,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 6,
+    "col": 9,
+    "total_population": -10.4,
+    "total_pollution": 7.0
+  },
+  {
+    "step": 16,
+    "action_index": 130,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 6,
+    "col": 10,
+    "total_population": -11.9,
+    "total_pollution": 7.5
+  },
+  {
+    "step": 17,
+    "action_index": 131,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 6,
+    "col": 11,
+    "total_population": -13.5,
+    "total_pollution": 8.0
+  },
+  {
+    "step": 18,
+    "action_index": 132,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 6,
+    "col": 12,
+    "total_population": -15.2,
+    "total_pollution": 8.5
+  },
+  {
+    "step": 19,
+    "action_index": 112,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 5,
+    "col": 12,
+    "total_population": -17.0,
+    "total_pollution": 9.0
+  },
+  {
+    "step": 20,
+    "action_index": 92,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 4,
+    "col": 12,
+    "total_population": -18.9,
+    "total_pollution": 9.5
+  },
+  {
+    "step": 21,
+    "action_index": 72,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 3,
+    "col": 12,
+    "total_population": -20.9,
+    "total_pollution": 10.0
+  },
+  {
+    "step": 22,
+    "action_index": 52,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 2,
+    "col": 12,
+    "total_population": -23.0,
+    "total_pollution": 10.5
+  },
+  {
+    "step": 23,
+    "action_index": 32,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 1,
+    "col": 12,
+    "total_population": -25.2,
+    "total_pollution": 11.0
+  },
+  {
+    "step": 24,
+    "action_index": 133,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 6,
+    "col": 13,
+    "total_population": -27.5,
+    "total_pollution": 11.5
+  },
+  {
+    "step": 25,
+    "action_index": 134,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 6,
+    "col": 14,
+    "total_population": -29.9,
+    "total_pollution": 12.0
+  },
+  {
+    "step": 26,
+    "action_index": 135,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 6,
+    "col": 15,
+    "total_population": -32.4,
+    "total_pollution": 12.5
+  },
+  {
+    "step": 27,
+    "action_index": 136,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 6,
+    "col": 16,
+    "total_population": -35.0,
+    "total_pollution": 13.0
+  },
+  {
+    "step": 28,
+    "action_index": 137,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 6,
+    "col": 17,
+    "total_population": -37.7,
+    "total_pollution": 13.5
+  },
+  {
+    "step": 29,
+    "action_index": 138,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 6,
+    "col": 18,
+    "total_population": -40.5,
+    "total_pollution": 14.0
+  },
+  {
+    "step": 30,
+    "action_index": 118,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 5,
+    "col": 18,
+    "total_population": -43.4,
+    "total_pollution": 14.5
+  },
+  {
+    "step": 31,
+    "action_index": 98,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 4,
+    "col": 18,
+    "total_population": -46.4,
+    "total_pollution": 15.0
+  },
+  {
+    "step": 32,
+    "action_index": 78,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 3,
+    "col": 18,
+    "total_population": -49.5,
+    "total_pollution": 15.5
+  },
+  {
+    "step": 33,
+    "action_index": 58,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 2,
+    "col": 18,
+    "total_population": -52.7,
+    "total_pollution": 16.0
+  },
+  {
+    "step": 34,
+    "action_index": 38,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 1,
+    "col": 18,
+    "total_population": -56.0,
+    "total_pollution": 16.5
+  },
+  {
+    "step": 35,
+    "action_index": 146,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 7,
+    "col": 6,
+    "total_population": -59.4,
+    "total_pollution": 17.0
+  },
+  {
+    "step": 36,
+    "action_index": 152,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 7,
+    "col": 12,
+    "total_population": -62.9,
+    "total_pollution": 17.5
+  },
+  {
+    "step": 37,
+    "action_index": 158,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 7,
+    "col": 18,
+    "total_population": -66.5,
+    "total_pollution": 18.0
+  },
+  {
+    "step": 38,
+    "action_index": 166,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 8,
+    "col": 6,
+    "total_population": -70.2,
+    "total_pollution": 18.5
+  },
+  {
+    "step": 39,
+    "action_index": 172,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 8,
+    "col": 12,
+    "total_population": -74.0,
+    "total_pollution": 19.0
+  },
+  {
+    "step": 40,
+    "action_index": 178,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 8,
+    "col": 18,
+    "total_population": -77.9,
+    "total_pollution": 19.5
+  },
+  {
+    "step": 41,
+    "action_index": 186,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 9,
+    "col": 6,
+    "total_population": -81.9,
+    "total_pollution": 20.0
+  },
+  {
+    "step": 42,
+    "action_index": 192,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 9,
+    "col": 12,
+    "total_population": -86.0,
+    "total_pollution": 20.5
+  },
+  {
+    "step": 43,
+    "action_index": 198,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 9,
+    "col": 18,
+    "total_population": -90.2,
+    "total_pollution": 21.0
+  },
+  {
+    "step": 44,
+    "action_index": 206,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 10,
+    "col": 6,
+    "total_population": -94.5,
+    "total_pollution": 21.5
+  },
+  {
+    "step": 45,
+    "action_index": 212,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 10,
+    "col": 12,
+    "total_population": -98.9,
+    "total_pollution": 22.0
+  },
+  {
+    "step": 46,
+    "action_index": 218,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 10,
+    "col": 18,
+    "total_population": -103.4,
+    "total_pollution": 22.5
+  },
+  {
+    "step": 47,
+    "action_index": 226,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 11,
+    "col": 6,
+    "total_population": -108.0,
+    "total_pollution": 23.0
+  },
+  {
+    "step": 48,
+    "action_index": 232,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 11,
+    "col": 12,
+    "total_population": -112.7,
+    "total_pollution": 23.5
+  },
+  {
+    "step": 49,
+    "action_index": 238,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 11,
+    "col": 18,
+    "total_population": -117.5,
+    "total_pollution": 24.0
+  },
+  {
+    "step": 50,
+    "action_index": 246,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 12,
+    "col": 6,
+    "total_population": -122.4,
+    "total_pollution": 24.5
+  },
+  {
+    "step": 51,
+    "action_index": 245,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 12,
+    "col": 5,
+    "total_population": -127.4,
+    "total_pollution": 25.0
+  },
+  {
+    "step": 52,
+    "action_index": 244,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 12,
+    "col": 4,
+    "total_population": -132.5,
+    "total_pollution": 25.5
+  },
+  {
+    "step": 53,
+    "action_index": 243,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 12,
+    "col": 3,
+    "total_population": -137.7,
+    "total_pollution": 26.0
+  },
+  {
+    "step": 54,
+    "action_index": 242,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 12,
+    "col": 2,
+    "total_population": -143.0,
+    "total_pollution": 26.5
+  },
+  {
+    "step": 55,
+    "action_index": 241,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 12,
+    "col": 1,
+    "total_population": -148.4,
+    "total_pollution": 27.0
+  },
+  {
+    "step": 56,
+    "action_index": 247,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 12,
+    "col": 7,
+    "total_population": -153.9,
+    "total_pollution": 27.5
+  },
+  {
+    "step": 57,
+    "action_index": 248,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 12,
+    "col": 8,
+    "total_population": -159.5,
+    "total_pollution": 28.0
+  },
+  {
+    "step": 58,
+    "action_index": 249,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 12,
+    "col": 9,
+    "total_population": -165.2,
+    "total_pollution": 28.5
+  },
+  {
+    "step": 59,
+    "action_index": 250,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 12,
+    "col": 10,
+    "total_population": -171.0,
+    "total_pollution": 29.0
+  },
+  {
+    "step": 60,
+    "action_index": 251,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 12,
+    "col": 11,
+    "total_population": -176.9,
+    "total_pollution": 29.5
+  },
+  {
+    "step": 61,
+    "action_index": 258,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 12,
+    "col": 18,
+    "total_population": -182.9,
+    "total_pollution": 30.0
+  },
+  {
+    "step": 62,
+    "action_index": 257,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 12,
+    "col": 17,
+    "total_population": -189.0,
+    "total_pollution": 30.5
+  },
+  {
+    "step": 63,
+    "action_index": 256,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 12,
+    "col": 16,
+    "total_population": -195.2,
+    "total_pollution": 31.0
+  },
+  {
+    "step": 64,
+    "action_index": 255,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 12,
+    "col": 15,
+    "total_population": -201.5,
+    "total_pollution": 31.5
+  },
+  {
+    "step": 65,
+    "action_index": 254,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 12,
+    "col": 14,
+    "total_population": -207.9,
+    "total_pollution": 32.0
+  },
+  {
+    "step": 66,
+    "action_index": 253,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 12,
+    "col": 13,
+    "total_population": -214.4,
+    "total_pollution": 32.5
+  },
+  {
+    "step": 67,
+    "action_index": 266,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 13,
+    "col": 6,
+    "total_population": -221.0,
+    "total_pollution": 33.0
+  },
+  {
+    "step": 68,
+    "action_index": 278,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 13,
+    "col": 18,
+    "total_population": -227.7,
+    "total_pollution": 33.5
+  },
+  {
+    "step": 69,
+    "action_index": 286,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 14,
+    "col": 6,
+    "total_population": -234.5,
+    "total_pollution": 34.0
+  },
+  {
+    "step": 70,
+    "action_index": 298,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 14,
+    "col": 18,
+    "total_population": -241.4,
+    "total_pollution": 34.5
+  },
+  {
+    "step": 71,
+    "action_index": 306,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 15,
+    "col": 6,
+    "total_population": -248.4,
+    "total_pollution": 35.0
+  },
+  {
+    "step": 72,
+    "action_index": 318,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 15,
+    "col": 18,
+    "total_population": -255.5,
+    "total_pollution": 35.5
+  },
+  {
+    "step": 73,
+    "action_index": 326,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 16,
+    "col": 6,
+    "total_population": -262.7,
+    "total_pollution": 36.0
+  },
+  {
+    "step": 74,
+    "action_index": 338,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 16,
+    "col": 18,
+    "total_population": -270.0,
+    "total_pollution": 36.5
+  },
+  {
+    "step": 75,
+    "action_index": 346,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 17,
+    "col": 6,
+    "total_population": -277.4,
+    "total_pollution": 37.0
+  },
+  {
+    "step": 76,
+    "action_index": 358,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 17,
+    "col": 18,
+    "total_population": -284.9,
+    "total_pollution": 37.5
+  },
+  {
+    "step": 77,
+    "action_index": 366,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 18,
+    "col": 6,
+    "total_population": -292.5,
+    "total_pollution": 38.0
+  },
+  {
+    "step": 78,
+    "action_index": 365,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 18,
+    "col": 5,
+    "total_population": -300.2,
+    "total_pollution": 38.5
+  },
+  {
+    "step": 79,
+    "action_index": 364,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 18,
+    "col": 4,
+    "total_population": -308.0,
+    "total_pollution": 39.0
+  },
+  {
+    "step": 80,
+    "action_index": 363,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 18,
+    "col": 3,
+    "total_population": -315.9,
+    "total_pollution": 39.5
+  },
+  {
+    "step": 81,
+    "action_index": 362,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 18,
+    "col": 2,
+    "total_population": -323.9,
+    "total_pollution": 40.0
+  },
+  {
+    "step": 82,
+    "action_index": 361,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 18,
+    "col": 1,
+    "total_population": -332.0,
+    "total_pollution": 40.5
+  },
+  {
+    "step": 83,
+    "action_index": 367,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 18,
+    "col": 7,
+    "total_population": -340.2,
+    "total_pollution": 41.0
+  },
+  {
+    "step": 84,
+    "action_index": 368,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 18,
+    "col": 8,
+    "total_population": -348.5,
+    "total_pollution": 41.5
+  },
+  {
+    "step": 85,
+    "action_index": 369,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 18,
+    "col": 9,
+    "total_population": -356.9,
+    "total_pollution": 42.0
+  },
+  {
+    "step": 86,
+    "action_index": 370,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 18,
+    "col": 10,
+    "total_population": -365.4,
+    "total_pollution": 42.5
+  },
+  {
+    "step": 87,
+    "action_index": 371,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 18,
+    "col": 11,
+    "total_population": -374.0,
+    "total_pollution": 43.0
+  },
+  {
+    "step": 88,
+    "action_index": 372,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 18,
+    "col": 12,
+    "total_population": -382.7,
+    "total_pollution": 43.5
+  },
+  {
+    "step": 89,
+    "action_index": 352,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 17,
+    "col": 12,
+    "total_population": -391.5,
+    "total_pollution": 44.0
+  },
+  {
+    "step": 90,
+    "action_index": 59,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 2,
+    "col": 19,
+    "total_population": -400.4,
+    "total_pollution": 44.5
+  },
+  {
+    "step": 91,
+    "action_index": 79,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 3,
+    "col": 19,
+    "total_population": -377.28679999999997,
+    "total_pollution": 46.0
+  },
+  {
+    "step": 92,
+    "action_index": 332,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 16,
+    "col": 12,
+    "total_population": -359.5327564666666,
+    "total_pollution": 47.5
+  },
+  {
+    "step": 93,
+    "action_index": 99,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 4,
+    "col": 19,
+    "total_population": -341.94132259811107,
+    "total_pollution": 48.0
+  },
+  {
+    "step": 94,
+    "action_index": 105,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 5,
+    "col": 5,
+    "total_population": -325.3821049634696,
+    "total_pollution": 49.5
+  },
+  {
+    "step": 95,
+    "action_index": 107,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 5,
+    "col": 7,
+    "total_population": -308.85713215969866,
+    "total_pollution": 51.0
+  },
+  {
+    "step": 96,
+    "action_index": 111,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 5,
+    "col": 11,
+    "total_population": -291.9744655928748,
+    "total_pollution": 52.5
+  },
+  {
+    "step": 97,
+    "action_index": 113,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 5,
+    "col": 13,
+    "total_population": -274.5413450462675,
+    "total_pollution": 54.0
+  },
+  {
+    "step": 98,
+    "action_index": 312,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 15,
+    "col": 12,
+    "total_population": -256.4496014649626,
+    "total_pollution": 55.5
+  },
+  {
+    "step": 99,
+    "action_index": 117,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 5,
+    "col": 17,
+    "total_population": -238.38348785373122,
+    "total_pollution": 56.0
+  },
+  {
+    "step": 100,
+    "action_index": 119,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 5,
+    "col": 19,
+    "total_population": -219.58500550277338,
+    "total_pollution": 57.5
+  },
+  {
+    "step": 101,
+    "action_index": 139,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 6,
+    "col": 19,
+    "total_population": -200.01297268810663,
+    "total_pollution": 59.0
+  },
+  {
+    "step": 102,
+    "action_index": 145,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 7,
+    "col": 5,
+    "total_population": -179.63955676199234,
+    "total_pollution": 60.5
+  },
+  {
+    "step": 103,
+    "action_index": 147,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 7,
+    "col": 7,
+    "total_population": -158.44538855262383,
+    "total_pollution": 62.0
+  },
+  {
+    "step": 104,
+    "action_index": 292,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 14,
+    "col": 12,
+    "total_population": -136.4167225252737,
+    "total_pollution": 63.5
+  },
+  {
+    "step": 105,
+    "action_index": 252,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 12,
+    "col": 12,
+    "total_population": -114.41337960373599,
+    "total_pollution": 64.0
+  },
+  {
+    "step": 106,
+    "action_index": 151,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 7,
+    "col": 11,
+    "total_population": -91.56210344291472,
+    "total_pollution": 65.5
+  },
+  {
+    "step": 107,
+    "action_index": 153,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 7,
+    "col": 13,
+    "total_population": -67.85633182389671,
+    "total_pollution": 67.0
+  },
+  {
+    "step": 108,
+    "action_index": 157,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 7,
+    "col": 17,
+    "total_population": -43.29141555053263,
+    "total_pollution": 68.5
+  },
+  {
+    "step": 109,
+    "action_index": 159,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 7,
+    "col": 19,
+    "total_population": -17.864135618892334,
+    "total_pollution": 70.0
+  },
+  {
+    "step": 110,
+    "action_index": 373,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 18,
+    "col": 13,
+    "total_population": 8.427636999385111,
+    "total_pollution": 71.5
+  },
+  {
+    "step": 111,
+    "action_index": 179,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 8,
+    "col": 19,
+    "total_population": 34.68417683211377,
+    "total_pollution": 72.0
+  },
+  {
+    "step": 112,
+    "action_index": 199,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 9,
+    "col": 19,
+    "total_population": 61.8088290492403,
+    "total_pollution": 73.5
+  },
+  {
+    "step": 113,
+    "action_index": 219,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 10,
+    "col": 19,
+    "total_population": 89.80195363483793,
+    "total_pollution": 75.0
+  },
+  {
+    "step": 114,
+    "action_index": 374,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 18,
+    "col": 14,
+    "total_population": 118.66342076125447,
+    "total_pollution": 76.5
+  },
+  {
+    "step": 115,
+    "action_index": 225,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 11,
+    "col": 5,
+    "total_population": 147.48196999952432,
+    "total_pollution": 77.0
+  },
+  {
+    "step": 116,
+    "action_index": 227,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 11,
+    "col": 7,
+    "total_population": 177.17031096968535,
+    "total_pollution": 78.5
+  },
+  {
+    "step": 117,
+    "action_index": 231,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 11,
+    "col": 11,
+    "total_population": 207.72740979325383,
+    "total_pollution": 80.0
+  },
+  {
+    "step": 118,
+    "action_index": 233,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 11,
+    "col": 13,
+    "total_population": 239.1519941298768,
+    "total_pollution": 81.5
+  },
+  {
+    "step": 119,
+    "action_index": 237,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 11,
+    "col": 17,
+    "total_population": 271.4425946015521,
+    "total_pollution": 83.0
+  },
+  {
+    "step": 120,
+    "action_index": 375,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 18,
+    "col": 15,
+    "total_population": 304.5975779009797,
+    "total_pollution": 84.5
+  },
+  {
+    "step": 121,
+    "action_index": 239,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 11,
+    "col": 19,
+    "total_population": 337.69642904263515,
+    "total_pollution": 85.0
+  },
+  {
+    "step": 122,
+    "action_index": 259,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 12,
+    "col": 19,
+    "total_population": 371.65947734635137,
+    "total_pollution": 86.5
+  },
+  {
+    "step": 123,
+    "action_index": 265,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 13,
+    "col": 5,
+    "total_population": 406.4847155039882,
+    "total_pollution": 88.0
+  },
+  {
+    "step": 124,
+    "action_index": 267,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 13,
+    "col": 7,
+    "total_population": 442.17005159548825,
+    "total_pollution": 89.5
+  },
+  {
+    "step": 125,
+    "action_index": 271,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 13,
+    "col": 11,
+    "total_population": 478.7133220568186,
+    "total_pollution": 91.0
+  },
+  {
+    "step": 126,
+    "action_index": 376,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 18,
+    "col": 16,
+    "total_population": 516.1123024766803,
+    "total_pollution": 92.5
+  },
+  {
+    "step": 127,
+    "action_index": 272,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 13,
+    "col": 12,
+    "total_population": 553.4414083457829,
+    "total_pollution": 93.0
+  },
+  {
+    "step": 128,
+    "action_index": 273,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 13,
+    "col": 13,
+    "total_population": 591.6253092942949,
+    "total_pollution": 94.5
+  },
+  {
+    "step": 129,
+    "action_index": 277,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 13,
+    "col": 17,
+    "total_population": 630.6615996206863,
+    "total_pollution": 96.0
+  },
+  {
+    "step": 130,
+    "action_index": 279,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 13,
+    "col": 19,
+    "total_population": 670.5478436465609,
+    "total_pollution": 97.5
+  },
+  {
+    "step": 131,
+    "action_index": 299,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 14,
+    "col": 19,
+    "total_population": 711.2815803148952,
+    "total_pollution": 99.0
+  },
+  {
+    "step": 132,
+    "action_index": 377,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 18,
+    "col": 17,
+    "total_population": 752.860327126129,
+    "total_pollution": 100.5
+  },
+  {
+    "step": 133,
+    "action_index": 319,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 15,
+    "col": 19,
+    "total_population": 794.3552931620778,
+    "total_pollution": 101.0
+  },
+  {
+    "step": 134,
+    "action_index": 6,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 0,
+    "col": 6,
+    "total_population": 836.6939934493457,
+    "total_pollution": 102.5
+  },
+  {
+    "step": 135,
+    "action_index": 339,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 16,
+    "col": 19,
+    "total_population": 878.945791143792,
+    "total_pollution": 103.0
+  },
+  {
+    "step": 136,
+    "action_index": 345,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 17,
+    "col": 5,
+    "total_population": 922.0399656459965,
+    "total_pollution": 104.5
+  },
+  {
+    "step": 137,
+    "action_index": 347,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 17,
+    "col": 7,
+    "total_population": 965.9738682461826,
+    "total_pollution": 106.0
+  },
+  {
+    "step": 138,
+    "action_index": 5,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 0,
+    "col": 5,
+    "total_population": 1010.7448490350362,
+    "total_pollution": 107.5
+  },
+  {
+    "step": 139,
+    "action_index": 351,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 17,
+    "col": 11,
+    "total_population": 1055.4204538967615,
+    "total_pollution": 108.0
+  },
+  {
+    "step": 140,
+    "action_index": 4,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 0,
+    "col": 4,
+    "total_population": 1100.9316638426408,
+    "total_pollution": 109.5
+  },
+  {
+    "step": 141,
+    "action_index": 25,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 1,
+    "col": 5,
+    "total_population": 1146.3444485766297,
+    "total_pollution": 110.0
+  },
+  {
+    "step": 142,
+    "action_index": 353,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 17,
+    "col": 13,
+    "total_population": 1192.5913130581412,
+    "total_pollution": 111.5
+  },
+  {
+    "step": 143,
+    "action_index": 357,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 17,
+    "col": 17,
+    "total_population": 1239.6695076391711,
+    "total_pollution": 113.0
+  },
+  {
+    "step": 144,
+    "action_index": 3,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 0,
+    "col": 3,
+    "total_population": 1287.5762918325916,
+    "total_pollution": 114.5
+  },
+  {
+    "step": 145,
+    "action_index": 382,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 19,
+    "col": 2,
+    "total_population": 1335.3762684917922,
+    "total_pollution": 115.0
+  },
+  {
+    "step": 146,
+    "action_index": 383,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 19,
+    "col": 3,
+    "total_population": 1384.0032490883523,
+    "total_pollution": 116.5
+  },
+  {
+    "step": 147,
+    "action_index": 384,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 19,
+    "col": 4,
+    "total_population": 1433.4544654568879,
+    "total_pollution": 118.0
+  },
+  {
+    "step": 148,
+    "action_index": 2,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 0,
+    "col": 2,
+    "total_population": 1483.7271614342696,
+    "total_pollution": 119.5
+  },
+  {
+    "step": 149,
+    "action_index": 385,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 19,
+    "col": 5,
+    "total_population": 1533.884736327559,
+    "total_pollution": 120.0
+  },
+  {
+    "step": 150,
+    "action_index": 386,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 19,
+    "col": 6,
+    "total_population": 1584.8621684610387,
+    "total_pollution": 121.5
+  },
+  {
+    "step": 151,
+    "action_index": 387,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 19,
+    "col": 7,
+    "total_population": 1636.6566838635085,
+    "total_pollution": 123.0
+  },
+  {
+    "step": 152,
+    "action_index": 1,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 0,
+    "col": 1,
+    "total_population": 1689.265522252303,
+    "total_pollution": 124.5
+  },
+  {
+    "step": 153,
+    "action_index": 388,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 19,
+    "col": 8,
+    "total_population": 1741.7510021523328,
+    "total_pollution": 125.0
+  },
+  {
+    "step": 154,
+    "action_index": 389,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 19,
+    "col": 9,
+    "total_population": 1795.0491631236805,
+    "total_pollution": 126.5
+  },
+  {
+    "step": 155,
+    "action_index": 390,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 19,
+    "col": 10,
+    "total_population": 1849.1572341237145,
+    "total_pollution": 128.0
+  },
+  {
+    "step": 156,
+    "action_index": 7,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 0,
+    "col": 7,
+    "total_population": 1904.0724587592333,
+    "total_pollution": 129.5
+  },
+  {
+    "step": 157,
+    "action_index": 391,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 19,
+    "col": 11,
+    "total_population": 1958.8561689241965,
+    "total_pollution": 130.0
+  },
+  {
+    "step": 158,
+    "action_index": 8,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 0,
+    "col": 8,
+    "total_population": 2014.4453839487378,
+    "total_pollution": 131.5
+  },
+  {
+    "step": 159,
+    "action_index": 27,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 1,
+    "col": 7,
+    "total_population": 2069.9002718807665,
+    "total_pollution": 132.0
+  },
+  {
+    "step": 160,
+    "action_index": 392,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 19,
+    "col": 12,
+    "total_population": 2126.1590022797595,
+    "total_pollution": 133.5
+  },
+  {
+    "step": 161,
+    "action_index": 393,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 19,
+    "col": 13,
+    "total_population": 2183.2187953313155,
+    "total_pollution": 135.0
+  },
+  {
+    "step": 162,
+    "action_index": 9,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 0,
+    "col": 9,
+    "total_population": 2241.0768875997956,
+    "total_pollution": 136.5
+  },
+  {
+    "step": 163,
+    "action_index": 394,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 19,
+    "col": 14,
+    "total_population": 2298.7926185096676,
+    "total_pollution": 137.0
+  },
+  {
+    "step": 164,
+    "action_index": 395,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 19,
+    "col": 15,
+    "total_population": 2357.3049938891263,
+    "total_pollution": 138.5
+  },
+  {
+    "step": 165,
+    "action_index": 396,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 19,
+    "col": 16,
+    "total_population": 2416.611251212069,
+    "total_pollution": 140.0
+  },
+  {
+    "step": 166,
+    "action_index": 10,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 0,
+    "col": 10,
+    "total_population": 2476.7086442581503,
+    "total_pollution": 141.5
+  },
+  {
+    "step": 167,
+    "action_index": 11,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 0,
+    "col": 11,
+    "total_population": 2536.655729427371,
+    "total_pollution": 142.0
+  },
+  {
+    "step": 168,
+    "action_index": 31,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 1,
+    "col": 11,
+    "total_population": 2597.3923094234538,
+    "total_pollution": 143.5
+  },
+  {
+    "step": 169,
+    "action_index": 291,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 14,
+    "col": 11,
+    "total_population": 2698.9639501385336,
+    "total_pollution": 170.5
+  },
+  {
+    "step": 170,
+    "action_index": 18,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 0,
+    "col": 18,
+    "total_population": 2801.6920836909003,
+    "total_pollution": 172.3
+  },
+  {
+    "step": 171,
+    "action_index": 19,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 0,
+    "col": 19,
+    "total_population": 2903.828473565593,
+    "total_pollution": 172.8
+  },
+  {
+    "step": 172,
+    "action_index": 39,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 1,
+    "col": 19,
+    "total_population": 3046.3482252911663,
+    "total_pollution": 186.45000000000002
+  },
+  {
+    "step": 173,
+    "action_index": 12,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 0,
+    "col": 12,
+    "total_population": 3190.1776933153556,
+    "total_pollution": 188.4
+  },
+  {
+    "step": 174,
+    "action_index": 17,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 0,
+    "col": 17,
+    "total_population": 3373.7699848831685,
+    "total_pollution": 193.0
+  },
+  {
+    "step": 175,
+    "action_index": 270,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 13,
+    "col": 10,
+    "total_population": 3555.2568232891576,
+    "total_pollution": 193.5
+  },
+  {
+    "step": 176,
+    "action_index": 16,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 0,
+    "col": 16,
+    "total_population": 3738.013526414957,
+    "total_pollution": 195.5
+  },
+  {
+    "step": 177,
+    "action_index": 37,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 1,
+    "col": 17,
+    "total_population": 3918.6738096875156,
+    "total_pollution": 196.0
+  },
+  {
+    "step": 178,
+    "action_index": 293,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 14,
+    "col": 13,
+    "total_population": 4137.131666727205,
+    "total_pollution": 214.60000000000002
+  },
+  {
+    "step": 179,
+    "action_index": 30,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 1,
+    "col": 10,
+    "total_population": 4356.641591708962,
+    "total_pollution": 216.8
+  },
+  {
+    "step": 180,
+    "action_index": 15,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 0,
+    "col": 15,
+    "total_population": 4612.534905935229,
+    "total_pollution": 226.2
+  },
+  {
+    "step": 181,
+    "action_index": 274,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 13,
+    "col": 14,
+    "total_population": 4864.092702427149,
+    "total_pollution": 226.7
+  },
+  {
+    "step": 182,
+    "action_index": 51,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 2,
+    "col": 11,
+    "total_population": 5116.355699489417,
+    "total_pollution": 229.0
+  },
+  {
+    "step": 183,
+    "action_index": 24,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 1,
+    "col": 4,
+    "total_population": 5402.627102208809,
+    "total_pollution": 236.125
+  },
+  {
+    "step": 184,
+    "action_index": 14,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 0,
+    "col": 14,
+    "total_population": 5689.047566069413,
+    "total_pollution": 238.5
+  },
+  {
+    "step": 185,
+    "action_index": 13,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 0,
+    "col": 13,
+    "total_population": 5969.841266017324,
+    "total_pollution": 239.0
+  },
+  {
+    "step": 186,
+    "action_index": 33,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 1,
+    "col": 13,
+    "total_population": 6281.927878256894,
+    "total_pollution": 243.8
+  },
+  {
+    "step": 187,
+    "action_index": 29,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 1,
+    "col": 9,
+    "total_population": 6593.6250872120345,
+    "total_pollution": 246.225
+  },
+  {
+    "step": 188,
+    "action_index": 100,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 5,
+    "col": 0,
+    "total_population": 6934.3082753107155,
+    "total_pollution": 255.925
+  },
+  {
+    "step": 189,
+    "action_index": 28,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 1,
+    "col": 8,
+    "total_population": 7266.46361230524,
+    "total_pollution": 256.425
+  },
+  {
+    "step": 190,
+    "action_index": 80,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 4,
+    "col": 0,
+    "total_population": 7597.699125612541,
+    "total_pollution": 258.95
+  },
+  {
+    "step": 191,
+    "action_index": 101,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 5,
+    "col": 1,
+    "total_population": 7920.643440806648,
+    "total_pollution": 259.45
+  },
+  {
+    "step": 192,
+    "action_index": 45,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 2,
+    "col": 5,
+    "total_population": 8268.719611501796,
+    "total_pollution": 288.85
+  },
+  {
+    "step": 193,
+    "action_index": 34,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 1,
+    "col": 14,
+    "total_population": 8615.354154508615,
+    "total_pollution": 291.675
+  },
+  {
+    "step": 194,
+    "action_index": 60,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 3,
+    "col": 0,
+    "total_population": 8984.54884207812,
+    "total_pollution": 299.1
+  },
+  {
+    "step": 195,
+    "action_index": 47,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 2,
+    "col": 7,
+    "total_population": 9342.5209607924,
+    "total_pollution": 299.6
+  },
+  {
+    "step": 196,
+    "action_index": 35,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 1,
+    "col": 15,
+    "total_population": 9698.629189537718,
+    "total_pollution": 302.5
+  },
+  {
+    "step": 197,
+    "action_index": 36,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 1,
+    "col": 16,
+    "total_population": 10073.9961485995,
+    "total_pollution": 305.0
+  },
+  {
+    "step": 198,
+    "action_index": 40,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 2,
+    "col": 0,
+    "total_population": 10446.773262406805,
+    "total_pollution": 307.925
+  },
+  {
+    "step": 199,
+    "action_index": 0,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 0,
+    "col": 0,
+    "total_population": 10807.222679973633,
+    "total_pollution": 308.425
+  },
+  {
+    "step": 200,
+    "action_index": 20,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 1,
+    "col": 0,
+    "total_population": 11183.681854995424,
+    "total_pollution": 323.575
+  },
+  {
+    "step": 201,
+    "action_index": 21,
+    "tile_value": 4,
+    "tile_type": "SERVICE",
+    "row": 1,
+    "col": 1,
+    "total_population": 11557.319044752348,
+    "total_pollution": 326.65
+  },
+  {
+    "step": 202,
+    "action_index": 140,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 7,
+    "col": 0,
+    "total_population": 11931.222934762078,
+    "total_pollution": 339.4
+  },
+  {
+    "step": 203,
+    "action_index": 53,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 2,
+    "col": 13,
+    "total_population": 12291.25059187184,
+    "total_pollution": 339.9
+  },
+  {
+    "step": 204,
+    "action_index": 160,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 8,
+    "col": 0,
+    "total_population": 12662.695550893399,
+    "total_pollution": 345.0
+  },
+  {
+    "step": 205,
+    "action_index": 141,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 7,
+    "col": 1,
+    "total_population": 13019.36020066793,
+    "total_pollution": 345.5
+  },
+  {
+    "step": 206,
+    "action_index": 22,
+    "tile_value": 4,
+    "tile_type": "SERVICE",
+    "row": 1,
+    "col": 2,
+    "total_population": 13373.693673574613,
+    "total_pollution": 348.75
+  },
+  {
+    "step": 207,
+    "action_index": 23,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 1,
+    "col": 3,
+    "total_population": 13725.60820729406,
+    "total_pollution": 361.625
+  },
+  {
+    "step": 208,
+    "action_index": 180,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 9,
+    "col": 0,
+    "total_population": 14084.79620830415,
+    "total_pollution": 387.375
+  },
+  {
+    "step": 209,
+    "action_index": 41,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 2,
+    "col": 1,
+    "total_population": 14428.236944794016,
+    "total_pollution": 387.875
+  },
+  {
+    "step": 210,
+    "action_index": 57,
+    "tile_value": 4,
+    "tile_type": "SERVICE",
+    "row": 2,
+    "col": 17,
+    "total_population": 14769.914455689559,
+    "total_pollution": 391.50000000000006
+  },
+  {
+    "step": 211,
+    "action_index": 71,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 3,
+    "col": 11,
+    "total_population": 15106.979282341588,
+    "total_pollution": 404.50000000000006
+  },
+  {
+    "step": 212,
+    "action_index": 200,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 10,
+    "col": 0,
+    "total_population": 15447.667930595604,
+    "total_pollution": 412.30000000000007
+  },
+  {
+    "step": 213,
+    "action_index": 220,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 11,
+    "col": 0,
+    "total_population": 15772.023197208795,
+    "total_pollution": 412.80000000000007
+  },
+  {
+    "step": 214,
+    "action_index": 221,
+    "tile_value": 4,
+    "tile_type": "SERVICE",
+    "row": 11,
+    "col": 1,
+    "total_population": 16095.145496457513,
+    "total_pollution": 416.625
+  },
+  {
+    "step": 215,
+    "action_index": 91,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 4,
+    "col": 11,
+    "total_population": 16411.374512812417,
+    "total_pollution": 429.75
+  },
+  {
+    "step": 216,
+    "action_index": 360,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 18,
+    "col": 0,
+    "total_population": 16728.22658316566,
+    "total_pollution": 440.25
+  },
+  {
+    "step": 217,
+    "action_index": 380,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 19,
+    "col": 0,
+    "total_population": 17028.615324104016,
+    "total_pollution": 440.75
+  },
+  {
+    "step": 218,
+    "action_index": 381,
+    "tile_value": 4,
+    "tile_type": "SERVICE",
+    "row": 19,
+    "col": 1,
+    "total_population": 17328.92983197608,
+    "total_pollution": 444.79999999999995
+  },
+  {
+    "step": 219,
+    "action_index": 73,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 3,
+    "col": 13,
+    "total_population": 17621.200159373147,
+    "total_pollution": 458.04999999999995
+  },
+  {
+    "step": 220,
+    "action_index": 340,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 17,
+    "col": 0,
+    "total_population": 17911.667231136027,
+    "total_pollution": 463.35
+  },
+  {
+    "step": 221,
+    "action_index": 93,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 4,
+    "col": 13,
+    "total_population": 18185.86410736849,
+    "total_pollution": 463.85
+  },
+  {
+    "step": 222,
+    "action_index": 320,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 16,
+    "col": 0,
+    "total_population": 18461.45991035135,
+    "total_pollution": 468.075
+  },
+  {
+    "step": 223,
+    "action_index": 341,
+    "tile_value": 4,
+    "tile_type": "SERVICE",
+    "row": 17,
+    "col": 1,
+    "total_population": 18721.61976057424,
+    "total_pollution": 468.575
+  },
+  {
+    "step": 224,
+    "action_index": 81,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 4,
+    "col": 1,
+    "total_population": 18973.13969900359,
+    "total_pollution": 481.95
+  },
+  {
+    "step": 225,
+    "action_index": 61,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 3,
+    "col": 1,
+    "total_population": 19221.215812162187,
+    "total_pollution": 492.65
+  },
+  {
+    "step": 226,
+    "action_index": 300,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 15,
+    "col": 0,
+    "total_population": 19472.478604994998,
+    "total_pollution": 497.1
+  },
+  {
+    "step": 227,
+    "action_index": 77,
+    "tile_value": 4,
+    "tile_type": "SERVICE",
+    "row": 3,
+    "col": 17,
+    "total_population": 19708.650201358738,
+    "total_pollution": 497.6
+  },
+  {
+    "step": 228,
+    "action_index": 97,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 4,
+    "col": 17,
+    "total_population": 19935.778638969154,
+    "total_pollution": 511.1
+  },
+  {
+    "step": 229,
+    "action_index": 114,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 5,
+    "col": 14,
+    "total_population": 20158.1698068555,
+    "total_pollution": 540.8
+  },
+  {
+    "step": 230,
+    "action_index": 280,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 14,
+    "col": 0,
+    "total_population": 20385.504494189317,
+    "total_pollution": 545.6500000000001
+  },
+  {
+    "step": 231,
+    "action_index": 240,
+    "tile_value": 4,
+    "tile_type": "SERVICE",
+    "row": 12,
+    "col": 0,
+    "total_population": 20598.26154115091,
+    "total_pollution": 546.1500000000001
+  },
+  {
+    "step": 232,
+    "action_index": 260,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 13,
+    "col": 0,
+    "total_population": 20801.536653989915,
+    "total_pollution": 559.7750000000001
+  },
+  {
+    "step": 233,
+    "action_index": 261,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 13,
+    "col": 1,
+    "total_population": 20999.219192069693,
+    "total_pollution": 584.3000000000001
+  },
+  {
+    "step": 234,
+    "action_index": 378,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 18,
+    "col": 18,
+    "total_population": 21203.922456184006,
+    "total_pollution": 589.5
+  },
+  {
+    "step": 235,
+    "action_index": 359,
+    "tile_value": 4,
+    "tile_type": "SERVICE",
+    "row": 17,
+    "col": 19,
+    "total_population": 21394.673196287753,
+    "total_pollution": 590.0
+  },
+  {
+    "step": 236,
+    "action_index": 397,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 19,
+    "col": 17,
+    "total_population": 21576.014797354474,
+    "total_pollution": 603.75
+  },
+  {
+    "step": 237,
+    "action_index": 65,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 3,
+    "col": 5,
+    "total_population": 21751.198227937333,
+    "total_pollution": 628.5
+  },
+  {
+    "step": 238,
+    "action_index": 379,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 18,
+    "col": 19,
+    "total_population": 21935.37275598527,
+    "total_pollution": 634.05
+  },
+  {
+    "step": 239,
+    "action_index": 398,
+    "tile_value": 4,
+    "tile_type": "SERVICE",
+    "row": 19,
+    "col": 18,
+    "total_population": 22106.24870003835,
+    "total_pollution": 634.55
+  },
+  {
+    "step": 240,
+    "action_index": 103,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 5,
+    "col": 3,
+    "total_population": 22267.782823537174,
+    "total_pollution": 648.425
+  },
+  {
+    "step": 241,
+    "action_index": 399,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 19,
+    "col": 19,
+    "total_population": 22417.4309476344,
+    "total_pollution": 648.925
+  },
+  {
+    "step": 242,
+    "action_index": 83,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 4,
+    "col": 3,
+    "total_population": 22561.079488247415,
+    "total_pollution": 654.4749999999999
+  },
+  {
+    "step": 243,
+    "action_index": 85,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 4,
+    "col": 5,
+    "total_population": 22693.774151002264,
+    "total_pollution": 654.9749999999999
+  },
+  {
+    "step": 244,
+    "action_index": 102,
+    "tile_value": 4,
+    "tile_type": "SERVICE",
+    "row": 5,
+    "col": 2,
+    "total_population": 22839.21298417234,
+    "total_pollution": 660.7
+  },
+  {
+    "step": 245,
+    "action_index": 104,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 5,
+    "col": 4,
+    "total_population": 22975.967442401623,
+    "total_pollution": 674.7
+  },
+  {
+    "step": 246,
+    "action_index": 84,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 4,
+    "col": 4,
+    "total_population": 23106.431391195358,
+    "total_pollution": 702.6999999999999
+  },
+  {
+    "step": 247,
+    "action_index": 82,
+    "tile_value": 4,
+    "tile_type": "SERVICE",
+    "row": 4,
+    "col": 2,
+    "total_population": 23250.514736102665,
+    "total_pollution": 708.8000000000001
+  },
+  {
+    "step": 248,
+    "action_index": 63,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 3,
+    "col": 3,
+    "total_population": 23385.302192586678,
+    "total_pollution": 722.9250000000001
+  },
+  {
+    "step": 249,
+    "action_index": 62,
+    "tile_value": 3,
+    "tile_type": "INDUSTRY",
+    "row": 3,
+    "col": 2,
+    "total_population": 23509.08159413385,
+    "total_pollution": 723.4250000000001
+  },
+  {
+    "step": 250,
+    "action_index": 64,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 3,
+    "col": 4,
+    "total_population": 23626.454997925255,
+    "total_pollution": 723.4250000000001
+  },
+  {
+    "step": 251,
+    "action_index": 43,
+    "tile_value": 4,
+    "tile_type": "SERVICE",
+    "row": 2,
+    "col": 3,
+    "total_population": 23759.238468040807,
+    "total_pollution": 729.6500000000001
+  },
+  {
+    "step": 252,
+    "action_index": 67,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 3,
+    "col": 7,
+    "total_population": 23882.87524632897,
+    "total_pollution": 743.9000000000001
+  },
+  {
+    "step": 253,
+    "action_index": 87,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 4,
+    "col": 7,
+    "total_population": 24021.624550193945,
+    "total_pollution": 750.25
+  },
+  {
+    "step": 254,
+    "action_index": 263,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 13,
+    "col": 3,
+    "total_population": 24174.185727831766,
+    "total_pollution": 756.6
+  },
+  {
+    "step": 255,
+    "action_index": 262,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 13,
+    "col": 2,
+    "total_population": 24313.665468530107,
+    "total_pollution": 757.1
+  },
+  {
+    "step": 256,
+    "action_index": 283,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 14,
+    "col": 3,
+    "total_population": 24466.934340168944,
+    "total_pollution": 763.4499999999999
+  },
+  {
+    "step": 257,
+    "action_index": 264,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 13,
+    "col": 4,
+    "total_population": 24607.05888213031,
+    "total_pollution": 763.9499999999999
+  },
+  {
+    "step": 258,
+    "action_index": 281,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 14,
+    "col": 1,
+    "total_population": 24760.87828886755,
+    "total_pollution": 770.3000000000001
+  },
+  {
+    "step": 259,
+    "action_index": 285,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 14,
+    "col": 5,
+    "total_population": 24927.27962461836,
+    "total_pollution": 776.6500000000001
+  },
+  {
+    "step": 260,
+    "action_index": 282,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 14,
+    "col": 2,
+    "total_population": 25105.119032826104,
+    "total_pollution": 783.0
+  },
+  {
+    "step": 261,
+    "action_index": 284,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 14,
+    "col": 4,
+    "total_population": 25293.412484295746,
+    "total_pollution": 789.3499999999999
+  },
+  {
+    "step": 262,
+    "action_index": 303,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 15,
+    "col": 3,
+    "total_population": 25491.260864175394,
+    "total_pollution": 795.6999999999999
+  },
+  {
+    "step": 263,
+    "action_index": 301,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 15,
+    "col": 1,
+    "total_population": 25672.146367945857,
+    "total_pollution": 796.1999999999999
+  },
+  {
+    "step": 264,
+    "action_index": 305,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 15,
+    "col": 5,
+    "total_population": 25863.246701717613,
+    "total_pollution": 802.5500000000001
+  },
+  {
+    "step": 265,
+    "action_index": 343,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 17,
+    "col": 3,
+    "total_population": 26063.66058566179,
+    "total_pollution": 808.9000000000001
+  },
+  {
+    "step": 266,
+    "action_index": 302,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 15,
+    "col": 2,
+    "total_population": 26272.613021818524,
+    "total_pollution": 815.25
+  },
+  {
+    "step": 267,
+    "action_index": 304,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 15,
+    "col": 4,
+    "total_population": 26489.371557794504,
+    "total_pollution": 821.5999999999999
+  },
+  {
+    "step": 268,
+    "action_index": 109,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 5,
+    "col": 9,
+    "total_population": 26713.239675137447,
+    "total_pollution": 827.9499999999999
+  },
+  {
+    "step": 269,
+    "action_index": 325,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 16,
+    "col": 5,
+    "total_population": 26917.918726364063,
+    "total_pollution": 828.4499999999999
+  },
+  {
+    "step": 270,
+    "action_index": 317,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 15,
+    "col": 17,
+    "total_population": 27130.744531898377,
+    "total_pollution": 834.8000000000001
+  },
+  {
+    "step": 271,
+    "action_index": 344,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 17,
+    "col": 4,
+    "total_population": 27325.329329010085,
+    "total_pollution": 835.3000000000001
+  },
+  {
+    "step": 272,
+    "action_index": 316,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 15,
+    "col": 16,
+    "total_population": 27528.95134240436,
+    "total_pollution": 841.6500000000001
+  },
+  {
+    "step": 273,
+    "action_index": 276,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 13,
+    "col": 16,
+    "total_population": 27715.120592275223,
+    "total_pollution": 842.1500000000001
+  },
+  {
+    "step": 274,
+    "action_index": 297,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 14,
+    "col": 17,
+    "total_population": 27911.026152693546,
+    "total_pollution": 848.5
+  },
+  {
+    "step": 275,
+    "action_index": 337,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 16,
+    "col": 17,
+    "total_population": 28115.831382586723,
+    "total_pollution": 854.8499999999999
+  },
+  {
+    "step": 276,
+    "action_index": 356,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 17,
+    "col": 16,
+    "total_population": 28328.796073242287,
+    "total_pollution": 861.1999999999999
+  },
+  {
+    "step": 277,
+    "action_index": 296,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 14,
+    "col": 16,
+    "total_population": 28549.22064288569,
+    "total_pollution": 867.5500000000001
+  },
+  {
+    "step": 278,
+    "action_index": 315,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 15,
+    "col": 15,
+    "total_population": 28776.440011881412,
+    "total_pollution": 873.9000000000001
+  },
+  {
+    "step": 279,
+    "action_index": 275,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 13,
+    "col": 15,
+    "total_population": 28984.190370478307,
+    "total_pollution": 874.4000000000001
+  },
+  {
+    "step": 280,
+    "action_index": 313,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 15,
+    "col": 13,
+    "total_population": 29199.823209168644,
+    "total_pollution": 880.75
+  },
+  {
+    "step": 281,
+    "action_index": 336,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 16,
+    "col": 16,
+    "total_population": 29422.66163080552,
+    "total_pollution": 887.1
+  },
+  {
+    "step": 282,
+    "action_index": 355,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 17,
+    "col": 15,
+    "total_population": 29652.087009376963,
+    "total_pollution": 893.4499999999999
+  },
+  {
+    "step": 283,
+    "action_index": 295,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 14,
+    "col": 15,
+    "total_population": 29887.53396163834,
+    "total_pollution": 899.8000000000001
+  },
+  {
+    "step": 284,
+    "action_index": 185,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 9,
+    "col": 5,
+    "total_population": 30128.485753885136,
+    "total_pollution": 906.1500000000001
+  },
+  {
+    "step": 285,
+    "action_index": 335,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 16,
+    "col": 15,
+    "total_population": 30348.80239950946,
+    "total_pollution": 906.6500000000001
+  },
+  {
+    "step": 286,
+    "action_index": 184,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 9,
+    "col": 4,
+    "total_population": 30575.921660618147,
+    "total_pollution": 913.0
+  },
+  {
+    "step": 287,
+    "action_index": 144,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 7,
+    "col": 4,
+    "total_population": 30783.591717383795,
+    "total_pollution": 913.5
+  },
+  {
+    "step": 288,
+    "action_index": 165,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 8,
+    "col": 5,
+    "total_population": 30999.148913364657,
+    "total_pollution": 919.85
+  },
+  {
+    "step": 289,
+    "action_index": 205,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 10,
+    "col": 5,
+    "total_population": 31221.916453311915,
+    "total_pollution": 926.2
+  },
+  {
+    "step": 290,
+    "action_index": 224,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 11,
+    "col": 4,
+    "total_population": 31451.275744199807,
+    "total_pollution": 932.5500000000001
+  },
+  {
+    "step": 291,
+    "action_index": 164,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 8,
+    "col": 4,
+    "total_population": 31686.685491136614,
+    "total_pollution": 938.9
+  },
+  {
+    "step": 292,
+    "action_index": 183,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 9,
+    "col": 3,
+    "total_population": 31927.60306751302,
+    "total_pollution": 945.25
+  },
+  {
+    "step": 293,
+    "action_index": 204,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 10,
+    "col": 4,
+    "total_population": 32147.89717583281,
+    "total_pollution": 945.75
+  },
+  {
+    "step": 294,
+    "action_index": 143,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 7,
+    "col": 3,
+    "total_population": 32374.994911629816,
+    "total_pollution": 952.1
+  },
+  {
+    "step": 295,
+    "action_index": 181,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 9,
+    "col": 1,
+    "total_population": 32608.33608808581,
+    "total_pollution": 958.45
+  },
+  {
+    "step": 296,
+    "action_index": 223,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 11,
+    "col": 3,
+    "total_population": 32847.386111141896,
+    "total_pollution": 964.8000000000001
+  },
+  {
+    "step": 297,
+    "action_index": 163,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 8,
+    "col": 3,
+    "total_population": 33091.65615759118,
+    "total_pollution": 971.1500000000001
+  },
+  {
+    "step": 298,
+    "action_index": 89,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 4,
+    "col": 9,
+    "total_population": 33340.675020364535,
+    "total_pollution": 977.5
+  },
+  {
+    "step": 299,
+    "action_index": 108,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 5,
+    "col": 8,
+    "total_population": 33568.37972174582,
+    "total_pollution": 978.0
+  },
+  {
+    "step": 300,
+    "action_index": 110,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 5,
+    "col": 10,
+    "total_population": 33802.25307333773,
+    "total_pollution": 984.35
+  },
+  {
+    "step": 301,
+    "action_index": 88,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 4,
+    "col": 8,
+    "total_population": 34041.76620025879,
+    "total_pollution": 990.7
+  },
+  {
+    "step": 302,
+    "action_index": 142,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 7,
+    "col": 2,
+    "total_population": 34286.43566105127,
+    "total_pollution": 997.0500000000001
+  },
+  {
+    "step": 303,
+    "action_index": 161,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 8,
+    "col": 1,
+    "total_population": 34535.86653068165,
+    "total_pollution": 1003.4
+  },
+  {
+    "step": 304,
+    "action_index": 69,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 3,
+    "col": 9,
+    "total_population": 34789.62797307897,
+    "total_pollution": 1009.75
+  },
+  {
+    "step": 305,
+    "action_index": 90,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 4,
+    "col": 10,
+    "total_population": 35021.6719568771,
+    "total_pollution": 1010.25
+  },
+  {
+    "step": 306,
+    "action_index": 68,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 3,
+    "col": 8,
+    "total_population": 35259.513007531634,
+    "total_pollution": 1016.6
+  },
+  {
+    "step": 307,
+    "action_index": 203,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 10,
+    "col": 3,
+    "total_population": 35502.65422087906,
+    "total_pollution": 1022.95
+  },
+  {
+    "step": 308,
+    "action_index": 354,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 17,
+    "col": 14,
+    "total_population": 35750.6640015033,
+    "total_pollution": 1029.3000000000002
+  },
+  {
+    "step": 309,
+    "action_index": 333,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 16,
+    "col": 13,
+    "total_population": 36003.10277570021,
+    "total_pollution": 1035.65
+  },
+  {
+    "step": 310,
+    "action_index": 193,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 9,
+    "col": 13,
+    "total_population": 36259.591071989125,
+    "total_pollution": 1042.0
+  },
+  {
+    "step": 311,
+    "action_index": 201,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 10,
+    "col": 1,
+    "total_population": 36494.13494277906,
+    "total_pollution": 1042.5
+  },
+  {
+    "step": 312,
+    "action_index": 194,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 9,
+    "col": 14,
+    "total_population": 36734.304140386834,
+    "total_pollution": 1048.85
+  },
+  {
+    "step": 313,
+    "action_index": 154,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 7,
+    "col": 14,
+    "total_population": 36953.922483179165,
+    "total_pollution": 1049.35
+  },
+  {
+    "step": 314,
+    "action_index": 173,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 8,
+    "col": 13,
+    "total_population": 37180.40266336888,
+    "total_pollution": 1055.7
+  },
+  {
+    "step": 315,
+    "action_index": 213,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 10,
+    "col": 13,
+    "total_population": 37413.15657277058,
+    "total_pollution": 1062.0500000000002
+  },
+  {
+    "step": 316,
+    "action_index": 234,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 11,
+    "col": 14,
+    "total_population": 37651.64659163512,
+    "total_pollution": 1068.4
+  },
+  {
+    "step": 317,
+    "action_index": 174,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 8,
+    "col": 14,
+    "total_population": 37895.381247734615,
+    "total_pollution": 1074.75
+  },
+  {
+    "step": 318,
+    "action_index": 195,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 9,
+    "col": 15,
+    "total_population": 38143.91124930712,
+    "total_pollution": 1081.1
+  },
+  {
+    "step": 319,
+    "action_index": 214,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 10,
+    "col": 14,
+    "total_population": 38371.182608070456,
+    "total_pollution": 1081.6
+  },
+  {
+    "step": 320,
+    "action_index": 155,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 7,
+    "col": 15,
+    "total_population": 38604.65916181061,
+    "total_pollution": 1087.95
+  },
+  {
+    "step": 321,
+    "action_index": 197,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 9,
+    "col": 17,
+    "total_population": 38843.80934815803,
+    "total_pollution": 1094.3000000000002
+  },
+  {
+    "step": 322,
+    "action_index": 235,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 11,
+    "col": 15,
+    "total_population": 39088.14721176273,
+    "total_pollution": 1100.65
+  },
+  {
+    "step": 323,
+    "action_index": 175,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 8,
+    "col": 15,
+    "total_population": 39337.22848586511,
+    "total_pollution": 1107.0
+  },
+  {
+    "step": 324,
+    "action_index": 349,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 17,
+    "col": 9,
+    "total_population": 39590.6470110493,
+    "total_pollution": 1113.35
+  },
+  {
+    "step": 325,
+    "action_index": 156,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 7,
+    "col": 16,
+    "total_population": 39822.39597049662,
+    "total_pollution": 1113.85
+  },
+  {
+    "step": 326,
+    "action_index": 329,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 16,
+    "col": 9,
+    "total_population": 40059.96587758344,
+    "total_pollution": 1120.2
+  },
+  {
+    "step": 327,
+    "action_index": 327,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 16,
+    "col": 7,
+    "total_population": 40277.222270349856,
+    "total_pollution": 1120.7
+  },
+  {
+    "step": 328,
+    "action_index": 331,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 16,
+    "col": 11,
+    "total_population": 40501.54007379646,
+    "total_pollution": 1127.0500000000002
+  },
+  {
+    "step": 329,
+    "action_index": 348,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 17,
+    "col": 8,
+    "total_population": 40732.31461540199,
+    "total_pollution": 1133.4
+  },
+  {
+    "step": 330,
+    "action_index": 350,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 17,
+    "col": 10,
+    "total_population": 40968.99307200351,
+    "total_pollution": 1139.75
+  },
+  {
+    "step": 331,
+    "action_index": 177,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 8,
+    "col": 17,
+    "total_population": 41211.07001829176,
+    "total_pollution": 1146.1
+  },
+  {
+    "step": 332,
+    "action_index": 309,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 15,
+    "col": 9,
+    "total_population": 41458.08335802027,
+    "total_pollution": 1152.45
+  },
+  {
+    "step": 333,
+    "action_index": 269,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 13,
+    "col": 9,
+    "total_population": 41683.98220776125,
+    "total_pollution": 1152.95
+  },
+  {
+    "step": 334,
+    "action_index": 307,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 15,
+    "col": 7,
+    "total_population": 41916.201728997665,
+    "total_pollution": 1159.3000000000002
+  },
+  {
+    "step": 335,
+    "action_index": 328,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 16,
+    "col": 8,
+    "total_population": 42154.2009118268,
+    "total_pollution": 1165.65
+  },
+  {
+    "step": 336,
+    "action_index": 311,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 15,
+    "col": 11,
+    "total_population": 42397.485113875744,
+    "total_pollution": 1172.0
+  },
+  {
+    "step": 337,
+    "action_index": 330,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 16,
+    "col": 10,
+    "total_population": 42645.60208175715,
+    "total_pollution": 1178.35
+  },
+  {
+    "step": 338,
+    "action_index": 191,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 9,
+    "col": 11,
+    "total_population": 42898.13831433888,
+    "total_pollution": 1184.7
+  },
+  {
+    "step": 339,
+    "action_index": 310,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 15,
+    "col": 10,
+    "total_population": 43129.09416224543,
+    "total_pollution": 1185.2
+  },
+  {
+    "step": 340,
+    "action_index": 190,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 9,
+    "col": 10,
+    "total_population": 43365.9371878067,
+    "total_pollution": 1191.5500000000002
+  },
+  {
+    "step": 341,
+    "action_index": 150,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 7,
+    "col": 10,
+    "total_population": 43582.54158949209,
+    "total_pollution": 1192.0500000000002
+  },
+  {
+    "step": 342,
+    "action_index": 171,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 8,
+    "col": 11,
+    "total_population": 43806.26063216338,
+    "total_pollution": 1198.4
+  },
+  {
+    "step": 343,
+    "action_index": 211,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 10,
+    "col": 11,
+    "total_population": 44036.48555680115,
+    "total_pollution": 1204.75
+  },
+  {
+    "step": 344,
+    "action_index": 230,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 11,
+    "col": 10,
+    "total_population": 44272.6597526776,
+    "total_pollution": 1211.1
+  },
+  {
+    "step": 345,
+    "action_index": 170,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 8,
+    "col": 10,
+    "total_population": 44514.27428549019,
+    "total_pollution": 1217.45
+  },
+  {
+    "step": 346,
+    "action_index": 189,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 9,
+    "col": 9,
+    "total_population": 44760.86380941531,
+    "total_pollution": 1223.8000000000002
+  },
+  {
+    "step": 347,
+    "action_index": 210,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 10,
+    "col": 10,
+    "total_population": 44986.387462157145,
+    "total_pollution": 1224.3000000000002
+  },
+  {
+    "step": 348,
+    "action_index": 149,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 7,
+    "col": 9,
+    "total_population": 45218.261955720955,
+    "total_pollution": 1230.65
+  },
+  {
+    "step": 349,
+    "action_index": 187,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 9,
+    "col": 7,
+    "total_population": 45455.94408574182,
+    "total_pollution": 1237.0
+  },
+  {
+    "step": 350,
+    "action_index": 229,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 11,
+    "col": 9,
+    "total_population": 45698.93716113249,
+    "total_pollution": 1243.35
+  },
+  {
+    "step": 351,
+    "action_index": 169,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 8,
+    "col": 9,
+    "total_population": 45946.787017372444,
+    "total_pollution": 1249.7
+  },
+  {
+    "step": 352,
+    "action_index": 323,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 16,
+    "col": 3,
+    "total_population": 46199.078371869924,
+    "total_pollution": 1256.0500000000002
+  },
+  {
+    "step": 353,
+    "action_index": 324,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 16,
+    "col": 4,
+    "total_population": 46429.822138611766,
+    "total_pollution": 1256.5500000000002
+  },
+  {
+    "step": 354,
+    "action_index": 321,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 16,
+    "col": 1,
+    "total_population": 46666.46964981938,
+    "total_pollution": 1262.9
+  },
+  {
+    "step": 355,
+    "action_index": 322,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 16,
+    "col": 2,
+    "total_population": 46908.55045488835,
+    "total_pollution": 1269.25
+  },
+  {
+    "step": 356,
+    "action_index": 115,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 5,
+    "col": 15,
+    "total_population": 47155.58359504069,
+    "total_pollution": 1275.6
+  },
+  {
+    "step": 357,
+    "action_index": 342,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 17,
+    "col": 2,
+    "total_population": 47381.51658539854,
+    "total_pollution": 1276.1
+  },
+  {
+    "step": 358,
+    "action_index": 95,
+    "tile_value": 5,
+    "tile_type": "ROAD",
+    "row": 4,
+    "col": 15,
+    "total_population": 47613.797699195464,
+    "total_pollution": 1282.45
+  },
+  {
+    "step": 359,
+    "action_index": 116,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 5,
+    "col": 16,
+    "total_population": 47826.23649020373,
+    "total_pollution": 1282.95
+  },
+  {
+    "step": 360,
+    "action_index": 94,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 4,
+    "col": 14,
+    "total_population": 48046.160496776916,
+    "total_pollution": 1289.3000000000002
+  },
+  {
+    "step": 361,
+    "action_index": 148,
+    "tile_value": 1,
+    "tile_type": "RESIDENCE",
+    "row": 7,
+    "col": 8,
+    "total_population": 48272.91459397539,
+    "total_pollution": 1295.65
+  },
+  {
+    "step": 362,
+    "action_index": 70,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 3,
+    "col": 10,
+    "total_population": 48505.91463217561,
+    "total_pollution": 1302.0
+  },
+  {
+    "step": 363,
+    "action_index": 96,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 4,
+    "col": 16,
+    "total_population": 48719.03178167447,
+    "total_pollution": 1270.7368421052631
+  },
+  {
+    "step": 364,
+    "action_index": 167,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 8,
+    "col": 7,
+    "total_population": 48913.96064212055,
+    "total_pollution": 1229.7631578947367
+  },
+  {
+    "step": 365,
+    "action_index": 207,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 10,
+    "col": 7,
+    "total_population": 49092.25156284723,
+    "total_pollution": 1225.2631578947367
+  },
+  {
+    "step": 366,
+    "action_index": 228,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 11,
+    "col": 8,
+    "total_population": 49255.32290670848,
+    "total_pollution": 1222.7932330827066
+  },
+  {
+    "step": 367,
+    "action_index": 209,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 10,
+    "col": 9,
+    "total_population": 49404.47227257204,
+    "total_pollution": 1220.4755639097743
+  },
+  {
+    "step": 368,
+    "action_index": 215,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 10,
+    "col": 15,
+    "total_population": 49540.88676478139,
+    "total_pollution": 1217.734962406015
+  },
+  {
+    "step": 369,
+    "action_index": 236,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 11,
+    "col": 16,
+    "total_population": 49665.652390417956,
+    "total_pollution": 1213.4718045112782
+  },
+  {
+    "step": 370,
+    "action_index": 217,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 10,
+    "col": 17,
+    "total_population": 49779.76265834798,
+    "total_pollution": 1210.748120300752
+  },
+  {
+    "step": 371,
+    "action_index": 222,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 11,
+    "col": 2,
+    "total_population": 49884.12644777057,
+    "total_pollution": 1207.71992481203
+  },
+  {
+    "step": 372,
+    "action_index": 268,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 13,
+    "col": 8,
+    "total_population": 49979.57520824597,
+    "total_pollution": 1183.798872180451
+  },
+  {
+    "step": 373,
+    "action_index": 287,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 14,
+    "col": 7,
+    "total_population": 50066.86954793114,
+    "total_pollution": 1181.2589920747814
+  },
+  {
+    "step": 374,
+    "action_index": 308,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 15,
+    "col": 8,
+    "total_population": 50146.70526194207,
+    "total_pollution": 1178.288943569264
+  },
+  {
+    "step": 375,
+    "action_index": 188,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 9,
+    "col": 8,
+    "total_population": 50219.718848361896,
+    "total_pollution": 1175.0915751482112
+  },
+  {
+    "step": 376,
+    "action_index": 196,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 9,
+    "col": 16,
+    "total_population": 50286.49255538561,
+    "total_pollution": 1174.3645887633302
+  },
+  {
+    "step": 377,
+    "action_index": 289,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 14,
+    "col": 9,
+    "total_population": 50347.55899940516,
+    "total_pollution": 1172.6390248535558
+  },
+  {
+    "step": 378,
+    "action_index": 49,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 2,
+    "col": 9,
+    "total_population": 50403.40539046392,
+    "total_pollution": 1170.9716079269854
+  },
+  {
+    "step": 379,
+    "action_index": 75,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 3,
+    "col": 15,
+    "total_population": 50454.47739842027,
+    "total_pollution": 1153.496044017211
+  },
+  {
+    "step": 380,
+    "action_index": 182,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 9,
+    "col": 2,
+    "total_population": 50501.182690332775,
+    "total_pollution": 1131.0806304833764
+  },
+  {
+    "step": 381,
+    "action_index": 314,
+    "tile_value": 2,
+    "tile_type": "GREENERY",
+    "row": 15,
+    "col": 14,
+    "total_population": 50543.89416699132,
+    "total_pollution": 1127.0204801074365
+  }
+]
