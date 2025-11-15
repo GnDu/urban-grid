@@ -5,6 +5,7 @@ import ipywidgets as widgets
 import json
 from PIL import Image
 import imageio
+from typing import List
 from utils import TileTypes
 
 
@@ -29,6 +30,78 @@ tile_colours_map = {
     TileTypes.SERVICE: "#2196f3",
     TileTypes.ROAD: "#424242",
 }
+
+def convert_to_json_step(play:np.array, 
+                            total_population:List[float], 
+                            total_pollution:List[float]):
+    #play should be a 3D numpy (t,x,y) 
+    data_points = []
+    offset=0
+
+    grid_at_t = play[0]
+    diff_coordinates = np.argwhere(grid_at_t!=0)
+    
+    start = int(len(diff_coordinates)+1)
+    print(start)
+    for i, coordinate in enumerate(diff_coordinates):
+        data_point = {}
+        row, col = diff_coordinates[i]
+        row, col = int(row), int(col)
+        tile_value = grid_at_t[row, col]
+        # print(tile_value)
+        tile_type = list(TileTypes)[int(tile_value)].name.upper()
+
+        population_at_t = total_population[0]
+        pollution_at_t = total_pollution[0]
+
+        data_point['step']=i+1
+        data_point['action_index']=0
+        data_point['tile_value']=int(tile_value)
+        data_point['tile_type']=tile_type
+        data_point['row']=row
+        data_point['col']=col
+        data_point['total_population']=population_at_t
+        data_point['total_pollution']=pollution_at_t
+        data_points.append(data_point)
+        # print(data_point)
+
+    for t in range(1, play.shape[0]):
+        data_point = {}
+        grid_at_t = play[t]
+        prev_grid = play[t-1]
+
+        diff = prev_grid - grid_at_t
+        diff_coordinates = np.argwhere(diff!=0)
+        for i, coordinate in enumerate(diff_coordinates):
+            row, col = diff_coordinates[i]
+            row, col = int(row), int(col)
+            tile_value = grid_at_t[row, col]
+            # print(tile_value)
+            tile_type = list(TileTypes)[int(tile_value)].name.upper()
+
+            population_at_t = total_population[t]
+            pollution_at_t = total_pollution[t]
+
+            data_point['step']=start
+            data_point['action_index']=0
+            data_point['tile_value']=int(tile_value)
+            data_point['tile_type']=tile_type
+            data_point['row']=row
+            data_point['col']=col
+            data_point['total_population']=population_at_t
+            data_point['total_pollution']=pollution_at_t
+            # print(data_point)
+            # print(start)
+            start+=1
+            # print(data_point)
+            data_points.append(data_point)
+
+    
+    return data_points
+            
+
+
+
 
 class GridAnimator:
     """
@@ -549,7 +622,7 @@ def _hex_to_rgb(hex_color):
     hex_color = hex_color.lstrip('#')
     return tuple(int(hex_color[i:i+2], 16) for i in (0, 2, 4))
 
-def render_3d_array_to_gif(array, output_path, pixel_size=10, duration=200):
+def render_3d_array_to_gif(array, output_path, pixel_size=10, duration=1):
     """
     Render a 3D array as an animated GIF.
     
